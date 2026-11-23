@@ -390,6 +390,44 @@ export function CalculatorIsland({
             help={help}
           />
         );
+      case 'text': {
+        const cls =
+          'w-full rounded-sm border border-line-strong bg-surface px-3 py-2.5 text-base hover:border-text/60 focus:border-brand focus:shadow-[0_0_0_3px_var(--tok-brand-wash)] focus:outline-none';
+        const helpId = help ? `${i.id}-help` : undefined;
+        return (
+          <div key={i.id} className="flex flex-col gap-1.5">
+            <label htmlFor={`f-${i.id}`} className="text-sm font-medium">
+              {label(i)}
+            </label>
+            {i.multiline ? (
+              <textarea
+                id={`f-${i.id}`}
+                value={String(v ?? '')}
+                maxLength={i.maxLength}
+                rows={4}
+                spellCheck={false}
+                aria-describedby={helpId}
+                onChange={(e) => set(i.id, e.target.value)}
+                className={`num font-mono ${cls}`}
+              />
+            ) : (
+              <input
+                id={`f-${i.id}`}
+                value={String(v ?? '')}
+                maxLength={i.maxLength}
+                aria-describedby={helpId}
+                onChange={(e) => set(i.id, e.target.value)}
+                className={`h-12 ${cls}`}
+              />
+            )}
+            {help && (
+              <p id={helpId} className="text-sm text-subtle">
+                {help}
+              </p>
+            )}
+          </div>
+        );
+      }
       case 'list':
         return (
           <ListField
@@ -436,7 +474,23 @@ export function CalculatorIsland({
           onSubmit={(e) => e.preventDefault()}
           className="no-print-controls space-y-5"
         >
-          {main.map(renderInput)}
+          {groupRows(main).map((g) =>
+            g.row ? (
+              <fieldset key={g.row.id} className="min-w-0">
+                <legend className="mb-2 text-sm font-semibold">
+                  {ui[g.row.legendKey] ?? g.row.id}
+                </legend>
+                <div
+                  className="grid items-end gap-3"
+                  style={{ gridTemplateColumns: `repeat(${g.items.length}, minmax(0, 1fr))` }}
+                >
+                  {g.items.map(renderInput)}
+                </div>
+              </fieldset>
+            ) : (
+              renderInput(g.items[0]!)
+            ),
+          )}
           {advanced.some(visible) && (
             <details
               className="group rounded-sm border border-line bg-surface"
@@ -691,4 +745,17 @@ function compactMoney(fmt: Fmt, n: number): string {
   } catch {
     return fmt.num(n, 0);
   }
+}
+
+/** Groups consecutive inputs that share a `row` so they render side by side. */
+function groupRows(
+  inputs: readonly CalculatorInput[],
+): { row?: CalculatorInput['row']; items: CalculatorInput[] }[] {
+  const out: { row?: CalculatorInput['row']; items: CalculatorInput[] }[] = [];
+  for (const i of inputs) {
+    const last = out[out.length - 1];
+    if (i.row && last?.row?.id === i.row.id) last.items.push(i);
+    else out.push({ row: i.row, items: [i] });
+  }
+  return out;
 }

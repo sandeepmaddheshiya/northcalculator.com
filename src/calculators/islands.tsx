@@ -20,6 +20,14 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   'unit-converter': dynamic(() => import('./conversion/unit-converter/Island')),
   'currency-converter': dynamic(() => import('./conversion/currency-converter/Island')),
   gpa: dynamic(() => import('./education/gpa/Island')),
+  tip: dynamic(() => import('./everyday/tip/Island')),
+  discount: dynamic(() => import('./everyday/discount/Island')),
+  'sales-tax': dynamic(() => import('./finance/sales-tax/Island')),
+  'simple-interest': dynamic(() => import('./finance/simple-interest/Island')),
+  'date-difference': dynamic(() => import('./date-time/date-difference/Island')),
+  'date-add': dynamic(() => import('./date-time/date-add/Island')),
+  fraction: dynamic(() => import('./math/fraction/Island')),
+  average: dynamic(() => import('./math/average/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {

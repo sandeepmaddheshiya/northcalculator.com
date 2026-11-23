@@ -88,6 +88,7 @@ function referencedKeys(def: CalculatorDefinition): string[] {
   const inputs = def.inputs.flatMap((i) => (i.type === 'list' ? [i, ...i.columns] : [i]));
   for (const i of inputs) {
     if (i.helpKey) keys.push(i.helpKey);
+    if (i.row) keys.push(i.row.legendKey);
     if (i.suffixKey) keys.push(i.suffixKey);
     if (i.prefixKey) keys.push(i.prefixKey);
     if ('options' in i) keys.push(...i.options.map((o) => o.labelKey));

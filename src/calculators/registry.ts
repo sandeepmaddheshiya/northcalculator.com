@@ -11,6 +11,14 @@ import { gpa } from './education/gpa';
 import { unitConverter } from './conversion/unit-converter';
 import { currencyConverter } from './conversion/currency-converter';
 import { scientific } from './math/scientific';
+import { tip } from './everyday/tip';
+import { discount } from './everyday/discount';
+import { salesTax } from './finance/sales-tax';
+import { simpleInterest } from './finance/simple-interest';
+import { dateDifference } from './date-time/date-difference';
+import { dateAdd } from './date-time/date-add';
+import { fraction } from './math/fraction';
+import { average } from './math/average';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -21,13 +29,21 @@ export const MODULES: readonly CalculatorModule[] = [
   mortgage,
   loan,
   compoundInterest,
+  simpleInterest,
+  salesTax,
   percentage,
+  fraction,
+  average,
   scientific,
   bmi,
   age,
+  dateDifference,
+  dateAdd,
   unitConverter,
   currencyConverter,
   gpa,
+  tip,
+  discount,
 ];
 
 export const CALCULATORS: readonly CalculatorDefinition[] = MODULES.map((m) => m.definition);

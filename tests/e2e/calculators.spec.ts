@@ -14,6 +14,14 @@ const CALCULATORS = [
   ['/en/conversion/unit-converter', 'Result'],
   ['/en/conversion/currency-converter', 'Converted amount'],
   ['/en/education/gpa-calculator', 'GPA (unweighted)'],
+  ['/en/everyday/tip-calculator', 'Tip'],
+  ['/en/everyday/discount-calculator', 'Result'],
+  ['/en/finance/sales-tax-calculator', 'Result'],
+  ['/en/finance/simple-interest-calculator', 'Interest'],
+  ['/en/date-time/days-between-dates', 'Days'],
+  ['/en/date-time/date-calculator', 'Date'],
+  ['/en/math/fraction-calculator', 'Result (simplified)'],
+  ['/en/math/average-calculator', 'Mean (average)'],
 ] as const;
 
 const snapshot = JSON.parse(

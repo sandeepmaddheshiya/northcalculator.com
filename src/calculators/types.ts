@@ -32,6 +32,8 @@ interface InputBase {
   labelBy?: string;
   /** Secondary input, shown inside the collapsible "More options" group. */
   advanced?: boolean;
+  /** Consecutive inputs with the same row id render side by side under one legend (ui[legendKey]). */
+  row?: { id: string; legendKey: string };
 }
 
 export interface NumberInput extends InputBase {
@@ -76,6 +78,8 @@ export interface TextInput extends InputBase {
   type: 'text';
   default: string;
   maxLength: number;
+  /** Render as a textarea (lists of numbers). */
+  multiline?: boolean;
 }
 
 export interface ToggleInput extends InputBase {

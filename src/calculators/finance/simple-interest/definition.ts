@@ -1,0 +1,108 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+import { currencySelect } from '@/calculators/currencies';
+
+export const definition: CalculatorDefinition = {
+  id: 'simple-interest',
+  slug: { en: 'simple-interest-calculator' },
+  category: 'finance',
+  tags: [
+    'simple interest',
+    'I = Prt',
+    'interest on a loan',
+    'interest for days',
+    'short-term loan',
+    'certificate of deposit',
+  ],
+  difficulty: 'basic',
+  ymyl: true,
+  currency: { input: 'cur' },
+  schemaCategory: 'FinanceApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'principal',
+      param: 'p',
+      type: 'currency',
+      labelKey: 'principal',
+      default: 4000,
+      min: 0,
+      max: 1e12,
+    },
+    { id: 'rate', param: 'r', type: 'percent', labelKey: 'rate', default: 5.5, min: 0, max: 100 },
+    {
+      id: 'time',
+      param: 't',
+      type: 'number',
+      labelKey: 'time',
+      labelBy: 'unit',
+      default: 4,
+      min: 0,
+      max: 36500,
+    },
+    {
+      id: 'unit',
+      param: 'u',
+      type: 'segmented',
+      labelKey: 'unit',
+      default: 'y',
+      options: [
+        { value: 'y', labelKey: 'unit.y' },
+        { value: 'm', labelKey: 'unit.m' },
+        { value: 'd', labelKey: 'unit.d' },
+      ],
+    },
+    {
+      id: 'basis',
+      param: 'b',
+      type: 'select',
+      labelKey: 'basis',
+      default: '365',
+      options: [
+        { value: '365', labelKey: 'basis.365' },
+        { value: '360', labelKey: 'basis.360' },
+      ],
+      advanced: true,
+      helpKey: 'basis.help',
+      showIf: { input: 'unit', in: ['d'] },
+    },
+    currencySelect('USD'),
+  ],
+  outputs: [
+    { id: 'interest', labelKey: 'out.interest', format: 'currency', primary: true },
+    { id: 'total', labelKey: 'out.total', format: 'currency' },
+    { id: 'years', labelKey: 'out.years', format: 'number', decimals: 6 },
+  ],
+  sources: [
+    {
+      title: 'Contemporary Mathematics, 6.3 Simple Interest',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/contemporary-mathematics/pages/6-3-simple-interest',
+      accessed: '2026-11-24',
+      locator: 'I = P × r × t; Examples 6.27–6.33 (years, months and days)',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-24', note: 'First published.' }],
+  related: ['compound-interest', 'loan', 'percentage'],
+  examples: [
+    {
+      id: 'loan',
+      inputs: { principal: 4000, rate: 5.5, time: 4, unit: 'y' },
+      expect: { interest: 880, total: 4880 },
+    },
+    {
+      id: 'months',
+      inputs: { principal: 20000, rate: 6.75, time: 4, unit: 'm' },
+      expect: { interest: 450 },
+    },
+    {
+      id: 'days',
+      inputs: { principal: 6500, rate: 12.6, time: 45, unit: 'd' },
+      expect: { interest: 100.97 },
+    },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-24',
+};
