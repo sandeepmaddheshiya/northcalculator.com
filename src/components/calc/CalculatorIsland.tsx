@@ -45,6 +45,8 @@ export interface IslandProps {
   validation: ValidationMessages;
   /** Build-time data from CalculatorModule.data (serialisable). */
   data?: unknown;
+  /** Page path to use in shared links when the island is shown elsewhere (embeds). */
+  canonicalPath?: string;
 }
 
 function currencySymbol(locale: string, currency: string): string {
@@ -70,6 +72,7 @@ export function CalculatorIsland({
   chrome,
   validation,
   data,
+  canonicalPath,
 }: IslandProps & { def: CalculatorDefinition; compute: ComputeFn }) {
   const [today, setToday] = useState(buildToday);
   const defaults = useMemo(() => defaultValues(def, today), [def, today]);
@@ -261,7 +264,7 @@ export function CalculatorIsland({
 
   function currentUrl() {
     const q = encodeState(def, values, defaults);
-    return `${window.location.origin}${window.location.pathname}${q ? `?${q}` : ''}`;
+    return `${window.location.origin}${canonicalPath ?? window.location.pathname}${q ? `?${q}` : ''}`;
   }
 
   function resultText() {

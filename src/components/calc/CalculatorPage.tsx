@@ -18,6 +18,7 @@ import type { InputValues } from '@/calculators/types';
 import { buildToday } from '@/lib/build-date';
 import { Icon } from '@/components/ui/Icon';
 import { fill } from '@/lib/fill';
+import { absoluteUrl } from '@/lib/site';
 import { CalculatorIslandFor } from '@/calculators/islands';
 
 /** The template every calculator page follows (BRIEF §5). Server component; only the island hydrates. */
@@ -207,6 +208,13 @@ export async function CalculatorPage({ mod, locale }: { mod: CalculatorModule; l
             <p>
               <Link href="/methodology">{t('methodologyLink')}</Link>
             </p>
+            <details className="no-print">
+              <summary className="cursor-pointer font-medium">{t('embedTitle')}</summary>
+              <p>{t('embedBody')}</p>
+              <pre className="overflow-x-auto rounded-sm border border-line bg-sunken p-3 font-mono text-xs whitespace-pre-wrap">
+                {`<iframe src="${absoluteUrl(`/embed/${locale}/${def.id}`)}" title="${content.name}" width="100%" height="760" style="border:0" loading="lazy"></iframe>`}
+              </pre>
+            </details>
           </Prose>
 
           <aside

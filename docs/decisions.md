@@ -141,3 +141,19 @@ Short ADRs. Status: Proposed → Accepted (after owner approval) → Superseded.
 - **Mortgage:** PMI ends when the _scheduled_ balance (without extra payments) reaches 78% of the original value, per the US Homeowners Protection Act. Canadian semi-annual compounding is an option.
 - **Loan:** APR with fees follows Regulation Z Appendix J (monthly IRR × 12). The EU/UK APRC, (1 + i)^12 − 1, is shown alongside.
 - **Currency (amends ADR-007):** `pnpm build` runs `scripts/fetch-rates.mjs` first, so every deploy embeds that day's snapshot. If the fetch fails, the committed snapshot is kept. A custom-rate mode shows a provider's markup against the reference rate.
+
+## ADR-024: Embeddable calculators
+
+- **Status:** Accepted 2026-11-24
+- **Decision:** `/embed/{locale}/{id}` renders a calculator alone, without site chrome, for iframes on other sites. Embed pages are `noindex` with a canonical to the main calculator page, link back to it, and share links point to the main page (`canonicalPath`). `public/_headers` detaches the site-wide `Content-Security-Policy` and `X-Frame-Options` for `/embed/*` and sets `frame-ancestors *`, because Cloudflare joins repeated headers with a comma, and browsers would enforce both policies. Every calculator page shows the iframe snippet. Verify the headers after deploy (seo-launch-checklist §2).
+
+## ADR-025: No Web Workers yet
+
+- **Status:** Accepted 2026-11-24
+- **Context:** BRIEF §3 asks that compute can run in a Web Worker.
+- **Decision:** Compute functions stay pure and DOM-free, so they _can_ move to a worker, but none needs to. The slowest current case (a 50-year amortization with extra payments, or the average of 10,000 values) completes in well under 5 ms, far below the 50 ms responsiveness target, and a worker would add a chunk and message-passing overhead to every calculator. Revisit for Wave 2 tools with heavy iteration (Monte Carlo, large matrices).
+
+## ADR-026: Locale rollout waits for human review
+
+- **Status:** Accepted 2026-11-24
+- **Decision:** Phase 4 delivers the tooling (`pnpm i18n:status`, key-parity check, `docs/i18n-rollout.md`) but no new live locale. BRIEF §8 forbids publishing machine-translated or unreviewed pages, and no fluent reviewers are available yet. Every locale stays `planned` (not routed) until a reviewer signs it off.

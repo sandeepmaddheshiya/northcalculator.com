@@ -43,8 +43,10 @@ function chunksOf(html) {
   ].filter((s) => !nomodule.has(s));
 }
 
-/** /en/<category>/<slug>.html is a calculator page. */
-const isCalculator = (page) => /^\/[a-z]{2}(-[A-Z]{2})?\/[^/]+\/[^/]+\.html$/.test(page);
+/** /en/<category>/<slug>.html and /embed/en/<id>.html are calculator pages. */
+const isCalculator = (page) =>
+  /^\/[a-z]{2}(-[A-Z]{2})?\/[^/]+\/[^/]+\.html$/.test(page) ||
+  /^\/embed\/[^/]+\/[^/]+\.html$/.test(page);
 
 const pages = htmlFiles(OUT).map((file) => {
   const html = readFileSync(file, 'utf8');
@@ -72,7 +74,8 @@ for (const p of pages) {
   const jsBudget = calc ? budgets.calculatorJsGzipBytes : budgets.initialJsGzipBytes;
   let own = 0;
   if (calc) {
-    const base = baseline.get(p.page.split('/')[1]) ?? new Set();
+    const locale = p.page.startsWith('/embed/') ? p.page.split('/')[2] : p.page.split('/')[1];
+    const base = baseline.get(locale) ?? new Set();
     own = p.chunks.filter((c) => !base.has(c)).reduce((a, s) => a + size(s), 0);
   }
   const over =

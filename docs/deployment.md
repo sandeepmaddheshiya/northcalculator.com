@@ -31,7 +31,7 @@ Create a Deploy Hook (Pages → Settings → Builds → Deploy hooks) and call i
 
 ## After the first deploy
 
-Follow `docs/seo-launch-checklist.md` (written in Phase 6) for the Search Console and Bing Webmaster setup. Until then:
+Follow `docs/seo-launch-checklist.md` for header checks and the Search Console and Bing Webmaster setup. In short:
 
 - Verify the domain in Google Search Console (DNS TXT record) and submit `https://northcalculator.com/sitemap.xml`.
 - Do the same in Bing Webmaster Tools (it can import from GSC).

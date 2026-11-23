@@ -153,7 +153,9 @@
     "compareClear": "Stop comparing",
     "scenarioA": "A (pinned)",
     "scenarioB": "B (current)",
-    "difference": "B − A"
+    "difference": "B − A",
+    "embedTitle": "Embed this calculator on your site",
+    "embedBody": "Paste this code into your page. The calculator runs in a frame, with no tracking and no cookies, and links back here for the formula and sources."
   },
   "categoryHub": {
     "title": "{name} calculators",
@@ -171,5 +173,9 @@
     "title": "You’re offline",
     "body": "This page hasn’t been saved on this device yet. Calculators you have opened before still work without a connection, because they run entirely in your browser.",
     "home": "Go to the home page"
+  },
+  "embed": {
+    "poweredBy": "Calculator by NorthCalculator.",
+    "open": "Open the full calculator with the formula and sources"
   }
 }

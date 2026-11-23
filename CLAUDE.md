@@ -4,25 +4,31 @@ Read `BRIEF.md` (the owner's brief, condensed) and `docs/decisions.md` (ADRs) be
 
 ## Status
 
-- Phase 0 (research) ✅ · Phase 1 (foundation) ✅ · Phase 2 (engine + 10 flagship calculators) ✅ 2026-11-24.
-- Flagships live: mortgage, loan/EMI, compound interest, percentage, scientific, BMI, age, unit converter, currency, GPA. All `review: pending` (ADR-011).
-- Next: Phase 3: scale Wave 1 (generator, hubs, search, compare, history, PWA, homepage).
+- Phase 0 ✅ · Phase 1 ✅ · Phase 2 ✅ (10 flagships) · Phase 3: infrastructure ✅ (generator, inline search answers, history/saved, compare, PWA/offline, homepage samples); Wave 1 at 18 of ~90 calculators (docs/taxonomy-and-wave1.md).
+- Phase 4: tooling and runbook ✅ (`pnpm i18n:status`, docs/i18n-rollout.md); no locale goes live until a fluent reviewer signs it off (ADR-026).
+- Phase 5: embeds ✅ (`/embed/{locale}/{id}`, ADR-024); workers deferred (ADR-025); Wave 2 calculators not started.
+- Phase 6: launch docs ✅ (docs/seo-launch-checklist.md, docs/growth.md); deploy, DNS and Search Console need the owner.
+- Phase 7: `pnpm check:stale` flags overdue reviews. All calculators are `review: pending` until the owner reviews them (ADR-011).
+- Next: more Wave 1 calculators via `pnpm new:calculator`, highest demand first.
 
 ## Commands
 
-|                     |                                                                                       |
-| ------------------- | ------------------------------------------------------------------------------------- |
-| `pnpm dev`          | Dev server (http://localhost:3000/en, gallery at /dev/design)                         |
-| `pnpm build`        | Static export to `out/` + `scripts/postbuild.mjs` (per-page CSP hashes + page checks) |
-| `pnpm start`        | Serve `out/` like Cloudflare Pages                                                    |
-| `pnpm check`        | typecheck + lint + unit tests + i18n parity                                           |
-| `pnpm test`         | Vitest: formulas, parser, token contrast, content gate, JSON-LD                       |
-| `pnpm e2e`          | Playwright + axe on mobile 360px and desktop (needs `pnpm build`)                     |
-| `pnpm check:bundle` | Gzip JS/CSS per page vs `budgets.json`                                                |
-| `pnpm lhci`         | Lighthouse CI budgets (`lighthouserc.json`)                                           |
-| `pnpm check:i18n`   | Key parity across locales, no unused keys                                             |
-| `pnpm check:links`  | Every cited source URL resolves (403 from bot-blocking sites is a warning)            |
-| `pnpm rates`        | Refresh the currency snapshot (also runs at the start of `pnpm build`)                |
+|                                       |                                                                                       |
+| ------------------------------------- | ------------------------------------------------------------------------------------- |
+| `pnpm dev`                            | Dev server (http://localhost:3000/en, gallery at /dev/design)                         |
+| `pnpm build`                          | Static export to `out/` + `scripts/postbuild.mjs` (per-page CSP hashes + page checks) |
+| `pnpm start`                          | Serve `out/` like Cloudflare Pages                                                    |
+| `pnpm check`                          | typecheck + lint + unit tests + i18n parity                                           |
+| `pnpm test`                           | Vitest: formulas, parser, token contrast, content gate, JSON-LD                       |
+| `pnpm e2e`                            | Playwright + axe on mobile 360px and desktop (needs `pnpm build`)                     |
+| `pnpm check:bundle`                   | Gzip JS/CSS per page vs `budgets.json`                                                |
+| `pnpm lhci`                           | Lighthouse CI budgets (`lighthouserc.json`)                                           |
+| `pnpm check:i18n`                     | Key parity across locales, no unused keys                                             |
+| `pnpm check:links`                    | Every cited source URL resolves (403 from bot-blocking sites is a warning)            |
+| `pnpm rates`                          | Refresh the currency snapshot (also runs at the start of `pnpm build`)                |
+| `pnpm new:calculator <category> <id>` | Scaffold + register a calculator (TODO markers fail the content gate)                 |
+| `pnpm i18n:status`                    | Per-locale UI and content coverage                                                    |
+| `pnpm check:stale`                    | Calculators overdue for review; `--strict` exits non-zero                             |
 
 End of every phase: run all of the above, fix everything, commit (Conventional Commits), and summarise.
 

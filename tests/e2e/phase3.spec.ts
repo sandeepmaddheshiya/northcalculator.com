@@ -77,3 +77,26 @@ test('offline page exists, is noindex, and the service worker registers', async 
   const scope = await page.evaluate(async () => (await navigator.serviceWorker.ready).scope);
   expect(scope).toMatch(/\/$/);
 });
+
+test('embed: calculator alone, noindex with canonical, axe clean, links back', async ({ page }) => {
+  await page.goto('/embed/en/mortgage', { waitUntil: 'networkidle' });
+  await expect(page.locator('h1')).toHaveText('Mortgage Calculator');
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    'href',
+    /\/en\/finance\/mortgage-calculator$/,
+  );
+  await expect(page.getByRole('link', { name: /Open the full calculator/ })).toHaveAttribute(
+    'href',
+    /\/en\/finance\/mortgage-calculator$/,
+  );
+  await expect(page.locator('header')).toHaveCount(0); // no site chrome
+  const axe = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
+  expect(axe.violations.map((v) => v.id)).toEqual([]);
+});
+
+test('calculator pages offer an embed snippet', async ({ page }) => {
+  await page.goto('/en/finance/mortgage-calculator');
+  await page.getByText('Embed this calculator on your site').click();
+  await expect(page.locator('pre').filter({ hasText: '/embed/en/mortgage' })).toBeVisible();
+});

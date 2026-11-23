@@ -6,3 +6,5 @@ brand
 playwright-report
 test-results
 .lighthouseci
+# Rewritten by scripts/fetch-rates.mjs on every build
+src/calculators/conversion/currency-converter/rates.snapshot.json

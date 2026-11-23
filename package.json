@@ -24,6 +24,8 @@
     "check:bundle": "node scripts/check-bundle.mjs",
     "check:links": "node scripts/check-links.mjs",
     "new:calculator": "node scripts/new-calculator.mjs",
+    "i18n:status": "node scripts/i18n-status.mjs",
+    "check:stale": "node scripts/check-stale.mjs",
     "lhci": "lhci autorun",
     "check": "pnpm typecheck && pnpm lint && pnpm test && pnpm check:i18n",
     "prepare": "husky"

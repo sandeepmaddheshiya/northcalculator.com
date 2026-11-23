@@ -9,9 +9,12 @@
   Content-Security-Policy: frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
   X-Frame-Options: DENY
 
+# Embeds may be framed anywhere. Cloudflare joins repeated headers with a comma, which browsers
+# would enforce as two policies ('none' wins), so detach the /* values first and set them again.
 /embed/*
-  Content-Security-Policy: frame-ancestors *; base-uri 'self'; object-src 'none'
+  ! Content-Security-Policy
   ! X-Frame-Options
+  Content-Security-Policy: frame-ancestors *; base-uri 'self'; form-action 'self'; object-src 'none'
 
 /sw.js
   Cache-Control: no-cache
