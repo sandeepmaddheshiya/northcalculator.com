@@ -19,9 +19,21 @@ Questions marked **Owner** need your answer. Questions marked **Build** are reso
 | #   | Question                                                                                                                                                                                                                                           | Who   | Blocks        |
 | --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- | ------------- |
 | Q2a | The About and author pages name the operator as "Sandeep Maddheshiya" (inferred from the domain you gave). Please confirm the name, preferred credentials line, and a public contact email (or whether a link to sandeepmaddheshiya.me is enough). | Owner | Launch        |
-| Q8  | The GPA scale differs by institution. Should we ship US 4.0 (unweighted plus weighted) with an editable scale, and the CBSE ×9.5 CGPA conversion as a separate page?                                                                               | Build | GPA           |
 | Q9  | Business-days holidays: is a weekends-only version plus user-entered holidays acceptable for Wave 1, with a per-country holiday dataset in Wave 2?                                                                                                 | Build | Business days |
 | Q10 | Shoe size: there's no single international standard, so ship it with an "approximate" label or defer it? Clothing sizes are already deferred.                                                                                                      | Build | Conversion    |
 | Q11 | Indian and UK tax figures must be re-verified against the Finance Act / HMRC for the current tax year at build time. Re-review every April (UK) and February budget (India).                                                                       | Build | Regional tax  |
 | Q12 | Ovulation calculator: the luteal phase assumption (14 days) varies between individuals. The UI will state this. Confirm during your review.                                                                                                        | Build | Ovulation     |
 | Q13 | Competitor CWV, JSON-LD and ad density still need a real-browser measurement (PSI/CrUX).                                                                                                                                                           | Build | —             |
+
+## Resolved during Phase 2 (2026-11-24)
+
+- **Q8 (GPA scale):** shipped the US 4.0 scale (UC Berkeley registrar) with editable honors/AP bonuses. See ADR-023.
+
+## New (Phase 2)
+
+| #   | Question                                                                                                                                                                                                                 | Who            | Blocks     |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------- | ---------- |
+| Q14 | Several OpenStax worked examples print values that differ from the exact result (ADR-022). Do you want us to report these errata to OpenStax?                                                                            | Owner          | —          |
+| Q15 | The BMI page cites WHO Technical Report Series 894 for obesity classes I–III (30/35/40). The report's existence is verified (PMID 11234459), but the table locator should be checked against the PDF during your review. | Owner (review) | BMI review |
+| Q16 | CDC pages block automated fetching (HTTP 403), so CDC is not cited on the BMI page and its wording was not checked. Add a CDC citation during review if you want a US government source.                                 | Owner (review) | —          |
+| Q17 | Legal treatment of 29 February birthdays varies by country. The age calculator offers both conventions without citing a jurisdiction. Should regional pages cite specific laws later?                                    | Owner          | —          |

@@ -15,6 +15,7 @@ export interface FormatOptions {
   /** 'native' renders the locale's own digits (e.g. Arabic-Indic); default Latin. */
   digits?: 'latn' | 'native';
   signDisplay?: Intl.NumberFormatOptions['signDisplay'];
+  notation?: 'standard' | 'scientific';
 }
 
 const cache = new Map<string, Intl.NumberFormat>();
@@ -23,7 +24,10 @@ function formatter(locale: string, o: FormatOptions): Intl.NumberFormat {
   const key = `${locale}|${JSON.stringify(o)}`;
   let f = cache.get(key);
   if (!f) {
-    const opts: Intl.NumberFormatOptions = { signDisplay: o.signDisplay ?? 'auto' };
+    const opts: Intl.NumberFormatOptions = {
+      signDisplay: o.signDisplay ?? 'auto',
+      notation: o.notation ?? 'standard',
+    };
     if (o.kind === 'currency') {
       opts.style = 'currency';
       opts.currency = o.currency ?? 'USD';
@@ -59,4 +63,17 @@ export function formatNumber(value: number, locale: string, o: FormatOptions = {
 export function formatLocaleFor(contentLocale: string, region?: string | null): string {
   if (!region) return contentLocale;
   return `${contentLocale.split('-')[0]}-${region.toUpperCase()}`;
+}
+
+/**
+ * Significant-digit display for results that can be tiny or huge (unit conversion, science):
+ * plain notation between 1e-6 and 1e15, scientific notation outside it.
+ */
+export function formatSignificant(value: number, locale: string, digits = 10): string {
+  const a = Math.abs(value);
+  const scientific = a !== 0 && (a >= 1e15 || a < 1e-6);
+  return formatNumber(value, locale, {
+    significant: digits,
+    notation: scientific ? 'scientific' : 'standard',
+  });
 }

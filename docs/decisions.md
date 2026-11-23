@@ -87,7 +87,7 @@ Short ADRs. Status: Proposed → Accepted (after owner approval) → Superseded.
 
 ## ADR-015: JavaScript budget vs the framework floor
 
-- **Status:** Proposed, needs owner decision. CI currently enforces the interim value in `budgets.json`.
+- **Status:** Accepted 2026-11-23 as option 1 (owner asked to proceed through all phases; may override). Budgets: content pages ≤ 150 KB gz total JS, calculator pages ≤ 180 KB, own calculator chunk ≤ 30 KB. CWV budgets remain release blockers.
 - **Context:** BRIEF §10 sets ≤ 90 KB gz initial JS _including the framework_. Measured on this repo (2026-11-23): a page with **zero** client components loads **129 KB gz** on Next.js 16.4 + React 19.3 (React DOM ≈ 70 KB, App Router runtime ≈ 45 KB, router and Turbopack runtime ≈ 14 KB). Legacy polyfills (38 KB) are `nomodule`, so modern browsers skip them and they're excluded. Our own code adds about 11 KB (header search, theme toggle, icons). We already removed next-intl's client runtime (−16 KB) by passing pre-translated labels to islands.
 - **Real-world impact measured:** Lighthouse mobile (simulated 4G, mid-tier CPU) scores **100/100/100/100**, with LCP 0.90 s, CLS 0.000 and TBT 40–84 ms. All CWV budgets in BRIEF §10 pass by a wide margin.
 - **Options:**
@@ -99,3 +99,45 @@ Short ADRs. Status: Proposed → Accepted (after owner approval) → Superseded.
 
 - **Status:** Accepted 2026-11-23
 - **Decision:** The `en` locale uses US spelling ("math", "color"), matching the largest English search market (and the leading competitor). UK/IN users get region-aware number formatting (ADR-006), not separate spelling.
+
+## ADR-017: Money in integer minor units instead of decimal.js (amends ADR-004)
+
+- **Status:** Accepted 2026-11-23
+- **Decision:** Money amounts that accumulate (amortization schedules, balances, totals) are held as integers in the currency's minor unit (cents, paise; 0 digits for JPY, 3 for BHD, taken from `Intl.NumberFormat`). Rates and growth factors use IEEE doubles. Every value that becomes money is rounded half-up to the minor unit at a documented step. Integer arithmetic is exact up to 2^53 minor units (about 90 trillion dollars), so `0.1 + 0.2` style errors can't occur. This drops decimal.js and saves about 12 KB gz on every money page.
+
+## ADR-018: Own expression parser for the scientific calculator
+
+- **Status:** Accepted 2026-11-23
+- **Decision:** A recursive-descent parser (`src/engine/expr.ts`, about 4 KB) instead of mathjs (about 170 KB gz). There's no `eval`. Input is capped at 500 characters and 100 nesting levels, and factorial at 170! (the largest that fits a double). The calculator uses double precision (IEEE 754), and results are shown to 12 significant digits to hide binary noise. This is documented on the page. mathjs stays reserved for Wave 2 tools that need matrices or symbolic maths, and will be lazy-loaded there.
+
+## ADR-019: Calculator content as typed TSX modules, not MDX
+
+- **Status:** Accepted 2026-11-23
+- **Decision:** Each calculator has a `content.<locale>.tsx` module that exports a typed `CalculatorContent` object (name, summary, UI labels, how-it-works, examples, guidance, FAQs). Type-checking guarantees every locale provides every section. Example prose receives the computed results, so the numbers in the text come from `compute()`. No MDX toolchain is needed.
+
+## ADR-020: Client islands live in a client-side loader map
+
+- **Status:** Accepted 2026-11-24
+- **Context:** Importing each calculator's island from server code (the registry) made Turbopack put every island into the shared layout chunk. With one calculator, every page, including About, loaded its 12 KB island and compute code. With 100 calculators, every page would have loaded all of them.
+- **Decision:** `src/calculators/islands.tsx` is a `'use client'` module that maps calculator id → `next/dynamic(() => import('./…/Island'))`. Server code renders `<CalculatorIslandFor id=…>` and never imports island files. Each island is its own chunk, server-rendered at build time and loaded only on its page. The content gate fails if a registered calculator has no island entry. `scripts/check-bundle.mjs` now counts chunks referenced from the RSC payload too, and enforces `calculatorChunkGzipBytes` (30 KB) on the JS a calculator page loads beyond a content page.
+
+## ADR-021: Localised text outputs via `ctx.t` and `Intl.PluralRules`
+
+- **Status:** Accepted 2026-11-24
+- **Decision:** `ComputeContext.t(key, values)` fills the calculator's own UI strings, so `compute()` can return localised text such as "36 years, 6 months, 9 days". Plural forms are chosen with `Intl.PluralRules(locale)` (`unit.year.one`, `unit.year.other`, plus `few`/`many` for locales that need them). The island, the page (worked examples) and the OG route all pass the same strings, so prose, tool and image always agree. No ICU runtime is shipped to the client.
+
+## ADR-022: Exact values over printed textbook values
+
+- **Status:** Accepted 2026-11-24
+- **Context:** Reference tests use worked examples from OpenStax, NIST, NHLBI and the ECB. Several printed values differ from the exact result in the last cent: the textbook rounded or truncated an intermediate value, or the page has a typo.
+- **Decision:** Tests assert the exact value, computed independently in Python's `decimal` module at 40 digits, and the comment records the printed value and the reason. Known discrepancies: OpenStax Contemporary Mathematics Ex 6.101 ($528.50 vs exact $528.4946…), 6.114 ($649.95 vs $649.9427…), 6.41b and 6.42 (truncated, not rounded), 6.43 (truncated), 6.111 (total is payment × 360, while the ledger's last payment clears the rounding residue); Ex 6.56 is wrong in the book ($11,219.53 and $11,239.53 printed, exact $11,139.54) and is not used. The NHLBI BMI table repeats 232 lb at 4′11″/BMI 48 (should be about 237); that cell is skipped.
+
+## ADR-023: Calculator conventions decided in Phase 2
+
+- **Status:** Accepted 2026-11-24
+- **BMI:** the category is taken from the BMI rounded to one decimal (the value shown), so 24.96 shows as 25.0 and is "Overweight". Imperial inputs use the exact definitions, not the 703 shortcut. WHO international categories by default, with the WHO 2004 Asian action points (23.0, 27.5, 32.5, 37.5) as an option.
+- **Age:** month steps keep the birth day-of-month, clamped to month length (31 Jan → 28 Feb is one month), matching Python's `dateutil`. 29 February births use 28 Feb by default, with 1 Mar as an option. Fixed an engine bug where the 1 March rule could report "12 months".
+- **GPA:** UC Berkeley's published 4.0 scale. Honors and AP/IB bonuses default to +0.5 and +1.0 but are editable, because schools set them and no national rule exists (College Board). Resolves open question Q8. A CBSE CGPA conversion, if built, will be its own page.
+- **Mortgage:** PMI ends when the _scheduled_ balance (without extra payments) reaches 78% of the original value, per the US Homeowners Protection Act. Canadian semi-annual compounding is an option.
+- **Loan:** APR with fees follows Regulation Z Appendix J (monthly IRR × 12). The EU/UK APRC, (1 + i)^12 − 1, is shown alongside.
+- **Currency (amends ADR-007):** `pnpm build` runs `scripts/fetch-rates.mjs` first, so every deploy embeds that day's snapshot. If the fetch fails, the committed snapshot is kept. A custom-rate mode shows a provider's markup against the reference rate.

@@ -10,6 +10,7 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { graph, operator, organization, website } from '@/lib/seo/jsonld';
 import { calculatorsFor, categoriesFor } from '@/calculators/registry';
+import { loadContent } from '@/calculators/content-loader';
 
 export async function generateMetadata({
   params,
@@ -36,6 +37,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const tc = await getTranslations({ locale, namespace: 'categories' });
   const categories = categoriesFor(locale);
   const calcs = calculatorsFor(locale);
+  const names: Record<string, string> = Object.fromEntries(
+    await Promise.all(
+      calcs.map(async (c) => [c.id, (await loadContent(c.id, locale))!.name] as const),
+    ),
+  );
 
   const principles = [
     ['liveTitle', 'liveBody'],
@@ -103,7 +109,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                             href={`/${c.slug[locale]}/${x.slug[locale]}`}
                             className="text-muted hover:text-text hover:underline"
                           >
-                            {x.id}
+                            {names[x.id]}
                           </Link>
                         </li>
                       ))}

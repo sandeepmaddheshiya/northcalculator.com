@@ -1,5 +1,7 @@
 {
   "initialJsGzipBytes": 153600,
+  "calculatorJsGzipBytes": 184320,
+  "calculatorChunkGzipBytes": 30720,
   "cssGzipBytes": 25600,
-  "note": "Proposed ADR-015: framework floor is ~129 KB gz on Next 16 + React 19; own code ≤ 20 KB on content pages. Owner decision pending."
+  "note": "ADR-015: content pages ≤ 150 KB gz, calculator pages ≤ 180 KB, each calculator's own code ≤ 30 KB (framework floor ~129 KB)."
 }

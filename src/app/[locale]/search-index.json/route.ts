@@ -13,7 +13,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ locale:
   const locale = resolveLocale((await params).locale);
   const t = await getTranslations({ locale });
   const tPages = await getTranslations({ locale, namespace: 'pages' });
-  const docs = buildSearchIndex(
+  const docs = await buildSearchIndex(
     locale,
     (k) => t(k as never),
     (k) => tPages(k as never),

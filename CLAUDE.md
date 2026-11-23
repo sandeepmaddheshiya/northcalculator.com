@@ -4,8 +4,9 @@ Read `BRIEF.md` (the owner's brief, condensed) and `docs/decisions.md` (ADRs) be
 
 ## Status
 
-- Phase 0 (research) ✅ · Phase 1 (foundation) ✅ awaiting owner review of the design (`/dev/design`) and ADR-015.
-- Next: Phase 2: engine + 10 flagship calculators (percentage, mortgage, loan/EMI, compound interest, BMI, age, unit converter, scientific, GPA, currency).
+- Phase 0 (research) ✅ · Phase 1 (foundation) ✅ · Phase 2 (engine + 10 flagship calculators) ✅ 2026-11-24.
+- Flagships live: mortgage, loan/EMI, compound interest, percentage, scientific, BMI, age, unit converter, currency, GPA. All `review: pending` (ADR-011).
+- Next: Phase 3: scale Wave 1 (generator, hubs, search, compare, history, PWA, homepage).
 
 ## Commands
 
@@ -20,6 +21,8 @@ Read `BRIEF.md` (the owner's brief, condensed) and `docs/decisions.md` (ADRs) be
 | `pnpm check:bundle` | Gzip JS/CSS per page vs `budgets.json`                                                |
 | `pnpm lhci`         | Lighthouse CI budgets (`lighthouserc.json`)                                           |
 | `pnpm check:i18n`   | Key parity across locales, no unused keys                                             |
+| `pnpm check:links`  | Every cited source URL resolves (403 from bot-blocking sites is a warning)            |
+| `pnpm rates`        | Refresh the currency snapshot (also runs at the start of `pnpm build`)                |
 
 End of every phase: run all of the above, fix everything, commit (Conventional Commits), and summarise.
 
@@ -29,7 +32,9 @@ End of every phase: run all of the above, fix everything, commit (Conventional C
 - **Routing:** `src/app/[locale]/…`. Only `status: 'live'` locales in `src/i18n/locales.ts` are routed. `/` → `/en` 301.
 - **i18n:** next-intl runs **server-side only**. Client islands must NOT call `useTranslations`. Pass pre-translated labels as props (see `src/i18n/labels.ts`) and use `fill()` for `{placeholders}`. Use `Link` from `@/i18n/navigation` (a server component) in RSC. In client components use plain `<a>`/`next/link` with an explicit locale.
 - **Locale typing:** narrow route params with `resolveLocale()` from `@/i18n/server`.
-- **Calculators:** contract in `src/calculators/types.ts`, registered in `src/calculators/registry.ts`. Compute is pure and deterministic. Money uses decimal.js. Parse input with `parseLocaleNumber`, format with `formatNumber` (`src/engine`).
+- **Calculators:** one folder each: `definition.ts`, `compute.ts`, `compute.test.ts`, `content.en.tsx` (ADR-019), `Island.tsx`, `index.ts`. Register the module in `src/calculators/registry.ts` **and** its island in `src/calculators/islands.tsx` (client map, ADR-020; never import islands from server code). Compute is pure and deterministic. Money is integer minor units (ADR-017, `src/engine/money.ts`), not decimal.js. Text outputs use `ctx.t` + `Intl.PluralRules` (ADR-021). Build-time data (currency rates) comes through `module.data` → `ctx.data`.
+- **Generic island features:** `showIf`, `labelBy`, `advanced`, `optionsBy` (dependent selects), `swapWith`, list inputs (rows), formats `sig`/`duration`/`text`. Prefer extending these over writing a custom island. Only the scientific calculator has a custom one.
+- **Tests per calculator:** ≥2 independent reference sources (textbook/standard values verified by fetching the source), property tests, and the worked-example check. When a printed reference value is off by a rounding step, assert the exact value and say why (ADR-022). The content gate checks title/description/summary/FAQ lengths, ui keys, banned phrases and near-duplicates.
 - **SEO:** `buildMetadata()` (self-canonical, hreflang only to locales where the page exists, x-default); JSON-LD builders in `src/lib/seo/jsonld.ts` (mark up only visible content, never ratings); sitemap index at `/sitemap.xml` → `/sitemaps/{locale}-{category}.xml`; `/llms.txt`; OG images are build-time PNG routes at `/{locale}/og/{name}.png`.
 - **Design:** tokens in `src/app/globals.css` (semantic only; `tokens.test.ts` enforces contrast). See `docs/design-system.md`. Banned patterns are listed in BRIEF §7.
 

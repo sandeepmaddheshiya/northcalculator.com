@@ -1,0 +1,152 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+import { currencySelect } from '@/calculators/currencies';
+
+export const COMPOUNDING = [
+  'annual',
+  'semiannual',
+  'quarterly',
+  'monthly',
+  'daily',
+  'continuous',
+] as const;
+
+export const definition: CalculatorDefinition = {
+  id: 'compound-interest',
+  slug: { en: 'compound-interest-calculator' },
+  category: 'finance',
+  tags: [
+    'compound interest',
+    'savings',
+    'investment growth',
+    'APY',
+    'future value',
+    'monthly contributions',
+    'rule of 72',
+  ],
+  difficulty: 'basic',
+  ymyl: true,
+  currency: { input: 'cur' },
+  schemaCategory: 'FinanceApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'principal',
+      param: 'p',
+      type: 'currency',
+      labelKey: 'principal',
+      default: 10000,
+      min: 0,
+      max: 1e12,
+    },
+    { id: 'rate', param: 'r', type: 'percent', labelKey: 'rate', default: 5, min: 0, max: 100 },
+    {
+      id: 'years',
+      param: 'y',
+      type: 'number',
+      labelKey: 'years',
+      default: 10,
+      min: 1,
+      max: 100,
+      integer: true,
+    },
+    {
+      id: 'comp',
+      param: 'c',
+      type: 'select',
+      labelKey: 'comp',
+      default: 'monthly',
+      options: COMPOUNDING.map((c) => ({ value: c, labelKey: `comp.${c}` })),
+    },
+    {
+      id: 'add',
+      param: 'a',
+      type: 'currency',
+      labelKey: 'add',
+      labelBy: 'freq',
+      default: 100,
+      min: 0,
+      max: 1e11,
+    },
+    {
+      id: 'freq',
+      param: 'f',
+      type: 'segmented',
+      labelKey: 'freq',
+      default: 'monthly',
+      options: [
+        { value: 'monthly', labelKey: 'freq.monthly' },
+        { value: 'annually', labelKey: 'freq.annually' },
+      ],
+    },
+    {
+      id: 'timing',
+      param: 't',
+      type: 'segmented',
+      labelKey: 'timing',
+      default: 'end',
+      options: [
+        { value: 'end', labelKey: 'timing.end' },
+        { value: 'start', labelKey: 'timing.start' },
+      ],
+      advanced: true,
+      helpKey: 'timing.help',
+    },
+    currencySelect('USD'),
+  ],
+  outputs: [
+    { id: 'fv', labelKey: 'out.fv', format: 'currency', primary: true },
+    { id: 'contrib', labelKey: 'out.contrib', format: 'currency' },
+    { id: 'interest', labelKey: 'out.interest', format: 'currency' },
+    { id: 'apy', labelKey: 'out.apy', format: 'percent', decimals: 3 },
+    { id: 'double', labelKey: 'out.double', format: 'number', decimals: 1 },
+  ],
+  sources: [
+    {
+      title: 'Contemporary Mathematics, 6.4 Compound Interest',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/contemporary-mathematics/pages/6-4-compound-interest',
+      accessed: '2026-11-24',
+      locator: 'compound interest formula, effective annual yield; Examples 6.39–6.47',
+    },
+    {
+      title: 'Contemporary Mathematics, 6.6 Methods of Savings',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/contemporary-mathematics/pages/6-6-methods-of-savings',
+      accessed: '2026-11-24',
+      locator: 'future value of an ordinary annuity; Examples 6.55, 6.57, 6.59, 6.60',
+    },
+    {
+      title:
+        'Truth in Savings (Regulation DD), 12 CFR 1030, Appendix A: Annual Percentage Yield Computation',
+      publisher:
+        'Consumer Financial Protection Bureau, via the Electronic Code of Federal Regulations',
+      url: 'https://www.ecfr.gov/current/title-12/chapter-X/part-1030/appendix-Appendix%20A%20to%20Part%201030',
+      accessed: '2026-11-24',
+      locator: 'APY definition for deposit accounts',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-24', note: 'First published.' }],
+  related: ['loan', 'mortgage', 'percentage'],
+  examples: [
+    {
+      id: 'cd',
+      inputs: { principal: 7500, rate: 4.5, years: 10, comp: 'quarterly', add: 0 },
+      expect: { fv: 11732.83 },
+    },
+    {
+      id: 'monthly',
+      inputs: { principal: 0, rate: 3.75, years: 8, comp: 'monthly', add: 250 },
+      expect: { fv: 27938.2 },
+    },
+    {
+      id: 'college',
+      inputs: { principal: 0, rate: 3.4, years: 18, comp: 'annual', add: 2500, freq: 'annually' },
+      expect: { fv: 60694.78 },
+    },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-24',
+};

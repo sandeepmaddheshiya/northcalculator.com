@@ -2,22 +2,70 @@
   "ci": {
     "collect": {
       "staticDistDir": "./out",
-      "url": ["http://localhost/en.html", "http://localhost/en/methodology.html"],
+      "url": [
+        "http://localhost/en.html",
+        "http://localhost/en/methodology.html",
+        "http://localhost/en/finance/mortgage-calculator.html",
+        "http://localhost/en/math/scientific-calculator.html",
+        "http://localhost/en/conversion/currency-converter.html",
+        "http://localhost/en/education/gpa-calculator.html"
+      ],
       "numberOfRuns": 3,
-      "settings": { "formFactor": "mobile", "throttlingMethod": "simulate" }
+      "settings": {
+        "formFactor": "mobile",
+        "throttlingMethod": "simulate"
+      }
     },
     "assert": {
       "assertions": {
-        "categories:performance": ["error", { "minScore": 0.95 }],
-        "categories:accessibility": ["error", { "minScore": 1 }],
-        "categories:best-practices": ["error", { "minScore": 0.95 }],
-        "categories:seo": ["error", { "minScore": 1 }],
-        "largest-contentful-paint": ["error", { "maxNumericValue": 1800 }],
-        "cumulative-layout-shift": ["error", { "maxNumericValue": 0.02 }],
-        "total-blocking-time": ["error", { "maxNumericValue": 150 }],
+        "categories:performance": [
+          "error",
+          {
+            "minScore": 0.95
+          }
+        ],
+        "categories:accessibility": [
+          "error",
+          {
+            "minScore": 1
+          }
+        ],
+        "categories:best-practices": [
+          "error",
+          {
+            "minScore": 0.95
+          }
+        ],
+        "categories:seo": [
+          "error",
+          {
+            "minScore": 1
+          }
+        ],
+        "largest-contentful-paint": [
+          "error",
+          {
+            "maxNumericValue": 1800
+          }
+        ],
+        "cumulative-layout-shift": [
+          "error",
+          {
+            "maxNumericValue": 0.02
+          }
+        ],
+        "total-blocking-time": [
+          "error",
+          {
+            "maxNumericValue": 150
+          }
+        ],
         "unused-javascript": "off"
       }
     },
-    "upload": { "target": "filesystem", "outputDir": ".lighthouseci" }
+    "upload": {
+      "target": "filesystem",
+      "outputDir": ".lighthouseci"
+    }
   }
 }

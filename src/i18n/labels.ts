@@ -40,3 +40,52 @@ export async function validationMessages(locale: Locale): Promise<ValidationMess
     negative: raw('negative'),
   };
 }
+
+export type CalcChrome = Record<
+  | 'inputs'
+  | 'result'
+  | 'copyLink'
+  | 'linkCopied'
+  | 'copyResult'
+  | 'resultCopied'
+  | 'print'
+  | 'reset'
+  | 'downloadCsv'
+  | 'showSteps'
+  | 'stepsHeading'
+  | 'moreOptions'
+  | 'backToResult'
+  | 'ymylDisclaimer'
+  | 'cannotCompute'
+  | 'chartHeading'
+  | 'tableHeading'
+  | 'onDevice'
+  | 'swap',
+  string
+>;
+
+export async function calcChrome(locale: Locale): Promise<CalcChrome> {
+  const t = await getTranslations({ locale, namespace: 'calc' });
+  const keys = [
+    'inputs',
+    'result',
+    'copyLink',
+    'linkCopied',
+    'copyResult',
+    'resultCopied',
+    'print',
+    'reset',
+    'downloadCsv',
+    'showSteps',
+    'stepsHeading',
+    'moreOptions',
+    'backToResult',
+    'ymylDisclaimer',
+    'cannotCompute',
+    'chartHeading',
+    'tableHeading',
+    'onDevice',
+    'swap',
+  ] as const;
+  return Object.fromEntries(keys.map((k) => [k, t(k)])) as CalcChrome;
+}

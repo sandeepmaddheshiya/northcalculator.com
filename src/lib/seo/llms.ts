@@ -1,10 +1,11 @@
 import { calculatorsFor, categoriesFor } from '@/calculators/registry';
 import { getCategory } from '@/calculators/categories';
 import { SITE, absoluteUrl } from '@/lib/site';
+import { loadContent } from '@/calculators/content-loader';
 import en from '../../../messages/en.json';
 
 /** /llms.txt per https://llmstxt.org: a concise, citation-friendly map of the site. */
-export function llmsTxt(full: boolean): string {
+export async function llmsTxt(full: boolean): Promise<string> {
   const locale = 'en';
   const lines: string[] = [
     `# ${SITE.name}`,
@@ -27,9 +28,14 @@ export function llmsTxt(full: boolean): string {
       const url = absoluteUrl(
         `/${locale}/${getCategory(c.category).slug[locale]}/${c.slug[locale]}`,
       );
-      lines.push(
-        `- [${c.id}](${url})${full ? `: sources: ${c.sources.map((s) => s.publisher).join('; ')}` : ''}`,
-      );
+      const content = (await loadContent(c.id, locale))!;
+      lines.push(`- [${content.name}](${url}): ${content.promise}`);
+      if (full) {
+        lines.push(`  - Summary: ${content.summary}`);
+        lines.push(
+          `  - Sources: ${c.sources.map((s) => `${s.title} (${s.publisher}, ${s.url})`).join('; ')}`,
+        );
+      }
     }
   }
   lines.push('', '## Optional', '', `- [Sitemap](${absoluteUrl('/sitemap.xml')})`);
