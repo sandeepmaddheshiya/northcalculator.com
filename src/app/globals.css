@@ -1,0 +1,234 @@
+@import 'tailwindcss';
+
+/*
+ * NorthCalculator design tokens. See docs/design-system.md.
+ * Raw palette → semantic tokens → Tailwind theme. Components use semantic tokens only.
+ * Contrast is enforced by src/lib/tokens.test.ts. Keep the --tok-* lines inside the
+ * "tokens:light" and "tokens:dark" marker comments parseable (one hex per line).
+ */
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+:root {
+  /* tokens:light */
+  --tok-bg: #f6f8fb;
+  --tok-surface: #ffffff;
+  --tok-sunken: #eef2f7;
+  --tok-text: #0b1f3a;
+  --tok-muted: #4a5870;
+  --tok-subtle: #5e6c81;
+  --tok-border: #d5dce6;
+  --tok-border-strong: #7a879c;
+  --tok-brand: #0a5cc0;
+  --tok-brand-hover: #084c9f;
+  --tok-brand-ink: #0b1f3a;
+  --tok-on-brand: #ffffff;
+  --tok-brand-wash: #e8f1fd;
+  --tok-highlight: #fff1c2;
+  --tok-success: #137a4b;
+  --tok-success-wash: #e6f4ec;
+  --tok-warning: #8a5300;
+  --tok-warning-wash: #fdf3e1;
+  --tok-danger: #b42318;
+  --tok-danger-wash: #fdecea;
+  --tok-grid: #e3e8ef;
+  /* /tokens:light */
+  color-scheme: light;
+}
+
+/* Dark mode is designed, not inverted. Applied for system preference unless the
+   user forced light, and always when the user forced dark. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --tok-bg: #08101c;
+    --tok-surface: #0f1826;
+    --tok-sunken: #0b1420;
+    --tok-text: #e7edf5;
+    --tok-muted: #a7b4c6;
+    --tok-subtle: #8c9aae;
+    --tok-border: #223047;
+    --tok-border-strong: #55657d;
+    --tok-brand: #6aa8ff;
+    --tok-brand-hover: #8cbcff;
+    --tok-brand-ink: #e7edf5;
+    --tok-on-brand: #08101c;
+    --tok-brand-wash: #10243f;
+    --tok-highlight: #3b3112;
+    --tok-success: #4cc38a;
+    --tok-success-wash: #0f2a1f;
+    --tok-warning: #f0b44c;
+    --tok-warning-wash: #2e2310;
+    --tok-danger: #ff7a6b;
+    --tok-danger-wash: #34151a;
+    --tok-grid: #152133;
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  /* tokens:dark */
+  --tok-bg: #08101c;
+  --tok-surface: #0f1826;
+  --tok-sunken: #0b1420;
+  --tok-text: #e7edf5;
+  --tok-muted: #a7b4c6;
+  --tok-subtle: #8c9aae;
+  --tok-border: #223047;
+  --tok-border-strong: #55657d;
+  --tok-brand: #6aa8ff;
+  --tok-brand-hover: #8cbcff;
+  --tok-brand-ink: #e7edf5;
+  --tok-on-brand: #08101c;
+  --tok-brand-wash: #10243f;
+  --tok-highlight: #3b3112;
+  --tok-success: #4cc38a;
+  --tok-success-wash: #0f2a1f;
+  --tok-warning: #f0b44c;
+  --tok-warning-wash: #2e2310;
+  --tok-danger: #ff7a6b;
+  --tok-danger-wash: #34151a;
+  --tok-grid: #152133;
+  /* /tokens:dark */
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--tok-bg);
+  --color-surface: var(--tok-surface);
+  --color-sunken: var(--tok-sunken);
+  --color-text: var(--tok-text);
+  --color-muted: var(--tok-muted);
+  --color-subtle: var(--tok-subtle);
+  --color-line: var(--tok-border);
+  --color-line-strong: var(--tok-border-strong);
+  --color-brand: var(--tok-brand);
+  --color-brand-hover: var(--tok-brand-hover);
+  --color-brand-ink: var(--tok-brand-ink);
+  --color-on-brand: var(--tok-on-brand);
+  --color-brand-wash: var(--tok-brand-wash);
+  --color-highlight: var(--tok-highlight);
+  --color-success: var(--tok-success);
+  --color-success-wash: var(--tok-success-wash);
+  --color-warning: var(--tok-warning);
+  --color-warning-wash: var(--tok-warning-wash);
+  --color-danger: var(--tok-danger);
+  --color-danger-wash: var(--tok-danger-wash);
+  --color-grid: var(--tok-grid);
+
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* Type scale: 1.2 minor third around 16px, with a display step for results. */
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.375rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.625rem;
+  --text-lg: 1.1875rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.4375rem;
+  --text-xl--line-height: 2rem;
+  --text-2xl: 1.75rem;
+  --text-2xl--line-height: 2.25rem;
+  --text-3xl: 2.25rem;
+  --text-3xl--line-height: 2.625rem;
+  --text-result: clamp(2.5rem, 1.6rem + 3.6vw, 4rem);
+  --text-result--line-height: 1.05;
+
+  /* Radii: deliberately small and varied, never uniform rounded-2xl. */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: var(--tok-bg);
+    color: var(--tok-text);
+    font-family: var(--font-sans);
+    font-feature-settings: 'kern';
+  }
+  ::selection {
+    background: var(--tok-brand-wash);
+  }
+  :focus-visible {
+    outline: 2px solid var(--tok-brand);
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    letter-spacing: -0.012em;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer utilities {
+  /* All results and tables use tabular, lining numerals (BRIEF §7). */
+  .num {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+  /* Engineer's-notebook grid used sparingly behind the result panel. */
+  .bg-grid {
+    background-image:
+      linear-gradient(var(--tok-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--tok-grid) 1px, transparent 1px);
+    background-size: 16px 16px;
+    background-position: -1px -1px;
+  }
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 800px;
+  }
+  /* A changed result flashes like a highlighter pass, then settles. */
+  .flash {
+    animation: flash 700ms var(--ease-out-quint);
+  }
+}
+
+@keyframes flash {
+  from {
+    background-color: var(--tok-highlight);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+  }
+}

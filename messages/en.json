@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "homeTitle": "NorthCalculator: precise calculators that show their working",
+    "homeDescription": "Free calculators for money, health, math, dates and units. Live results, step-by-step working, cited formulas, and nothing leaves your device."
+  },
+  "common": {
+    "skipToContent": "Skip to content",
+    "home": "Home",
+    "breadcrumbs": "Breadcrumbs",
+    "onDevice": "Your numbers stay on this device. Nothing you type is sent to a server.",
+    "lastUpdated": "Last updated {date}"
+  },
+  "validation": {
+    "invalid": "Enter a number, like 1,250 or 12.5",
+    "empty": "Enter a value",
+    "min": "Use {min} or more",
+    "max": "Use {max} or less",
+    "integer": "Use a whole number",
+    "negative": "Use a value of zero or more"
+  },
+  "categories": {
+    "finance": "Finance",
+    "math": "Math",
+    "health": "Health & Fitness",
+    "date-time": "Date & Time",
+    "conversion": "Unit Conversion",
+    "education": "Education",
+    "everyday": "Everyday Life"
+  },
+  "search": {
+    "open": "Search calculators",
+    "placeholder": "Search calculators, e.g. mortgage or BMI",
+    "label": "Search calculators",
+    "noResults": "Nothing matches “{query}”.",
+    "hint": "Try a calculator name, or what you want to work out.",
+    "results": "Results: {count}"
+  },
+  "theme": {
+    "label": "Color theme",
+    "system": "Match system",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "locale": {
+    "label": "Language",
+    "current": "Current language: {name}"
+  },
+  "footer": {
+    "about": "About",
+    "calculators": "Calculators",
+    "legal": "Legal",
+    "methodology": "Methodology",
+    "editorialPolicy": "Editorial policy",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "operatedBy": "Built and operated by {name}.",
+    "copyright": "© {year} NorthCalculator",
+    "disclaimer": "Results are educational estimates. They are not financial, medical, tax or legal advice."
+  },
+  "home": {
+    "eyebrow": "Precise · Cited · Private",
+    "title": "Calculators that show their working",
+    "lede": "Get the answer, see the steps that produced it, and check the source behind the formula. No sign-up, no clutter, and your numbers never leave your device.",
+    "principlesTitle": "How NorthCalculator works",
+    "principles": {
+      "liveTitle": "Answers as you type",
+      "liveBody": "Every calculator starts with realistic defaults and updates the moment you change a value. There is no Calculate button to hunt for.",
+      "citedTitle": "Every formula has a source",
+      "citedBody": "Each page names the standard, study or official publication its formula comes from, with the date it was checked.",
+      "privateTitle": "Runs on your device",
+      "privateBody": "Calculations happen in your browser. Salary, loan and health figures are never sent to us or anyone else.",
+      "shareTitle": "Shareable to the digit",
+      "shareBody": "The page address carries your inputs, so a bookmarked or shared link reopens the exact same result."
+    },
+    "categoriesTitle": "Browse by subject",
+    "comingTitle": "Calculators are being added",
+    "comingBody": "The first calculators are being built and checked against their sources. Each one is published only when its formula, tests and explanation are complete."
+  },
+  "notFound": {
+    "title": "This page doesn’t exist",
+    "body": "The address may be mistyped, or the page may have moved. Try searching for the calculator you need.",
+    "back": "Go to the home page"
+  },
+  "pages": {
+    "about": "About NorthCalculator",
+    "methodology": "Methodology",
+    "editorialPolicy": "Editorial policy",
+    "privacy": "Privacy policy",
+    "terms": "Terms of use",
+    "contact": "Contact"
+  }
+}

@@ -1,0 +1,3 @@
+# Cloudflare Pages redirects (ADR-010). No language detection: everyone lands on English.
+/  /en  301
+/index.html  /en  301
