@@ -27,6 +27,7 @@ const BANNED = [
   /comprehensive guide/i,
   /\bultimate\b/i,
   /lorem ipsum/i,
+  /TODO\(/, // generator placeholders (scripts/new-calculator.mjs)
 ];
 
 describe('content gate: definitions', () => {

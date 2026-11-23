@@ -11,6 +11,20 @@ import { JsonLd } from '@/components/seo/JsonLd';
 import { graph, operator, organization, website } from '@/lib/seo/jsonld';
 import { calculatorsFor, categoriesFor } from '@/calculators/registry';
 import { loadContent } from '@/calculators/content-loader';
+import { runCalculator } from '@/calculators/run';
+
+/** Worked samples under the universal input, computed at build time by each calculator. */
+const SAMPLES = [
+  { key: 'percentage', id: 'percentage', inputs: { mode: 'of', a: 15, b: 240 } },
+  {
+    key: 'oven',
+    id: 'unit-converter',
+    inputs: { q: 'temperature', v: 350, from: 'f', to: 'c' },
+    digits: 5,
+  },
+  { key: 'mortgage', id: 'mortgage', inputs: { price: 400000, down: 20, rate: 6.5, years: 30 } },
+  { key: 'bmi', id: 'bmi', inputs: { system: 'metric', cm: 175, kg: 82 } },
+] as const;
 
 export async function generateMetadata({
   params,
@@ -37,6 +51,16 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const tc = await getTranslations({ locale, namespace: 'categories' });
   const categories = categoriesFor(locale);
   const calcs = calculatorsFor(locale);
+  const samples = (
+    await Promise.all(
+      SAMPLES.map(async (s) => ({
+        key: s.key,
+        run: await runCalculator(s.id, locale, s.inputs, {
+          digits: 'digits' in s ? s.digits : undefined,
+        }),
+      })),
+    )
+  ).filter((s) => s.run !== null);
   const names: Record<string, string> = Object.fromEntries(
     await Promise.all(
       calcs.map(async (c) => [c.id, (await loadContent(c.id, locale))!.name] as const),
@@ -66,6 +90,30 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <div className="mt-8 max-w-xl">
               <SearchTrigger variant="hero" labels={await searchLabels(locale)} locale={locale} />
             </div>
+            {samples.length > 0 && (
+              <div className="mt-8 max-w-xl">
+                <h2 className="font-mono text-xs tracking-[0.16em] text-subtle uppercase">
+                  {t('tryTitle')}
+                </h2>
+                <ul className="mt-3 divide-y divide-line border-y border-line">
+                  {samples.map((s) => (
+                    <li key={s.key}>
+                      <Link
+                        href={s.run!.href}
+                        className="group flex items-baseline justify-between gap-4 py-2.5 hover:text-brand"
+                      >
+                        <span className="min-w-0 text-[15px] text-muted group-hover:text-brand">
+                          {t(`try.${s.key}`)}
+                        </span>
+                        <span className="num shrink-0 font-mono text-[15px] font-medium">
+                          {s.run!.value}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
           {/* Four verifiable principles, set as a numbered margin list rather than feature cards (BRIEF §7). */}
           <aside aria-label={t('principlesTitle')} className="self-end lg:ps-8">

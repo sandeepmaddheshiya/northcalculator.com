@@ -15,6 +15,8 @@ export async function searchLabels(locale: Locale): Promise<SearchLabels> {
     noResults: t.raw('noResults') as string,
     hint: t('hint'),
     results: t.raw('results') as string,
+    answer: t('answer'),
+    showWorking: t('showWorking'),
   };
 }
 
@@ -41,51 +43,47 @@ export async function validationMessages(locale: Locale): Promise<ValidationMess
   };
 }
 
-export type CalcChrome = Record<
-  | 'inputs'
-  | 'result'
-  | 'copyLink'
-  | 'linkCopied'
-  | 'copyResult'
-  | 'resultCopied'
-  | 'print'
-  | 'reset'
-  | 'downloadCsv'
-  | 'showSteps'
-  | 'stepsHeading'
-  | 'moreOptions'
-  | 'backToResult'
-  | 'ymylDisclaimer'
-  | 'cannotCompute'
-  | 'chartHeading'
-  | 'tableHeading'
-  | 'onDevice'
-  | 'swap',
-  string
->;
+/** Calculator chrome strings handed to client islands (one list defines both type and loader). */
+const CHROME_KEYS = [
+  'inputs',
+  'result',
+  'copyLink',
+  'linkCopied',
+  'copyResult',
+  'resultCopied',
+  'print',
+  'reset',
+  'downloadCsv',
+  'showSteps',
+  'stepsHeading',
+  'moreOptions',
+  'backToResult',
+  'ymylDisclaimer',
+  'cannotCompute',
+  'chartHeading',
+  'tableHeading',
+  'onDevice',
+  'swap',
+  'history',
+  'saved',
+  'recent',
+  'save',
+  'savedDone',
+  'remove',
+  'clearHistory',
+  'historyNote',
+  'historyNoteSensitive',
+  'compare',
+  'compareHeading',
+  'compareClear',
+  'scenarioA',
+  'scenarioB',
+  'difference',
+] as const;
+
+export type CalcChrome = Record<(typeof CHROME_KEYS)[number], string>;
 
 export async function calcChrome(locale: Locale): Promise<CalcChrome> {
   const t = await getTranslations({ locale, namespace: 'calc' });
-  const keys = [
-    'inputs',
-    'result',
-    'copyLink',
-    'linkCopied',
-    'copyResult',
-    'resultCopied',
-    'print',
-    'reset',
-    'downloadCsv',
-    'showSteps',
-    'stepsHeading',
-    'moreOptions',
-    'backToResult',
-    'ymylDisclaimer',
-    'cannotCompute',
-    'chartHeading',
-    'tableHeading',
-    'onDevice',
-    'swap',
-  ] as const;
-  return Object.fromEntries(keys.map((k) => [k, t(k)])) as CalcChrome;
+  return Object.fromEntries(CHROME_KEYS.map((k) => [k, t(k)])) as CalcChrome;
 }

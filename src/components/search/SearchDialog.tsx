@@ -6,6 +6,8 @@ import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { fill } from '@/lib/fill';
 import { Icon } from '@/components/ui/Icon';
 import type { SearchDoc } from '@/lib/search-index';
+import { inlineAnswer } from '@/lib/inline-answer';
+import { formatSignificant } from '@/engine/format';
 
 export interface SearchLabels {
   open: string;
@@ -14,6 +16,8 @@ export interface SearchLabels {
   noResults: string;
   hint: string;
   results: string;
+  answer: string;
+  showWorking: string;
 }
 
 export default function SearchDialog({
@@ -56,10 +60,28 @@ export default function SearchDialog({
     return ms;
   }, [docs]);
 
-  const results = useMemo(() => {
+  const found = useMemo(() => {
     if (!engine || !query.trim()) return docs?.slice(0, 8) ?? [];
     return engine.search(query).slice(0, 12) as unknown as SearchDoc[];
   }, [engine, docs, query]);
+
+  // An inline answer ("15% of 240 = 36") becomes the first option, linking to its calculator.
+  const answer = useMemo(() => {
+    const a = inlineAnswer(query, locale);
+    const doc = a && docs?.find((d) => d.id === a.calculator);
+    if (!a || !doc) return null;
+    return {
+      title: `${a.question} = ${formatSignificant(a.value, locale, 10)}${a.suffix ? ` ${a.suffix}` : ''}`,
+      description: `${t('showWorking')}: ${doc.title}`,
+      url: `${doc.url}?${new URLSearchParams(a.params).toString()}`,
+      category: t('answer'),
+    };
+  }, [query, locale, docs, labels]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const results = useMemo(
+    () => (answer ? [answer as SearchDoc, ...found] : found),
+    [answer, found],
+  );
 
   const go = (url: string) => {
     onOpenChange(false);
@@ -123,7 +145,7 @@ export default function SearchDialog({
           >
             {results.map((r, i) => (
               <li
-                key={r.url}
+                key={`${i}-${r.url}`}
                 id={`${listId}-${i}`}
                 role="option"
                 aria-selected={i === active}
@@ -131,8 +153,10 @@ export default function SearchDialog({
                 onClick={() => go(r.url)}
                 className="flex cursor-pointer items-baseline justify-between gap-4 rounded-md px-3 py-2.5 aria-selected:bg-brand-wash"
               >
-                <span>
-                  <span className="block font-medium">{r.title}</span>
+                <span className="min-w-0">
+                  <span className={`block font-medium ${r === answer ? 'num text-lg' : ''}`}>
+                    {r.title}
+                  </span>
                   <span className="block text-sm text-muted">{r.description}</span>
                 </span>
                 <span className="shrink-0 text-xs text-subtle">{r.category}</span>

@@ -29,11 +29,13 @@
   },
   "search": {
     "open": "Search calculators",
-    "placeholder": "Search calculators, e.g. mortgage or BMI",
+    "placeholder": "Search, or try “15% of 240” or “5 ft to m”",
     "label": "Search calculators",
     "noResults": "Nothing matches “{query}”.",
-    "hint": "Try a calculator name, or what you want to work out.",
-    "results": "Results: {count}"
+    "hint": "Try a calculator name, a sum such as 2^10 + 5, or a conversion such as 100 f to c.",
+    "results": "Results: {count}",
+    "answer": "Answer",
+    "showWorking": "Show the working"
   },
   "theme": {
     "label": "Color theme",
@@ -75,7 +77,14 @@
     },
     "categoriesTitle": "Browse by subject",
     "comingTitle": "Calculators are being added",
-    "comingBody": "The first calculators are being built and checked against their sources. Each one is published only when its formula, tests and explanation are complete."
+    "comingBody": "The first calculators are being built and checked against their sources. Each one is published only when its formula, tests and explanation are complete.",
+    "tryTitle": "Try a calculation",
+    "try": {
+      "percentage": "15% of 240",
+      "oven": "350 °F in Celsius",
+      "mortgage": "$400,000 home, 20% down, 6.5% for 30 years",
+      "bmi": "BMI at 175 cm and 82 kg"
+    }
   },
   "notFound": {
     "title": "This page doesn’t exist",
@@ -129,7 +138,22 @@
     "feedbackBody": "Tell us what you expected and why. Copy the link above first so we can see your exact inputs.",
     "feedbackCta": "Report a problem",
     "onThisPage": "On this page",
-    "swap": "Swap"
+    "swap": "Swap",
+    "history": "History",
+    "saved": "Saved",
+    "recent": "Recent",
+    "save": "Save",
+    "savedDone": "Saved in this browser",
+    "remove": "Remove",
+    "clearHistory": "Clear",
+    "historyNote": "History is kept only in this browser. Nothing is sent to us.",
+    "historyNoteSensitive": "Because this calculator uses personal figures, nothing is kept automatically. Only results you save are stored, in this browser only.",
+    "compare": "Compare",
+    "compareHeading": "Comparing scenario A with your current inputs (B)",
+    "compareClear": "Stop comparing",
+    "scenarioA": "A (pinned)",
+    "scenarioB": "B (current)",
+    "difference": "B − A"
   },
   "categoryHub": {
     "title": "{name} calculators",
@@ -142,5 +166,10 @@
       "education": "Grade point averages and grade calculations with the scale written out, so you can match it to your school's own rules. Courses, credits and weightings are all editable.",
       "everyday": "Quick, practical calculators for tips, bills and shopping, with the arithmetic shown so you can trust the split."
     }
+  },
+  "offline": {
+    "title": "You’re offline",
+    "body": "This page hasn’t been saved on this device yet. Calculators you have opened before still work without a connection, because they run entirely in your browser.",
+    "home": "Go to the home page"
   }
 }

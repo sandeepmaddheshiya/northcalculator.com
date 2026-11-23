@@ -11,6 +11,7 @@ import { THEME_SCRIPT } from '@/lib/theme-script';
 import { SITE } from '@/lib/site';
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { SiteFooter } from '@/components/layout/SiteFooter';
+import { ServiceWorker } from '@/components/layout/ServiceWorker';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -69,6 +70,7 @@ export default async function LocaleLayout({
           {children}
         </div>
         <SiteFooter locale={locale} />
+        <ServiceWorker />
       </body>
     </html>
   );

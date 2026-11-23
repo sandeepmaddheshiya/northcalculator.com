@@ -27,6 +27,8 @@ const PATHS = {
   swap: 'M7 4 4 7l3 3M4 7h13M17 20l3-3-3-3M20 17H7',
   lock: 'M6 11h12v9H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3',
   plus: 'M12 5v14M5 12h14',
+  star: 'M12 3.8l2.5 5.2 5.7.8-4.1 4 1 5.6L12 16.7l-5.1 2.7 1-5.6-4.1-4 5.7-.8z',
+  compare: 'M8 4v16M16 4v16M4 8h4M16 16h4M4 16h4M16 8h4',
   trash: 'M5 7h14M10 7V4.5h4V7M7 7l.8 12.5h8.4L17 7M10.5 11v5M13.5 11v5',
   backspace: 'M9 5h11v14H9l-6-7 6-7ZM12.5 9.5l5 5M17.5 9.5l-5 5',
 } as const;

@@ -62,6 +62,8 @@ test('search opens with Ctrl+K and "/", closes with Escape, finds a page', async
   await expect(page.getByRole('option').first()).toContainText('Methodology');
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/\/en\/methodology$/);
+  // A full page load: wait for hydration before using the keyboard shortcut again.
+  await page.waitForLoadState('networkidle');
   await page.keyboard.press('/');
   await expect(page.getByRole('combobox')).toBeFocused();
   await page.keyboard.press('Escape');

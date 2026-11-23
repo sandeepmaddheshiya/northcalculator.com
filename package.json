@@ -23,6 +23,7 @@
     "check:content": "vitest run src/calculators/content-gate.test.ts",
     "check:bundle": "node scripts/check-bundle.mjs",
     "check:links": "node scripts/check-links.mjs",
+    "new:calculator": "node scripts/new-calculator.mjs",
     "lhci": "lhci autorun",
     "check": "pnpm typecheck && pnpm lint && pnpm test && pnpm check:i18n",
     "prepare": "husky"

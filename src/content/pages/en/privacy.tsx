@@ -14,10 +14,20 @@ export default function Privacy() {
       </p>
       <h2>Information stored on your device</h2>
       <p>
-        If you change the color theme, choose a number format, or (when these features are
-        available) save favorites, history or scenarios, that preference is stored in your browser’s
-        local storage. It never leaves your device and you can clear it at any time through your
-        browser settings.
+        Some things are kept in your browser’s local storage so the site can remember them. None of
+        it is sent to us, and you can clear it at any time in your browser settings:
+      </p>
+      <ul>
+        <li>your color theme;</li>
+        <li>
+          recent calculations, so you can reopen them from the History list on each calculator.
+          Calculators that use personal figures, such as BMI, never keep history automatically;
+        </li>
+        <li>results you choose to save with the Save button.</li>
+      </ul>
+      <p>
+        To work offline, the site also keeps copies of pages you have visited in your browser’s
+        cache. These are the same public pages anyone can load and contain none of your inputs.
       </p>
       <h2>Shared links</h2>
       <p>
@@ -28,7 +38,8 @@ export default function Privacy() {
       <h2>Exchange rates</h2>
       <p>
         The currency converter downloads published reference exchange rates from a public rate
-        provider. That request contains no information about what you are converting.
+        provider (ExchangeRate-API, or a backup copy of daily rates on the jsDelivr network if that
+        is unavailable). The request contains no information about what you are converting.
       </p>
       <h2>Hosting and server logs</h2>
       <p>

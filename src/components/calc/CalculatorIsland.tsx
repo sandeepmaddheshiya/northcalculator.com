@@ -29,6 +29,12 @@ import { DataTable } from './DataTable';
 import { makeFmt } from '@/calculators/fmt';
 import { decodeState, defaultValues, encodeState } from '@/calculators/url-state';
 import { fill } from '@/lib/fill';
+import { formatOutput } from '@/calculators/format-output';
+import { addEntry, clearEntries, readEntries, removeEntry, type HistoryEntry } from './history';
+import { HistoryPanel } from './HistoryPanel';
+import { ComparePanel, type CompareRow } from './ComparePanel';
+
+export { formatOutput };
 
 export interface IslandProps {
   locale: string;
@@ -55,39 +61,6 @@ function currencySymbol(locale: string, currency: string): string {
   }
 }
 
-export function formatOutput(
-  fmt: Fmt,
-  format: string,
-  v: number | string | null,
-  ui: Record<string, string>,
-  decimals?: number,
-): string {
-  if (v === null) return '—';
-  if (typeof v === 'string') return format === 'date' ? fmt.date(v) : (ui[v] ?? v);
-  switch (format) {
-    case 'currency':
-    case 'money':
-      return fmt.money(v, decimals);
-    case 'percent':
-      return fmt.pct(v, decimals ?? 2);
-    case 'integer':
-      return fmt.int(v);
-    case 'sig':
-      return fmt.sig(v, decimals ?? 10);
-    case 'duration': {
-      // Value in months → "29 yr 4 mo" (templates from the calculator's ui strings).
-      const y = Math.floor(v / 12);
-      const m = Math.round(v - y * 12);
-      const parts = [];
-      if (y) parts.push(fill(ui['fmt.years'] ?? '{n} yr', { n: fmt.int(y) }));
-      if (m || !y) parts.push(fill(ui['fmt.months'] ?? '{n} mo', { n: fmt.int(m) }));
-      return parts.join(' ');
-    }
-    default:
-      return fmt.num(v, decimals ?? 4);
-  }
-}
-
 export function CalculatorIsland({
   def,
   compute,
@@ -104,6 +77,11 @@ export function CalculatorIsland({
   const [notice, setNotice] = useState<string | null>(null);
   const [showSteps, setShowSteps] = useState(false);
   const [heroVisible, setHeroVisible] = useState(true);
+  const [recent, setRecent] = useState<HistoryEntry[]>([]);
+  const [saved, setSaved] = useState<HistoryEntry[]>([]);
+  const [pinned, setPinned] = useState<InputValues | null>(null);
+  const sensitive = def.inputs.some((i) => i.sensitive);
+  const canCompare = def.category === 'finance' || def.category === 'health';
   const hydrated = useRef(false);
   const heroRef = useRef<HTMLDivElement>(null);
 
@@ -120,6 +98,8 @@ export function CalculatorIsland({
         if (i.type === 'date' && i.default === 'today' && v[i.id] === buildToday) next[i.id] = iso;
       return { ...next, ...fromUrl } as InputValues;
     });
+    setRecent(readEntries('history', def.id));
+    setSaved(readEntries('saved', def.id));
     /* eslint-enable react-hooks/set-state-in-effect */
     hydrated.current = true;
   }, [def, buildToday]);
@@ -161,6 +141,37 @@ export function CalculatorIsland({
       return { outputs: {}, steps: [], warnings: [{ key: 'error.generic', level: 'warn' }] };
     }
   }, [compute, values, today, fmt, data, ui]);
+
+  // Auto-history: a settled, non-default calculation is remembered after 2 s (never for
+  // calculators with personal inputs, which are only kept when the user saves them).
+  const primaryOut = def.outputs.find((o) => o.primary)!;
+  const primaryNow = result.outputs[primaryOut.id] ?? null;
+  const primaryText =
+    primaryNow === null
+      ? null
+      : formatOutput(
+          fmt,
+          primaryOut.formatBy
+            ? (primaryOut.formatBy.map[String(values[primaryOut.formatBy.input])] ??
+                primaryOut.format)
+            : primaryOut.format,
+          primaryNow,
+          ui,
+          primaryOut.decimals,
+        );
+  useEffect(() => {
+    if (!hydrated.current || sensitive || primaryText === null) return;
+    const q = encodeState(def, values, defaults);
+    if (!q) return;
+    const id = window.setTimeout(
+      () => setRecent(addEntry('history', def.id, { q, label: primaryText, at: Date.now() })),
+      2000,
+    );
+    return () => window.clearTimeout(id);
+  }, [def, values, defaults, sensitive, primaryText]);
+
+  const openEntry = (q: string) =>
+    setValues({ ...defaults, ...decodeState(def, `?${q}`) } as InputValues);
 
   const set = (id: string, v: InputValue) =>
     setValues((prev) => {
@@ -206,6 +217,33 @@ export function CalculatorIsland({
       : o.format;
     return formatOutput(fmt, format, v, ui, o.decimals);
   };
+
+  const pinnedResult = useMemo(() => {
+    if (!pinned) return null;
+    try {
+      return compute(pinned, { today, fmt, data, t: (k, v) => fill(ui[k] ?? k, v ?? {}) });
+    } catch {
+      return null;
+    }
+  }, [compute, pinned, today, fmt, data, ui]);
+  const compareRows: CompareRow[] = pinnedResult
+    ? def.outputs
+        .filter(
+          (o) =>
+            (pinnedResult.outputs[o.id] ?? null) !== null ||
+            (result.outputs[o.id] ?? null) !== null,
+        )
+        .map((o) => {
+          const a = pinnedResult.outputs[o.id] ?? null;
+          const b = result.outputs[o.id] ?? null;
+          const d = typeof a === 'number' && typeof b === 'number' ? b - a : null;
+          const diff =
+            d === null || o.format === 'text'
+              ? null
+              : `${d > 0 ? '+' : d < 0 ? '−' : ''}${out(o.id, Math.abs(d))}`;
+          return { label: ui[o.labelKey] ?? o.id, a: out(o.id, a), b: out(o.id, b), diff };
+        })
+    : [];
 
   function flash(msg: string) {
     setNotice(msg);
@@ -482,6 +520,27 @@ export function CalculatorIsland({
               <Button size="sm" onClick={() => copy(resultText(), chrome.resultCopied)}>
                 <Icon name="copy" size={16} /> {chrome.copyResult}
               </Button>
+              <Button
+                size="sm"
+                disabled={primaryText === null}
+                onClick={() => {
+                  setSaved(
+                    addEntry('saved', def.id, {
+                      q: encodeState(def, values, defaults),
+                      label: primaryText ?? '',
+                      at: Date.now(),
+                    }),
+                  );
+                  flash(chrome.savedDone);
+                }}
+              >
+                <Icon name="star" size={16} /> {chrome.save}
+              </Button>
+              {canCompare && !pinned && (
+                <Button size="sm" disabled={primaryText === null} onClick={() => setPinned(values)}>
+                  <Icon name="compare" size={16} /> {chrome.compare}
+                </Button>
+              )}
               <Button size="sm" onClick={() => window.print()}>
                 <Icon name="print" size={16} /> {chrome.print}
               </Button>
@@ -498,8 +557,25 @@ export function CalculatorIsland({
               {notice}
             </p>
 
+            {pinned && compareRows.length > 0 && (
+              <ComparePanel rows={compareRows} chrome={chrome} onClear={() => setPinned(null)} />
+            )}
+
+            <HistoryPanel
+              recent={recent}
+              saved={saved}
+              chrome={chrome}
+              sensitive={sensitive}
+              onOpen={openEntry}
+              onRemoveSaved={(q) => setSaved(removeEntry('saved', def.id, q))}
+              onClearRecent={() => {
+                clearEntries('history', def.id);
+                setRecent([]);
+              }}
+            />
+
             {result.steps.length > 0 && (
-              <div className="border-t border-line pt-4">
+              <div className="mt-3 border-t border-line pt-4">
                 <button
                   type="button"
                   aria-expanded={showSteps}
