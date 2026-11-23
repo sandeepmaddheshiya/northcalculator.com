@@ -20,12 +20,12 @@ export default function NotFound() {
       </head>
       <body className="min-h-dvh">
         <main className="mx-auto max-w-2xl px-4 py-24 sm:px-6">
-          <p className="num text-subtle font-mono text-sm">404</p>
+          <p className="num font-mono text-sm text-subtle">404</p>
           <h1 className="mt-2 text-3xl font-semibold">{en.notFound.title}</h1>
-          <p className="text-muted mt-4 text-lg">{en.notFound.body}</p>
+          <p className="mt-4 text-lg text-muted">{en.notFound.body}</p>
           <Link
             href="/en"
-            className="text-brand mt-8 inline-block font-medium underline underline-offset-4"
+            className="mt-8 inline-block font-medium text-brand underline underline-offset-4"
           >
             {en.notFound.back}
           </Link>

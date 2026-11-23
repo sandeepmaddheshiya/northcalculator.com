@@ -39,7 +39,7 @@ End of every phase: run all of the above, fix everything, commit (Conventional C
 - Every formula needs a cited primary source plus ≥10 tests with ≥2 independent reference values. Never guess: log it in `docs/open-questions.md`.
 - Never claim a feature or fact that isn't true yet (e.g. search placeholder copy). Never show a review date for an unreviewed page (ADR-011).
 - No placeholder or lorem copy (postbuild fails on it). Exactly one `<h1>` per page.
-- No horizontal scroll at 360px (E2E checks it). Use logical CSS properties (`ms-`, `pe-`, `start-`) for RTL.
+- No horizontal scroll at 360px (E2E checks it). Mobile CSS grids must declare `grid-cols-[minmax(0,1fr)]`; implicit `auto` columns grow to fit wide content (formulas, buttons). Use logical CSS properties (`ms-`, `pe-`, `start-`) for RTL.
 - Lazy-load heavy libraries (mathjs, charts, MiniSearch, PDF). Keep each calculator chunk ≤ 30 KB gz.
 - No `eval` / `new Function` (lint error).
 - Only add new third-party origins to `CONNECT` in `scripts/postbuild.mjs` with an ADR.

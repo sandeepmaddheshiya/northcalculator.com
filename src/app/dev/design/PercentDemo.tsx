@@ -18,7 +18,7 @@ export function PercentDemo({ messages }: { messages: ValidationMessages }) {
 
   return (
     <form
-      className="grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
+      className="grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
       onSubmit={(e) => e.preventDefault()}
     >
       <div className="space-y-5">
@@ -50,7 +50,7 @@ export function PercentDemo({ messages }: { messages: ValidationMessages }) {
           ]}
         />
       </div>
-      <div className="bg-grid border-line bg-surface rounded-md border p-6">
+      <div className="rounded-md border border-line bg-grid bg-surface p-6">
         <ResultHero
           label={`${pct === null ? '…' : f(pct)}% of ${base === null ? '…' : f(base)}`}
           value={result}
@@ -58,7 +58,7 @@ export function PercentDemo({ messages }: { messages: ValidationMessages }) {
           caption={result === null ? undefined : `That is ${f(pct!)} hundredths of ${f(base!)}.`}
         />
         {result !== null && (
-          <div className="border-line mt-6 border-t pt-5">
+          <div className="mt-6 border-t border-line pt-5">
             <Steps
               steps={[
                 {

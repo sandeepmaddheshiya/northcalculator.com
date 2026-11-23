@@ -16,10 +16,10 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
     localeLabels(locale),
   ]);
   return (
-    <header className="no-print border-line bg-bg/90 supports-[backdrop-filter]:bg-bg/80 sticky top-0 z-30 border-b backdrop-blur-[6px]">
+    <header className="no-print sticky top-0 z-30 border-b border-line bg-bg/90 backdrop-blur-[6px] supports-[backdrop-filter]:bg-bg/80">
       <a
         href="#main"
-        className="focus:bg-surface sr-only focus:not-sr-only focus:absolute focus:start-4 focus:top-3 focus:z-50 focus:rounded-sm focus:px-3 focus:py-2 focus:shadow"
+        className="sr-only focus:not-sr-only focus:absolute focus:start-4 focus:top-3 focus:z-50 focus:rounded-sm focus:bg-surface focus:px-3 focus:py-2 focus:shadow"
       >
         {t('skipToContent')}
       </a>

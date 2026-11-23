@@ -44,7 +44,7 @@ export function ThemeToggle({ labels }: { labels: ThemeLabels }) {
         apply(next);
         setTheme(next);
       }}
-      className="text-muted hover:bg-sunken hover:text-text inline-flex size-10 items-center justify-center rounded-md transition-colors"
+      className="inline-flex size-10 items-center justify-center rounded-md text-muted transition-colors hover:bg-sunken hover:text-text"
       aria-label={`${t('label')}: ${t(theme)}. ${t(next)}?`}
       title={`${t('label')}: ${t(theme)}`}
     >

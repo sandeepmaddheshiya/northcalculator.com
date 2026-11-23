@@ -71,7 +71,7 @@ export default function SearchDialog({
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-40 bg-[#08101c]/40" />
         <Dialog.Content
-          className="border-line bg-surface fixed inset-x-0 top-0 z-50 mx-auto w-full max-w-2xl shadow-2xl sm:top-[10vh] sm:rounded-lg sm:border"
+          className="fixed inset-x-0 top-0 z-50 mx-auto w-full max-w-2xl border-line bg-surface shadow-2xl sm:top-[10vh] sm:rounded-lg sm:border"
           onOpenAutoFocus={(e) => {
             e.preventDefault();
             inputRef.current?.focus();
@@ -79,7 +79,7 @@ export default function SearchDialog({
         >
           <Dialog.Title className="sr-only">{t('label')}</Dialog.Title>
           <Dialog.Description className="sr-only">{t('hint')}</Dialog.Description>
-          <div className="border-line flex items-center gap-3 border-b px-4">
+          <div className="flex items-center gap-3 border-b border-line px-4">
             <Icon name="search" size={20} className="text-subtle" />
             <input
               ref={inputRef}
@@ -109,9 +109,9 @@ export default function SearchDialog({
               aria-activedescendant={results[active] ? `${listId}-${active}` : undefined}
               autoComplete="off"
               spellCheck={false}
-              className="placeholder:text-subtle h-14 flex-1 bg-transparent text-base outline-none"
+              className="h-14 flex-1 bg-transparent text-base outline-none placeholder:text-subtle"
             />
-            <Dialog.Close className="text-subtle ring-line hover:text-text rounded-sm px-1.5 py-0.5 font-mono text-xs ring-1">
+            <Dialog.Close className="rounded-sm px-1.5 py-0.5 font-mono text-xs text-subtle ring-1 ring-line hover:text-text">
               Esc
             </Dialog.Close>
           </div>
@@ -129,17 +129,17 @@ export default function SearchDialog({
                 aria-selected={i === active}
                 onMouseMove={() => setActive(i)}
                 onClick={() => go(r.url)}
-                className="aria-selected:bg-brand-wash flex cursor-pointer items-baseline justify-between gap-4 rounded-md px-3 py-2.5"
+                className="flex cursor-pointer items-baseline justify-between gap-4 rounded-md px-3 py-2.5 aria-selected:bg-brand-wash"
               >
                 <span>
                   <span className="block font-medium">{r.title}</span>
-                  <span className="text-muted block text-sm">{r.description}</span>
+                  <span className="block text-sm text-muted">{r.description}</span>
                 </span>
-                <span className="text-subtle shrink-0 text-xs">{r.category}</span>
+                <span className="shrink-0 text-xs text-subtle">{r.category}</span>
               </li>
             ))}
             {docs && query.trim() !== '' && results.length === 0 && (
-              <li className="text-muted px-3 py-6 text-center text-sm">
+              <li className="px-3 py-6 text-center text-sm text-muted">
                 {fill(t('noResults'), { query })}
                 <br />
                 {t('hint')}

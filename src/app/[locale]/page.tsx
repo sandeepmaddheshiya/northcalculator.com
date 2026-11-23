@@ -47,30 +47,30 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <main>
       <JsonLd json={graph(organization(), operator(), website(locale))} />
-      <section className="border-line border-b">
+      <section className="border-b border-line">
         <Container className="grid grid-cols-[minmax(0,1fr)] gap-10 pt-12 pb-14 sm:pt-20 sm:pb-20 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
           <div>
-            <p className="text-brand font-mono text-xs tracking-[0.18em] uppercase">
+            <p className="font-mono text-xs tracking-[0.18em] text-brand uppercase">
               {t('eyebrow')}
             </p>
             <h1 className="mt-4 max-w-[16ch] text-[clamp(2.25rem,1.5rem+3vw,3.75rem)] leading-[1.05] font-semibold tracking-[-0.025em]">
               {t('title')}
             </h1>
-            <p className="text-muted mt-5 max-w-[52ch] text-lg">{t('lede')}</p>
+            <p className="mt-5 max-w-[52ch] text-lg text-muted">{t('lede')}</p>
             <div className="mt-8 max-w-xl">
               <SearchTrigger variant="hero" labels={await searchLabels(locale)} locale={locale} />
             </div>
           </div>
           {/* Four verifiable principles, set as a numbered margin list rather than feature cards (BRIEF §7). */}
           <aside aria-label={t('principlesTitle')} className="self-end lg:ps-8">
-            <ol className="border-line relative space-y-6 border-s ps-6">
+            <ol className="relative space-y-6 border-s border-line ps-6">
               {principles.map(([title, body], i) => (
                 <li key={title} className="relative">
-                  <span className="num border-line bg-bg text-subtle absolute -start-[2.15rem] top-0.5 flex size-5 items-center justify-center rounded-full border font-mono text-[10px]">
+                  <span className="num absolute -start-[2.15rem] top-0.5 flex size-5 items-center justify-center rounded-full border border-line bg-bg font-mono text-[10px] text-subtle">
                     {i + 1}
                   </span>
                   <h2 className="font-semibold">{t(`principles.${title}`)}</h2>
-                  <p className="text-muted mt-1 text-[15px]">{t(`principles.${body}`)}</p>
+                  <p className="mt-1 text-[15px] text-muted">{t(`principles.${body}`)}</p>
                 </li>
               ))}
             </ol>
@@ -89,12 +89,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <div key={c.key}>
                   <Link
                     href={`/${c.slug[locale]}`}
-                    className="hover:text-brand flex items-center gap-2 font-semibold"
+                    className="flex items-center gap-2 font-semibold hover:text-brand"
                   >
                     <CategoryGlyph category={c.key} />
                     {tc(c.key)}
                   </Link>
-                  <ul className="border-line mt-3 space-y-1.5 border-s ps-4 text-[15px]">
+                  <ul className="mt-3 space-y-1.5 border-s border-line ps-4 text-[15px]">
                     {calcs
                       .filter((x) => x.category === c.key)
                       .map((x) => (
@@ -117,7 +117,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <h2 id="coming" className="text-xl font-semibold">
               {t('comingTitle')}
             </h2>
-            <p className="text-muted mt-2">{t('comingBody')}</p>
+            <p className="mt-2 text-muted">{t('comingBody')}</p>
           </section>
         )}
       </Container>

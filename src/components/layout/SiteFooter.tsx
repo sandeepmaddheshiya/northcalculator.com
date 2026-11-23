@@ -16,19 +16,19 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
 
   const linkCls = 'text-muted hover:text-text underline-offset-4 hover:underline';
   return (
-    <footer className="no-print border-line bg-surface mt-24 border-t">
+    <footer className="no-print mt-24 border-t border-line bg-surface">
       <Container className="grid gap-10 py-12 sm:grid-cols-[1.4fr_1fr_1fr] lg:grid-cols-[2fr_1fr_1fr_1fr]">
         <div className="max-w-sm">
           <LogoMark idPrefix="ftr" className="h-10 w-auto" />
-          <p className="text-muted mt-4 flex gap-2 text-sm">
-            <Icon name="lock" size={18} className="text-subtle mt-0.5 shrink-0" />
+          <p className="mt-4 flex gap-2 text-sm text-muted">
+            <Icon name="lock" size={18} className="mt-0.5 shrink-0 text-subtle" />
             {tCommon('onDevice')}
           </p>
-          <p className="text-subtle mt-3 text-sm">{t('disclaimer')}</p>
+          <p className="mt-3 text-sm text-subtle">{t('disclaimer')}</p>
         </div>
         {categories.length > 0 && (
           <nav aria-label={t('calculators')}>
-            <h2 className="text-subtle text-xs font-semibold tracking-wider uppercase">
+            <h2 className="text-xs font-semibold tracking-wider text-subtle uppercase">
               {t('calculators')}
             </h2>
             <ul className="mt-3 space-y-2 text-sm">
@@ -43,7 +43,7 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
           </nav>
         )}
         <nav aria-label={t('about')}>
-          <h2 className="text-subtle text-xs font-semibold tracking-wider uppercase">
+          <h2 className="text-xs font-semibold tracking-wider text-subtle uppercase">
             {t('about')}
           </h2>
           <ul className="mt-3 space-y-2 text-sm">
@@ -70,7 +70,7 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
           </ul>
         </nav>
         <nav aria-label={t('legal')}>
-          <h2 className="text-subtle text-xs font-semibold tracking-wider uppercase">
+          <h2 className="text-xs font-semibold tracking-wider text-subtle uppercase">
             {t('legal')}
           </h2>
           <ul className="mt-3 space-y-2 text-sm">
@@ -87,8 +87,8 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
           </ul>
         </nav>
       </Container>
-      <div className="border-line border-t">
-        <Container className="text-subtle flex flex-col gap-1 py-5 text-xs sm:flex-row sm:justify-between">
+      <div className="border-t border-line">
+        <Container className="flex flex-col gap-1 py-5 text-xs text-subtle sm:flex-row sm:justify-between">
           <p>{t('copyright', { year })}</p>
           <p>
             {t.rich('operatedBy', {
@@ -96,7 +96,7 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
             })}{' '}
             <a
               href={SITE.operator.url}
-              className="hover:text-text underline underline-offset-2"
+              className="underline underline-offset-2 hover:text-text"
               rel="author"
             >
               {SITE.operator.url.replace('https://', '')}

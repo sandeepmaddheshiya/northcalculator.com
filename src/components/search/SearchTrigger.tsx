@@ -62,14 +62,14 @@ export function SearchTrigger({
         <button
           type="button"
           onClick={openDialog}
-          className="group border-line-strong bg-surface text-muted hover:border-brand focus-visible:border-brand flex h-14 w-full items-center gap-3 rounded-md border px-4 text-start shadow-[0_1px_0_var(--tok-border)] transition-colors"
+          className="group flex h-14 w-full items-center gap-3 rounded-md border border-line-strong bg-surface px-4 text-start text-muted shadow-[0_1px_0_var(--tok-border)] transition-colors hover:border-brand focus-visible:border-brand"
           aria-haspopup="dialog"
         >
           <Icon name="search" size={22} className="text-subtle group-hover:text-brand" />
           <span className="min-w-0 flex-1 truncate text-base">{t('placeholder')}</span>
           <kbd
             aria-hidden="true"
-            className="border-line text-subtle hidden rounded-xs border px-1.5 py-0.5 font-mono text-xs sm:inline"
+            className="hidden rounded-xs border border-line px-1.5 py-0.5 font-mono text-xs text-subtle sm:inline"
           >
             /
           </kbd>
@@ -79,13 +79,13 @@ export function SearchTrigger({
           type="button"
           onClick={openDialog}
           aria-haspopup="dialog"
-          className="text-muted hover:bg-sunken hover:text-text md:border-line md:bg-surface md:hover:border-line-strong inline-flex size-10 items-center justify-center gap-2 rounded-md md:h-10 md:w-64 md:justify-start md:border md:px-3"
+          className="inline-flex size-10 items-center justify-center gap-2 rounded-md text-muted hover:bg-sunken hover:text-text md:h-10 md:w-64 md:justify-start md:border md:border-line md:bg-surface md:px-3 md:hover:border-line-strong"
         >
           <Icon name="search" size={18} />
           <span className="sr-only flex-1 text-start text-sm md:not-sr-only">{t('open')}</span>
           <kbd
             aria-hidden="true"
-            className="border-line text-subtle hidden rounded-xs border px-1.5 font-mono text-[11px] md:inline"
+            className="hidden rounded-xs border border-line px-1.5 font-mono text-[11px] text-subtle md:inline"
           >
             Ctrl K
           </kbd>

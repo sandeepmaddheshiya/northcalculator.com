@@ -31,17 +31,17 @@ export function SearchResults({ labels, locale }: { labels: SearchLabels; locale
   if (!results) return null;
   return (
     <div className="mt-6">
-      <p className="text-muted text-sm" aria-live="polite">
+      <p className="text-sm text-muted" aria-live="polite">
         {fill(labels.results, { count: results.length })}
       </p>
       {results.length === 0 && query && <p className="mt-4">{fill(labels.noResults, { query })}</p>}
-      <ul className="divide-line border-line mt-4 divide-y border-y">
+      <ul className="mt-4 divide-y divide-line border-y border-line">
         {results.map((r) => (
           <li key={r.url} className="py-3">
-            <a href={r.url} className="text-brand font-medium hover:underline">
+            <a href={r.url} className="font-medium text-brand hover:underline">
               {r.title}
             </a>
-            {r.description && <p className="text-muted text-sm">{r.description}</p>}
+            {r.description && <p className="text-sm text-muted">{r.description}</p>}
           </li>
         ))}
       </ul>

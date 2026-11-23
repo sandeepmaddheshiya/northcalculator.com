@@ -25,7 +25,7 @@ export function Callout({
       role={tone === 'danger' ? 'alert' : undefined}
     >
       <Icon name={t.icon} size={18} className={`mt-0.5 shrink-0 ${t.iconCls}`} />
-      <div className="text-text text-sm">
+      <div className="text-sm text-text">
         {title && <p className="font-semibold">{title}</p>}
         <div className={title ? 'mt-0.5' : ''}>{children}</div>
       </div>

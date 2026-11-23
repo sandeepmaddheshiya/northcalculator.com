@@ -90,11 +90,11 @@ function Section({
   return (
     <section
       id={id}
-      className="border-line grid gap-6 border-t py-12 lg:grid-cols-[14rem_1fr] lg:gap-12"
+      className="grid grid-cols-[minmax(0,1fr)] gap-6 border-t border-line py-12 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-12"
     >
       <header>
-        <h2 className="text-brand font-mono text-xs tracking-[0.16em] uppercase">{title}</h2>
-        {note && <p className="text-muted mt-2 text-sm">{note}</p>}
+        <h2 className="font-mono text-xs tracking-[0.16em] text-brand uppercase">{title}</h2>
+        {note && <p className="mt-2 text-sm text-muted">{note}</p>}
       </header>
       <div className="min-w-0">{children}</div>
     </section>
@@ -119,7 +119,7 @@ export default async function DesignGallery() {
         </div>
       </div>
       <h1 className="mt-6 text-3xl font-semibold">Design system</h1>
-      <p className="text-muted mt-2 max-w-2xl">
+      <p className="mt-2 max-w-2xl text-muted">
         The precision instrument: typography does the work, color is spent on meaning, and the
         result is the hero. Every number on this page is computed, not typed. Source of truth:{' '}
         <code className="font-mono text-sm">docs/design-system.md</code>.
@@ -159,12 +159,12 @@ export default async function DesignGallery() {
                 {tk.map((t) => (
                   <li key={t.name} className="flex items-center gap-3">
                     <span
-                      className="border-line size-9 shrink-0 rounded-xs border"
+                      className="size-9 shrink-0 rounded-xs border border-line"
                       style={{ background: t.hex }}
                     />
                     <span className="min-w-0 text-xs">
                       <span className="block font-medium">{t.name}</span>
-                      <span className="num text-subtle block font-mono">
+                      <span className="num block font-mono text-subtle">
                         {t.hex} · {contrast(t.hex, bg).toFixed(2)}:1
                       </span>
                     </span>
@@ -190,7 +190,7 @@ export default async function DesignGallery() {
             Body text sits at 17px with a 1.7 line height and a 68-character measure, so
             explanations read comfortably on phones and desktops alike.
           </p>
-          <p className="text-muted text-sm">Secondary text, 14px, muted.</p>
+          <p className="text-sm text-muted">Secondary text, 14px, muted.</p>
           <p className="font-mono text-sm">M = P × r(1 + r)ⁿ ÷ ((1 + r)ⁿ − 1)</p>
           <div className="num grid max-w-md grid-cols-2 gap-x-8 font-mono text-sm">
             <span>1,111,111.11</span>
@@ -214,7 +214,7 @@ export default async function DesignGallery() {
         title="Results"
         note={`Computed: $400,000 home, 20% down, 6.5% APR, 30-year fixed.`}
       >
-        <div className="grid gap-10 lg:grid-cols-2">
+        <div className="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-2">
           <ResultList
             items={[
               { label: 'Monthly principal & interest', value: usd(m.payment), emphasis: true },
@@ -264,7 +264,7 @@ export default async function DesignGallery() {
             <Icon name="steps" size={16} /> Show the working
           </Button>
           <Button disabled>Disabled</Button>
-          <span className="text-muted text-sm">
+          <span className="text-sm text-muted">
             Search with <Kbd>Ctrl K</Kbd> or <Kbd>/</Kbd>
           </span>
         </div>
@@ -294,9 +294,9 @@ export default async function DesignGallery() {
       >
         <ul className="grid grid-cols-6 gap-4 sm:grid-cols-11">
           {ICONS.map((n) => (
-            <li key={n} className="text-muted flex flex-col items-center gap-1">
+            <li key={n} className="flex flex-col items-center gap-1 text-muted">
               <Icon name={n} size={24} />
-              <span className="text-subtle text-[10px]">{n}</span>
+              <span className="text-[10px] text-subtle">{n}</span>
             </li>
           ))}
         </ul>

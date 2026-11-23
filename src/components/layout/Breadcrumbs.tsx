@@ -10,12 +10,12 @@ export function Breadcrumbs({
 }) {
   return (
     <nav aria-label={label} className="text-sm">
-      <ol className="text-muted flex flex-wrap items-center gap-1">
+      <ol className="flex flex-wrap items-center gap-1 text-muted">
         {items.map((it, i) => (
           <li key={i} className="flex items-center gap-1">
             {i > 0 && <Icon name="chevronRight" size={14} className="text-subtle rtl:rotate-180" />}
             {it.href ? (
-              <Link href={it.href} className="hover:text-text underline-offset-4 hover:underline">
+              <Link href={it.href} className="underline-offset-4 hover:text-text hover:underline">
                 {it.name}
               </Link>
             ) : (

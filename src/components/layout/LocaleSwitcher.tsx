@@ -24,14 +24,14 @@ export function LocaleSwitcher({
   return (
     <details className="relative">
       <summary
-        className="text-muted hover:bg-sunken hover:text-text inline-flex h-10 cursor-pointer list-none items-center gap-1.5 rounded-md px-2 text-sm"
+        className="inline-flex h-10 cursor-pointer list-none items-center gap-1.5 rounded-md px-2 text-sm text-muted hover:bg-sunken hover:text-text"
         aria-label={fill(labels.current, { name: current?.name ?? locale })}
       >
         <Icon name="globe" size={18} />
         <span className="font-mono text-xs uppercase">{locale}</span>
       </summary>
       <ul
-        className="border-line bg-surface absolute end-0 top-11 min-w-44 rounded-md border p-1 shadow-lg"
+        className="absolute end-0 top-11 min-w-44 rounded-md border border-line bg-surface p-1 shadow-lg"
         aria-label={labels.label}
       >
         {liveLocales.map((l) => (
@@ -41,7 +41,7 @@ export function LocaleSwitcher({
               hrefLang={l.code}
               lang={l.code}
               aria-current={l.code === locale ? 'true' : undefined}
-              className="hover:bg-sunken block rounded-sm px-3 py-2 text-sm aria-[current]:font-semibold"
+              className="block rounded-sm px-3 py-2 text-sm hover:bg-sunken aria-[current]:font-semibold"
             >
               {l.name}
             </a>

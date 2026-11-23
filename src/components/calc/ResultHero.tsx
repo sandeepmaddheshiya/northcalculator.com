@@ -50,10 +50,10 @@ export function ResultHero({
   const finalText = value === null ? '—' : format(value);
   return (
     <div>
-      <p className="text-muted text-sm font-medium">{label}</p>
+      <p className="text-sm font-medium text-muted">{label}</p>
       <p
         key={flashKey}
-        className={`num text-result text-text -mx-1 mt-1 rounded-xs px-1 font-semibold tracking-tight ${flashKey ? 'flash' : ''}`}
+        className={`num -mx-1 mt-1 rounded-xs px-1 text-result font-semibold tracking-tight text-text ${flashKey ? 'flash' : ''}`}
         aria-hidden="true"
       >
         {shown === null ? '—' : format(shown)}
@@ -61,7 +61,7 @@ export function ResultHero({
       <p className="sr-only" aria-live="polite" aria-atomic="true">
         {label}: {finalText}
       </p>
-      {caption && <p className="text-muted mt-2 max-w-prose text-[15px]">{caption}</p>}
+      {caption && <p className="mt-2 max-w-prose text-[15px] text-muted">{caption}</p>}
     </div>
   );
 }

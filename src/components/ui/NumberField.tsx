@@ -88,17 +88,17 @@ export function NumberField({
   const errId = error ? `${id}-err` : undefined;
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className="text-text text-sm font-medium">
+      <label htmlFor={id} className="text-sm font-medium text-text">
         {label}
       </label>
       <div
-        className={`group bg-surface focus-within:border-brand flex h-12 items-stretch rounded-sm border transition-colors focus-within:shadow-[0_0_0_3px_var(--tok-brand-wash)] ${
+        className={`group flex h-12 items-stretch rounded-sm border bg-surface transition-colors focus-within:border-brand focus-within:shadow-[0_0_0_3px_var(--tok-brand-wash)] ${
           error ? 'border-danger' : 'border-line-strong hover:border-text/60'
         }`}
       >
         {prefix && (
           <span
-            className="text-subtle flex items-center ps-3 font-mono text-sm select-none"
+            className="flex items-center ps-3 font-mono text-sm text-subtle select-none"
             aria-hidden="true"
           >
             {prefix}
@@ -145,7 +145,7 @@ export function NumberField({
         />
         {suffix && (
           <span
-            className="text-subtle flex items-center pe-3 font-mono text-sm select-none"
+            className="flex items-center pe-3 font-mono text-sm text-subtle select-none"
             aria-hidden="true"
           >
             {suffix}
@@ -153,12 +153,12 @@ export function NumberField({
         )}
       </div>
       {error && (
-        <p id={errId} className="text-danger text-sm">
+        <p id={errId} className="text-sm text-danger">
           {error}
         </p>
       )}
       {help && (
-        <p id={helpId} className="text-subtle text-sm">
+        <p id={helpId} className="text-sm text-subtle">
           {help}
         </p>
       )}

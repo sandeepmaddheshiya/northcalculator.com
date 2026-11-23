@@ -13,7 +13,7 @@ export function DataTable({
 }) {
   return (
     <div
-      className="border-line overflow-x-auto rounded-sm border"
+      className="overflow-x-auto rounded-sm border border-line"
       tabIndex={0}
       role="region"
       aria-label={caption}
@@ -26,7 +26,7 @@ export function DataTable({
               <th
                 key={c}
                 scope="col"
-                className={`text-muted px-3 py-2 font-medium ${i >= numericFrom ? 'text-end' : 'text-start'}`}
+                className={`px-3 py-2 font-medium text-muted ${i >= numericFrom ? 'text-end' : 'text-start'}`}
               >
                 {c}
               </th>
@@ -35,7 +35,7 @@ export function DataTable({
         </thead>
         <tbody>
           {rows.map((r, ri) => (
-            <tr key={ri} className="border-line border-t">
+            <tr key={ri} className="border-t border-line">
               {r.map((cell, ci) =>
                 ci === 0 ? (
                   <th key={ci} scope="row" className="px-3 py-2 text-start font-normal">

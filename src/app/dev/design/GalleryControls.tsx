@@ -5,7 +5,7 @@ export function GalleryControls() {
   return (
     <button
       type="button"
-      className="border-line text-muted hover:text-text h-10 rounded-md border px-3 font-mono text-xs"
+      className="h-10 rounded-md border border-line px-3 font-mono text-xs text-muted hover:text-text"
       onClick={() => {
         const el = document.documentElement;
         el.dir = el.dir === 'rtl' ? 'ltr' : 'rtl';

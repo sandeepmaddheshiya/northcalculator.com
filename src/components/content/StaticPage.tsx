@@ -51,7 +51,7 @@ export async function StaticPage({ locale, id }: { locale: Locale; id: StaticPag
           items={[{ name: tc('home'), href: '/' }, { name: title }]}
         />
         <h1 className="mt-6 text-3xl font-semibold sm:text-[2.5rem] sm:leading-tight">{title}</h1>
-        <p className="text-subtle mt-2 text-sm">
+        <p className="mt-2 text-sm text-subtle">
           {tc('lastUpdated', {
             date: format.dateTime(new Date(SITE.policiesUpdated), { dateStyle: 'long' }),
           })}

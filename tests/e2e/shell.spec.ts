@@ -2,6 +2,7 @@ import { expect, test, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 const PAGES = [
+  '/dev/design',
   '/en',
   '/en/about',
   '/en/methodology',

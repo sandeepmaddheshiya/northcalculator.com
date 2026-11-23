@@ -5,10 +5,10 @@ export function ResultList({
   items: readonly { label: string; value: string; emphasis?: boolean }[];
 }) {
   return (
-    <dl className="divide-line border-line divide-y border-y">
+    <dl className="divide-y divide-line border-y border-line">
       {items.map((it) => (
         <div key={it.label} className="flex items-baseline justify-between gap-4 py-2.5">
-          <dt className="text-muted text-sm">{it.label}</dt>
+          <dt className="text-sm text-muted">{it.label}</dt>
           <dd className={`num text-end ${it.emphasis ? 'font-semibold' : ''}`}>{it.value}</dd>
         </div>
       ))}

@@ -22,7 +22,7 @@ export function SelectField({
         <select
           id={id}
           aria-describedby={help ? `${id}-help` : undefined}
-          className="border-line-strong bg-surface hover:border-text/60 focus:border-brand h-12 w-full appearance-none rounded-sm border ps-3 pe-10 text-base focus:shadow-[0_0_0_3px_var(--tok-brand-wash)] focus:outline-none"
+          className="h-12 w-full appearance-none rounded-sm border border-line-strong bg-surface ps-3 pe-10 text-base hover:border-text/60 focus:border-brand focus:shadow-[0_0_0_3px_var(--tok-brand-wash)] focus:outline-none"
           {...rest}
         >
           {options.map((o) => (
@@ -34,11 +34,11 @@ export function SelectField({
         <Icon
           name="chevronDown"
           size={18}
-          className="text-subtle pointer-events-none absolute end-3 top-1/2 -translate-y-1/2"
+          className="pointer-events-none absolute end-3 top-1/2 -translate-y-1/2 text-subtle"
         />
       </div>
       {help && (
-        <p id={`${id}-help`} className="text-subtle text-sm">
+        <p id={`${id}-help`} className="text-sm text-subtle">
           {help}
         </p>
       )}
