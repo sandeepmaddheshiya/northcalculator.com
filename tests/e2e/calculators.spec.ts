@@ -70,6 +70,8 @@ const CALCULATORS = [
   ['/en/education/percentage-to-gpa-calculator', 'GPA (4.0 scale)'],
   ['/en/date-time/hours-worked-calculator', 'Total hours (decimal)'],
   ['/en/date-time/time-duration-calculator', 'Duration'],
+  ['/en/finance/break-even-calculator', 'Units to sell'],
+  ['/en/date-time/time-zone-converter', 'Converted time'],
 ] as const;
 
 const snapshot = JSON.parse(

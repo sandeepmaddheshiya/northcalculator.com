@@ -67,6 +67,8 @@ import { timeConverter } from './conversion/time-converter';
 import { percentGpa } from './education/percent-gpa';
 import { hoursWorked } from './date-time/hours-worked';
 import { timeDuration } from './date-time/time-duration';
+import { breakEven } from './finance/break-even';
+import { timeZone } from './date-time/time-zone';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -85,6 +87,7 @@ export const MODULES: readonly CalculatorModule[] = [
   margin,
   cagr,
   roi,
+  breakEven,
   savingsGoal,
   percentage,
   percentageChange,
@@ -113,6 +116,7 @@ export const MODULES: readonly CalculatorModule[] = [
   time,
   timeDuration,
   hoursWorked,
+  timeZone,
   businessDays,
   weekNumber,
   unitConverter,
