@@ -52,6 +52,10 @@ import { dti } from './finance/dti';
 import { testScore } from './education/test-score';
 import { cgpa } from './education/cgpa';
 import { billSplit } from './everyday/bill-split';
+import { lengthConverter } from './conversion/length-converter';
+import { weightConverter } from './conversion/weight-converter';
+import { temperatureConverter } from './conversion/temperature-converter';
+import { volumeConverter } from './conversion/volume-converter';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -99,6 +103,10 @@ export const MODULES: readonly CalculatorModule[] = [
   businessDays,
   weekNumber,
   unitConverter,
+  lengthConverter,
+  weightConverter,
+  temperatureConverter,
+  volumeConverter,
   currencyConverter,
   gpa,
   grade,

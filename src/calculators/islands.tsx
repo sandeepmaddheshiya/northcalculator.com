@@ -61,6 +61,10 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   'test-score': dynamic(() => import('./education/test-score/Island')),
   cgpa: dynamic(() => import('./education/cgpa/Island')),
   'bill-split': dynamic(() => import('./everyday/bill-split/Island')),
+  'length-converter': dynamic(() => import('./conversion/length-converter/Island')),
+  'weight-converter': dynamic(() => import('./conversion/weight-converter/Island')),
+  'temperature-converter': dynamic(() => import('./conversion/temperature-converter/Island')),
+  'volume-converter': dynamic(() => import('./conversion/volume-converter/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {

@@ -55,6 +55,10 @@ const CALCULATORS = [
   ['/en/education/test-score-calculator', 'Score'],
   ['/en/education/cgpa-to-percentage-calculator', 'Indicative percentage'],
   ['/en/everyday/split-bill-calculator', 'Total bill'],
+  ['/en/conversion/length-converter', 'Result'],
+  ['/en/conversion/weight-converter', 'Result'],
+  ['/en/conversion/temperature-converter', 'Result'],
+  ['/en/conversion/volume-converter', 'Result'],
 ] as const;
 
 const snapshot = JSON.parse(

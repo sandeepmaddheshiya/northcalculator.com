@@ -1,6 +1,39 @@
 import type { CalculatorDefinition } from '@/calculators/types';
 import { UNITS, type Quantity } from '@/engine/units';
 
+export const UNIT_SOURCES: CalculatorDefinition['sources'] = [
+  {
+    title:
+      'NIST Guide to the SI (Special Publication 811), Appendix B.8: Factors for Units Listed Alphabetically',
+    publisher: 'National Institute of Standards and Technology',
+    url: 'https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8',
+    accessed: '2026-11-24',
+    locator: 'conversion factors used as test references',
+  },
+  {
+    title: 'The International System of Units (SI Brochure), 9th edition',
+    publisher: 'Bureau International des Poids et Mesures (BIPM)',
+    url: 'https://www.bipm.org/en/publications/si-brochure',
+    accessed: '2026-11-24',
+    locator: 'SI base units and decimal prefixes',
+  },
+  {
+    title:
+      'Specifications, Tolerances, and Other Technical Requirements for Weighing and Measuring Devices (Handbook 44), Appendix C',
+    publisher: 'National Institute of Standards and Technology',
+    url: 'https://www.nist.gov/pml/owm/nist-handbook-44-current-edition',
+    accessed: '2026-11-24',
+    locator: 'US customary units: 1 yd = 0.9144 m, 1 lb = 0.453 592 37 kg, 1 gal = 231 in³',
+  },
+  {
+    title: 'Prefixes for binary multiples',
+    publisher: 'National Institute of Standards and Technology',
+    url: 'https://physics.nist.gov/cuu/Units/binary.html',
+    accessed: '2026-11-24',
+    locator: 'kibi (2¹⁰), mebi (2²⁰), gibi (2³⁰), tebi (2⁴⁰); IEC 80000-13',
+  },
+];
+
 export const QUANTITIES = Object.keys(UNITS) as Quantity[];
 
 /** Default pair shown when a quantity is chosen. */
@@ -98,38 +131,8 @@ export const definition: CalculatorDefinition = {
     { id: 'relation', labelKey: 'out.relation', format: 'text' },
     { id: 'exact', labelKey: 'out.exact', format: 'text' },
   ],
-  sources: [
-    {
-      title:
-        'NIST Guide to the SI (Special Publication 811), Appendix B.8: Factors for Units Listed Alphabetically',
-      publisher: 'National Institute of Standards and Technology',
-      url: 'https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8',
-      accessed: '2026-11-24',
-      locator: 'conversion factors used as test references',
-    },
-    {
-      title: 'The International System of Units (SI Brochure), 9th edition',
-      publisher: 'Bureau International des Poids et Mesures (BIPM)',
-      url: 'https://www.bipm.org/en/publications/si-brochure',
-      accessed: '2026-11-24',
-      locator: 'SI base units and decimal prefixes',
-    },
-    {
-      title:
-        'Specifications, Tolerances, and Other Technical Requirements for Weighing and Measuring Devices (Handbook 44), Appendix C',
-      publisher: 'National Institute of Standards and Technology',
-      url: 'https://www.nist.gov/pml/owm/nist-handbook-44-current-edition',
-      accessed: '2026-11-24',
-      locator: 'US customary units: 1 yd = 0.9144 m, 1 lb = 0.453 592 37 kg, 1 gal = 231 in³',
-    },
-    {
-      title: 'Prefixes for binary multiples',
-      publisher: 'National Institute of Standards and Technology',
-      url: 'https://physics.nist.gov/cuu/Units/binary.html',
-      accessed: '2026-11-24',
-      locator: 'kibi (2¹⁰), mebi (2²⁰), gibi (2³⁰), tebi (2⁴⁰); IEC 80000-13',
-    },
-  ],
+  sources: UNIT_SOURCES,
+
   review: { status: 'pending' },
   draftedWith: 'ai-assisted',
   version: '1.0.0',
