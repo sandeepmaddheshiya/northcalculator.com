@@ -100,6 +100,10 @@ const CALCULATORS = [
   ['/en/physics/force-calculator', 'Weight of the mass at gₙ (N)'],
   ['/en/physics/free-fall-calculator', 'Landing speed (km/h)'],
   ['/en/statistics/sample-size-calculator', 'Sample size needed'],
+  ['/en/chemistry/ph-calculator', 'Solution is'],
+  ['/en/chemistry/percent-yield-calculator', 'Shortfall (theoretical − actual)'],
+  ['/en/physics/projectile-motion-calculator', 'Time of flight (s)'],
+  ['/en/statistics/linear-regression-calculator', 'Regression line'],
 ] as const;
 
 const snapshot = JSON.parse(

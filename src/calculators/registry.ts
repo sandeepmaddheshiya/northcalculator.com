@@ -97,6 +97,10 @@ import { idealGas } from './chemistry/ideal-gas';
 import { force } from './physics/force';
 import { freeFall } from './physics/free-fall';
 import { sampleSize } from './statistics/sample-size';
+import { ph } from './chemistry/ph';
+import { percentYield } from './chemistry/percent-yield';
+import { projectile } from './physics/projectile';
+import { linearRegression } from './statistics/linear-regression';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -199,6 +203,10 @@ export const MODULES: readonly CalculatorModule[] = [
   force,
   freeFall,
   sampleSize,
+  ph,
+  percentYield,
+  projectile,
+  linearRegression,
   fuelCost,
 ];
 
