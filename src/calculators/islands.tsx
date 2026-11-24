@@ -95,6 +95,9 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   'molar-mass': dynamic(() => import('./chemistry/molar-mass/Island')),
   concrete: dynamic(() => import('./construction/concrete/Island')),
   quadratic: dynamic(() => import('./math/quadratic/Island')),
+  triangle: dynamic(() => import('./geometry/triangle/Island')),
+  slope: dynamic(() => import('./math/slope/Island')),
+  dilution: dynamic(() => import('./chemistry/dilution/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {

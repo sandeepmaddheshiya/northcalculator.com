@@ -86,6 +86,9 @@ import { electricityCost } from './electronics/electricity-cost';
 import { molarMass } from './chemistry/molar-mass';
 import { concrete } from './construction/concrete';
 import { quadratic } from './math/quadratic';
+import { triangle } from './geometry/triangle';
+import { slope } from './math/slope';
+import { dilution } from './chemistry/dilution';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -177,6 +180,9 @@ export const MODULES: readonly CalculatorModule[] = [
   molarMass,
   concrete,
   quadratic,
+  triangle,
+  slope,
+  dilution,
   fuelCost,
 ];
 

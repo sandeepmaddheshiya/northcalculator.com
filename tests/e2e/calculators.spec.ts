@@ -89,6 +89,9 @@ const CALCULATORS = [
   ['/en/chemistry/molar-mass-calculator', 'Molar mass (g/mol)'],
   ['/en/construction/concrete-calculator', 'Concrete needed (yd³)'],
   ['/en/math/quadratic-formula-calculator', 'Solutions'],
+  ['/en/geometry/triangle-calculator', 'Area (square units)'],
+  ['/en/math/slope-calculator', 'Slope (m)'],
+  ['/en/chemistry/dilution-calculator', 'Dilution factor (C₁ ÷ C₂)'],
 ] as const;
 
 const snapshot = JSON.parse(
