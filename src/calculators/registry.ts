@@ -56,6 +56,12 @@ import { lengthConverter } from './conversion/length-converter';
 import { weightConverter } from './conversion/weight-converter';
 import { temperatureConverter } from './conversion/temperature-converter';
 import { volumeConverter } from './conversion/volume-converter';
+import { areaConverter } from './conversion/area-converter';
+import { speedConverter } from './conversion/speed-converter';
+import { pressureConverter } from './conversion/pressure-converter';
+import { energyConverter } from './conversion/energy-converter';
+import { dataConverter } from './conversion/data-converter';
+import { fuelEconomyConverter } from './conversion/fuel-economy-converter';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -107,6 +113,12 @@ export const MODULES: readonly CalculatorModule[] = [
   weightConverter,
   temperatureConverter,
   volumeConverter,
+  areaConverter,
+  speedConverter,
+  pressureConverter,
+  energyConverter,
+  dataConverter,
+  fuelEconomyConverter,
   currencyConverter,
   gpa,
   grade,

@@ -59,6 +59,12 @@ const CALCULATORS = [
   ['/en/conversion/weight-converter', 'Result'],
   ['/en/conversion/temperature-converter', 'Result'],
   ['/en/conversion/volume-converter', 'Result'],
+  ['/en/conversion/area-converter', 'Result'],
+  ['/en/conversion/speed-converter', 'Result'],
+  ['/en/conversion/pressure-converter', 'Result'],
+  ['/en/conversion/energy-converter', 'Result'],
+  ['/en/conversion/data-storage-converter', 'Result'],
+  ['/en/conversion/fuel-economy-converter', 'Result'],
 ] as const;
 
 const snapshot = JSON.parse(

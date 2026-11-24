@@ -65,6 +65,12 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   'weight-converter': dynamic(() => import('./conversion/weight-converter/Island')),
   'temperature-converter': dynamic(() => import('./conversion/temperature-converter/Island')),
   'volume-converter': dynamic(() => import('./conversion/volume-converter/Island')),
+  'area-converter': dynamic(() => import('./conversion/area-converter/Island')),
+  'speed-converter': dynamic(() => import('./conversion/speed-converter/Island')),
+  'pressure-converter': dynamic(() => import('./conversion/pressure-converter/Island')),
+  'energy-converter': dynamic(() => import('./conversion/energy-converter/Island')),
+  'data-converter': dynamic(() => import('./conversion/data-converter/Island')),
+  'fuel-economy-converter': dynamic(() => import('./conversion/fuel-economy-converter/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {
