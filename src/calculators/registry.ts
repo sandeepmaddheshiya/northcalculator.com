@@ -70,6 +70,8 @@ import { timeDuration } from './date-time/time-duration';
 import { breakEven } from './finance/break-even';
 import { timeZone } from './date-time/time-zone';
 import { inflation } from './finance/inflation';
+import { caloriesBurned } from './health/calories-burned';
+import { debtPayoff } from './finance/debt-payoff';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -90,6 +92,7 @@ export const MODULES: readonly CalculatorModule[] = [
   roi,
   breakEven,
   inflation,
+  debtPayoff,
   savingsGoal,
   percentage,
   percentageChange,
@@ -110,6 +113,7 @@ export const MODULES: readonly CalculatorModule[] = [
   bmr,
   calorie,
   heartRate,
+  caloriesBurned,
   runningPace,
   age,
   dateDifference,

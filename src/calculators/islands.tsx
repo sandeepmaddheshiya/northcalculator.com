@@ -79,6 +79,8 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   'break-even': dynamic(() => import('./finance/break-even/Island')),
   'time-zone': dynamic(() => import('./date-time/time-zone/Island')),
   inflation: dynamic(() => import('./finance/inflation/Island')),
+  'calories-burned': dynamic(() => import('./health/calories-burned/Island')),
+  'debt-payoff': dynamic(() => import('./finance/debt-payoff/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {
