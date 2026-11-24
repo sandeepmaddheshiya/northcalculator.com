@@ -62,6 +62,9 @@ import { pressureConverter } from './conversion/pressure-converter';
 import { energyConverter } from './conversion/energy-converter';
 import { dataConverter } from './conversion/data-converter';
 import { fuelEconomyConverter } from './conversion/fuel-economy-converter';
+import { powerConverter } from './conversion/power-converter';
+import { timeConverter } from './conversion/time-converter';
+import { percentGpa } from './education/percent-gpa';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -119,12 +122,15 @@ export const MODULES: readonly CalculatorModule[] = [
   energyConverter,
   dataConverter,
   fuelEconomyConverter,
+  powerConverter,
+  timeConverter,
   currencyConverter,
   gpa,
   grade,
   finalGrade,
   testScore,
   cgpa,
+  percentGpa,
   tip,
   billSplit,
   discount,
