@@ -42,6 +42,9 @@ import { exponent } from './math/exponent';
 import { root } from './math/root';
 import { logarithm } from './math/logarithm';
 import { scientificNotation } from './math/scientific-notation';
+import { roi } from './finance/roi';
+import { savingsGoal } from './finance/savings-goal';
+import { daysUntil } from './date-time/days-until';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -57,6 +60,8 @@ export const MODULES: readonly CalculatorModule[] = [
   salary,
   margin,
   cagr,
+  roi,
+  savingsGoal,
   percentage,
   percentageChange,
   percentDifference,
@@ -78,6 +83,7 @@ export const MODULES: readonly CalculatorModule[] = [
   age,
   dateDifference,
   dateAdd,
+  daysUntil,
   time,
   businessDays,
   weekNumber,

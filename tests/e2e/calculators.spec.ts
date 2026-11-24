@@ -45,6 +45,9 @@ const CALCULATORS = [
   ['/en/math/square-root-calculator', 'Root'],
   ['/en/math/log-calculator', 'Logarithm'],
   ['/en/math/scientific-notation-calculator', 'Scientific notation'],
+  ['/en/finance/roi-calculator', 'Return on investment'],
+  ['/en/finance/savings-goal-calculator', 'Save each year'],
+  ['/en/date-time/days-until-calculator', 'Days'],
 ] as const;
 
 const snapshot = JSON.parse(

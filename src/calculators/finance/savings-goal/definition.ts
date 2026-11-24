@@ -1,0 +1,127 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+import { currencySelect } from '@/calculators/currencies';
+
+export const definition: CalculatorDefinition = {
+  id: 'savings-goal',
+  slug: { en: 'savings-goal-calculator' },
+  category: 'finance',
+  tags: [
+    'savings goal',
+    'how much to save',
+    'monthly savings',
+    'sinking fund',
+    'save for a goal',
+    'annuity payment',
+  ],
+  difficulty: 'basic',
+  ymyl: true,
+  currency: { input: 'cur' },
+  schemaCategory: 'FinanceApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'goal',
+      param: 'g',
+      type: 'currency',
+      labelKey: 'goal',
+      default: 37500,
+      min: 0,
+      max: 1e12,
+    },
+    { id: 'years', param: 'y', type: 'number', labelKey: 'years', default: 10, min: 0.1, max: 100 },
+    {
+      id: 'rate',
+      param: 'r',
+      type: 'percent',
+      labelKey: 'rate',
+      default: 12,
+      min: 0,
+      max: 50,
+      helpKey: 'rate.help',
+    },
+    {
+      id: 'freq',
+      param: 'f',
+      type: 'select',
+      labelKey: 'freq',
+      default: '1',
+      options: [
+        { value: '12', labelKey: 'freq.12' },
+        { value: '4', labelKey: 'freq.4' },
+        { value: '1', labelKey: 'freq.1' },
+      ],
+      helpKey: 'freq.help',
+    },
+    {
+      id: 'start',
+      param: 's',
+      type: 'currency',
+      labelKey: 'start',
+      default: 0,
+      min: 0,
+      max: 1e12,
+      advanced: true,
+    },
+    {
+      id: 'timing',
+      param: 't',
+      type: 'segmented',
+      labelKey: 'timing',
+      default: 'end',
+      options: [
+        { value: 'end', labelKey: 'timing.end' },
+        { value: 'begin', labelKey: 'timing.begin' },
+      ],
+      advanced: true,
+    },
+    currencySelect('USD'),
+  ],
+  outputs: [
+    { id: 'payment', labelKey: 'out.payment', labelBy: 'freq', format: 'currency', primary: true },
+    { id: 'contributed', labelKey: 'out.contributed', format: 'currency' },
+    { id: 'interest', labelKey: 'out.interest', format: 'currency' },
+    { id: 'periods', labelKey: 'out.periods', format: 'integer' },
+  ],
+  sources: [
+    {
+      title: 'Contemporary Mathematics, 6.7 Investments',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/contemporary-mathematics/pages/6-7-investments',
+      accessed: '2026-11-24',
+      locator:
+        'payment for a goal: pmt = FV × (r/n) ÷ ((1 + r/n)^(nt) − 1); Example 6.73: $37,500 in 10 years at 12% → $2,136.91 a year; Example 6.69: $1,500,000 in 35 years at 11.62% → $6,689.49 a year; Example 6.68: $1,300 a quarter for 5 years at 11.62% → $34,595.88',
+    },
+    {
+      title: 'Contemporary Mathematics, 6.6 Methods of Savings',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/contemporary-mathematics/pages/6-6-methods-of-savings',
+      accessed: '2026-11-24',
+      locator:
+        'future value of an ordinary annuity, FV = pmt × ((1 + r/n)^(nt) − 1) ÷ (r/n); solved here for pmt',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-24', note: 'First published.' }],
+  related: ['compound-interest', 'roi', 'simple-interest'],
+  examples: [
+    {
+      id: 'richard',
+      inputs: { goal: 37500, years: 10, rate: 12, freq: '1' },
+      expect: { payment: 2136.91 },
+    },
+    {
+      id: 'quarterly',
+      inputs: { goal: 34595.88, years: 5, rate: 11.62, freq: '4' },
+      expect: { payment: 1300 },
+    },
+    {
+      id: 'house',
+      inputs: { goal: 60000, years: 5, rate: 4, freq: '12', start: 10000 },
+      expect: { payment: 720.83 },
+    },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-24',
+};

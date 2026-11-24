@@ -1,0 +1,100 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+import { currencySelect } from '@/calculators/currencies';
+
+export const definition: CalculatorDefinition = {
+  id: 'roi',
+  slug: { en: 'roi-calculator' },
+  category: 'finance',
+  tags: [
+    'ROI',
+    'return on investment',
+    'investment return',
+    'annualized return',
+    'profit percentage',
+    'gain',
+  ],
+  difficulty: 'basic',
+  ymyl: false,
+  currency: { input: 'cur' },
+  schemaCategory: 'FinanceApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'cost',
+      param: 'c',
+      type: 'currency',
+      labelKey: 'cost',
+      default: 2187,
+      min: 0,
+      max: 1e12,
+    },
+    {
+      id: 'value',
+      param: 'v',
+      type: 'currency',
+      labelKey: 'value',
+      default: 2915,
+      min: 0,
+      max: 1e12,
+      helpKey: 'value.help',
+    },
+    {
+      id: 'years',
+      param: 'y',
+      type: 'number',
+      labelKey: 'years',
+      default: 1,
+      min: 0,
+      max: 200,
+      helpKey: 'years.help',
+    },
+    currencySelect('USD'),
+  ],
+  outputs: [
+    { id: 'roi', labelKey: 'out.roi', format: 'percent', decimals: 2, primary: true },
+    { id: 'gain', labelKey: 'out.gain', format: 'currency' },
+    { id: 'annualized', labelKey: 'out.annualized', format: 'percent', decimals: 2 },
+    { id: 'multiple', labelKey: 'out.multiple', format: 'number', decimals: 4 },
+  ],
+  sources: [
+    {
+      title: 'Contemporary Mathematics, 6.7 Investments',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/contemporary-mathematics/pages/6-7-investments',
+      accessed: '2026-11-24',
+      locator:
+        'ROI = (value − cost) ÷ cost; Example 6.67: $728 gain on $2,187 = 33.29%; Example 6.70: $660 on $3,000 = 22%; Example 6.72: $13,000 → $132,293.49 = 917.64%, annual return 12.3%',
+    },
+    {
+      title: 'Principles of Macroeconomics 3e, 7.2 Labor Productivity and Economic Growth',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/principles-macroeconomics-3e/pages/7-2-labor-productivity-and-economic-growth',
+      accessed: '2026-11-24',
+      locator: 'compound growth: value × (1 + rate)^years, used here to annualize the return',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-24', note: 'First published.' }],
+  related: ['cagr', 'compound-interest', 'margin'],
+  examples: [
+    {
+      id: 'shares',
+      inputs: { cost: 2187, value: 2915, years: 1 },
+      expect: { roi: 33.2876, gain: 728 },
+    },
+    {
+      id: 'bond',
+      inputs: { cost: 3000, value: 3660, years: 4 },
+      expect: { roi: 22, annualized: 5.0969 },
+    },
+    {
+      id: 'long',
+      inputs: { cost: 13000, value: 132293.49, years: 20 },
+      expect: { roi: 917.6422, annualized: 12.3 },
+    },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-24',
+};

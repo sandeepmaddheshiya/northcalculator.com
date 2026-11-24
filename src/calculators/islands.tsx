@@ -51,6 +51,9 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   root: dynamic(() => import('./math/root/Island')),
   logarithm: dynamic(() => import('./math/logarithm/Island')),
   'scientific-notation': dynamic(() => import('./math/scientific-notation/Island')),
+  roi: dynamic(() => import('./finance/roi/Island')),
+  'savings-goal': dynamic(() => import('./finance/savings-goal/Island')),
+  'days-until': dynamic(() => import('./date-time/days-until/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {
