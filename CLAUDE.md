@@ -4,7 +4,7 @@ Read `BRIEF.md` (the owner's brief, condensed) and `docs/decisions.md` (ADRs) be
 
 ## Status
 
-- Phase 0 ✅ · Phase 1 ✅ · Phase 2 ✅ (10 flagships) · Phase 3: infrastructure ✅ (generator, inline search answers, history/saved, compare, PWA/offline, homepage samples); Wave 1 at 18 of ~90 calculators (docs/taxonomy-and-wave1.md).
+- Phase 0 ✅ · Phase 1 ✅ · Phase 2 ✅ (10 flagships) · Phase 3: infrastructure ✅ (generator, inline search answers, history/saved, compare, PWA/offline, homepage samples); Wave 1 at 25 of ~90 calculators (docs/taxonomy-and-wave1.md).
 - Phase 4: tooling and runbook ✅ (`pnpm i18n:status`, docs/i18n-rollout.md); no locale goes live until a fluent reviewer signs it off (ADR-026).
 - Phase 5: embeds ✅ (`/embed/{locale}/{id}`, ADR-024); workers deferred (ADR-025); Wave 2 calculators not started.
 - Phase 6: launch docs ✅ (docs/seo-launch-checklist.md, docs/growth.md); deploy, DNS and Search Console need the owner.
@@ -39,7 +39,7 @@ End of every phase: run all of the above, fix everything, commit (Conventional C
 - **i18n:** next-intl runs **server-side only**. Client islands must NOT call `useTranslations`. Pass pre-translated labels as props (see `src/i18n/labels.ts`) and use `fill()` for `{placeholders}`. Use `Link` from `@/i18n/navigation` (a server component) in RSC. In client components use plain `<a>`/`next/link` with an explicit locale.
 - **Locale typing:** narrow route params with `resolveLocale()` from `@/i18n/server`.
 - **Calculators:** one folder each: `definition.ts`, `compute.ts`, `compute.test.ts`, `content.en.tsx` (ADR-019), `Island.tsx`, `index.ts`. Register the module in `src/calculators/registry.ts` **and** its island in `src/calculators/islands.tsx` (client map, ADR-020; never import islands from server code). Compute is pure and deterministic. Money is integer minor units (ADR-017, `src/engine/money.ts`), not decimal.js. Text outputs use `ctx.t` + `Intl.PluralRules` (ADR-021). Build-time data (currency rates) comes through `module.data` → `ctx.data`.
-- **Generic island features:** `showIf`, `labelBy`, `advanced`, `optionsBy` (dependent selects), `swapWith`, list inputs (rows), formats `sig`/`duration`/`text`. Prefer extending these over writing a custom island. Only the scientific calculator has a custom one.
+- **Generic island features:** `showIf`, `labelBy` (inputs and outputs), `advanced`, `optionsBy` (dependent selects), `swapWith`, list inputs (rows), formats `sig`/`duration`/`text`. Prefer extending these over writing a custom island. Only the scientific calculator has a custom one.
 - **Tests per calculator:** ≥2 independent reference sources (textbook/standard values verified by fetching the source), property tests, and the worked-example check. When a printed reference value is off by a rounding step, assert the exact value and say why (ADR-022). The content gate checks title/description/summary/FAQ lengths, ui keys, banned phrases and near-duplicates.
 - **SEO:** `buildMetadata()` (self-canonical, hreflang only to locales where the page exists, x-default); JSON-LD builders in `src/lib/seo/jsonld.ts` (mark up only visible content, never ratings); sitemap index at `/sitemap.xml` → `/sitemaps/{locale}-{category}.xml`; `/llms.txt`; OG images are build-time PNG routes at `/{locale}/og/{name}.png`.
 - **Design:** tokens in `src/app/globals.css` (semantic only; `tokens.test.ts` enforces contrast). See `docs/design-system.md`. Banned patterns are listed in BRIEF §7.

@@ -1,4 +1,4 @@
-import type { Fmt } from './types';
+import type { CalculatorOutput, Fmt } from './types';
 import { fill } from '@/lib/fill';
 
 /** Formats a calculator output for display. Shared by the island (client) and pages (server). */
@@ -33,4 +33,17 @@ export function formatOutput(
     default:
       return fmt.num(v, decimals ?? 4);
   }
+}
+
+/** An output's label, honouring `labelBy` (e.g. "Hourly pay" vs "Annual salary" by mode). */
+export function outputLabel(
+  o: CalculatorOutput,
+  values: Record<string, unknown>,
+  ui: Record<string, string>,
+): string {
+  return (
+    (o.labelBy ? ui[`${o.labelKey}.${String(values[o.labelBy])}`] : undefined) ??
+    ui[o.labelKey] ??
+    o.id
+  );
 }

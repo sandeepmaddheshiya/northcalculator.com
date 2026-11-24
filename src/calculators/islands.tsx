@@ -28,6 +28,13 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   'date-add': dynamic(() => import('./date-time/date-add/Island')),
   fraction: dynamic(() => import('./math/fraction/Island')),
   average: dynamic(() => import('./math/average/Island')),
+  'lcm-gcf': dynamic(() => import('./math/lcm-gcf/Island')),
+  cagr: dynamic(() => import('./finance/cagr/Island')),
+  margin: dynamic(() => import('./finance/margin/Island')),
+  salary: dynamic(() => import('./finance/salary/Island')),
+  grade: dynamic(() => import('./education/grade/Island')),
+  'final-grade': dynamic(() => import('./education/final-grade/Island')),
+  time: dynamic(() => import('./date-time/time/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {

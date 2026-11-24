@@ -22,6 +22,13 @@ const CALCULATORS = [
   ['/en/date-time/date-calculator', 'Date'],
   ['/en/math/fraction-calculator', 'Result (simplified)'],
   ['/en/math/average-calculator', 'Mean (average)'],
+  ['/en/math/lcm-gcf-calculator', 'Greatest common factor (GCF)'],
+  ['/en/finance/cagr-calculator', 'Compound annual growth rate'],
+  ['/en/finance/margin-calculator', 'Gross margin'],
+  ['/en/finance/hourly-to-salary-calculator', 'Annual salary'],
+  ['/en/education/grade-calculator', 'Weighted grade'],
+  ['/en/education/final-grade-calculator', 'Score needed on the final'],
+  ['/en/date-time/time-calculator', 'Result'],
 ] as const;
 
 const snapshot = JSON.parse(
@@ -170,4 +177,11 @@ test('currency: rates source and date are shown, custom rate shows the markup', 
   await expect(
     page.getByText('Markup against the reference rate', { exact: true }).first(),
   ).toBeVisible();
+});
+
+test('the result label follows the mode (output labelBy)', async ({ page }) => {
+  await page.goto('/en/finance/hourly-to-salary-calculator', { waitUntil: 'networkidle' });
+  await expect(page.getByText('Annual salary', { exact: true }).first()).toBeVisible();
+  await page.getByLabel('Paid per').selectOption('year');
+  await expect(page.getByText('Hourly rate', { exact: true }).first()).toBeVisible();
 });

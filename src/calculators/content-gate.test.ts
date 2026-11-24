@@ -97,7 +97,11 @@ function referencedKeys(def: CalculatorDefinition): string[] {
       if (by && 'options' in by) keys.push(...by.options.map((o) => `${i.labelKey}.${o.value}`));
     } else keys.push(i.labelKey);
   }
-  keys.push(...def.outputs.map((o) => o.labelKey));
+  for (const o of def.outputs) {
+    const by = o.labelBy ? def.inputs.find((x) => x.id === o.labelBy) : undefined;
+    if (by && 'options' in by) keys.push(...by.options.map((v) => `${o.labelKey}.${v.value}`));
+    else keys.push(o.labelKey);
+  }
   return keys;
 }
 

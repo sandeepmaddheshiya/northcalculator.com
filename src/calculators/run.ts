@@ -3,7 +3,7 @@ import { getModule } from './registry';
 import { makeFmt } from './fmt';
 import { defaultValues, encodeState } from './url-state';
 import { calculatorPath } from './paths';
-import { formatOutput } from './format-output';
+import { formatOutput, outputLabel } from './format-output';
 import { buildToday } from '@/lib/build-date';
 import { fill } from '@/lib/fill';
 import type { InputValues } from './types';
@@ -48,7 +48,7 @@ export async function runCalculator(
   const q = encodeState(def, values, defaults);
   return {
     name: content.name,
-    label: content.ui[primary.labelKey] ?? primary.id,
+    label: outputLabel(primary, values, content.ui),
     value,
     href: `${calculatorPath(def, locale)}${q ? `?${q}` : ''}`,
   };

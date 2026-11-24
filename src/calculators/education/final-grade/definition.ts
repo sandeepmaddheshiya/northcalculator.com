@@ -1,0 +1,88 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+
+export const definition: CalculatorDefinition = {
+  id: 'final-grade',
+  slug: { en: 'final-grade-calculator' },
+  category: 'education',
+  tags: [
+    'final grade',
+    'final exam grade',
+    'what do I need on my final',
+    'grade needed',
+    'final exam calculator',
+    'weighted grade',
+  ],
+  difficulty: 'basic',
+  ymyl: false,
+  schemaCategory: 'EducationalApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'current',
+      param: 'c',
+      type: 'percent',
+      labelKey: 'current',
+      default: 86,
+      min: 0,
+      max: 200,
+      helpKey: 'current.help',
+    },
+    {
+      id: 'target',
+      param: 't',
+      type: 'percent',
+      labelKey: 'target',
+      default: 90,
+      min: 0,
+      max: 200,
+    },
+    {
+      id: 'weight',
+      param: 'w',
+      type: 'percent',
+      labelKey: 'weight',
+      default: 30,
+      min: 0.01,
+      max: 100,
+      helpKey: 'weight.help',
+    },
+  ],
+  outputs: [
+    { id: 'needed', labelKey: 'out.needed', format: 'percent', decimals: 2, primary: true },
+    { id: 'ifPerfect', labelKey: 'out.ifPerfect', format: 'percent', decimals: 2 },
+    { id: 'ifZero', labelKey: 'out.ifZero', format: 'percent', decimals: 2 },
+  ],
+  sources: [
+    {
+      title: 'Calculating Final Grades: An Example of “Weighted Components” in 3 Steps',
+      publisher:
+        'Center for Innovation in Teaching & Learning, University of Illinois Urbana-Champaign',
+      url: 'https://blogs.illinois.edu/files/1499/114301/4394.pdf',
+      accessed: '2026-11-24',
+      locator: 'final exam weighted 30%; components sum to 84.955 with a final of 83',
+    },
+    {
+      title: 'Explain Weighted Grades in Canvas',
+      publisher: 'IT Support Services, California State University, Chico',
+      url: 'https://support.csuchico.edu/TDClient/1984/Portal/KB/ArticleDet?ID=115237',
+      accessed: '2026-11-24',
+      locator: 'homework 40%, quizzes 30%, final exam 30% (80%)',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-24', note: 'First published.' }],
+  related: ['grade', 'gpa', 'percentage'],
+  examples: [
+    { id: 'a', inputs: { current: 86, target: 90, weight: 30 }, expect: { needed: 99.3333 } },
+    { id: 'b', inputs: { current: 86, target: 80, weight: 30 }, expect: { needed: 66 } },
+    {
+      id: 'reach',
+      inputs: { current: 72, target: 90, weight: 20 },
+      expect: { needed: 162, ifPerfect: 77.6 },
+    },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-24',
+};

@@ -107,6 +107,8 @@ export interface CalculatorOutput {
   decimals?: number;
   /** Display format chosen by another input's value (e.g. percentage mode). */
   formatBy?: { input: string; map: Record<string, CalculatorOutput['format']> };
+  /** Label lookup varies with an input's value: ui[`${labelKey}.${value}`], falling back to ui[labelKey]. */
+  labelBy?: string;
 }
 
 export interface Step {

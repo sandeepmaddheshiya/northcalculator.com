@@ -1,0 +1,91 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+import { currencySelect } from '@/calculators/currencies';
+
+export const definition: CalculatorDefinition = {
+  id: 'cagr',
+  slug: { en: 'cagr-calculator' },
+  category: 'finance',
+  tags: [
+    'CAGR',
+    'compound annual growth rate',
+    'annualized return',
+    'average annual return',
+    'growth rate',
+    'investment return',
+  ],
+  difficulty: 'basic',
+  ymyl: false,
+  currency: { input: 'cur' },
+  schemaCategory: 'FinanceApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'start',
+      param: 's',
+      type: 'currency',
+      labelKey: 'start',
+      default: 13000,
+      min: 0,
+      max: 1e12,
+    },
+    {
+      id: 'end',
+      param: 'e',
+      type: 'currency',
+      labelKey: 'end',
+      default: 132293.49,
+      min: 0,
+      max: 1e12,
+    },
+    {
+      id: 'years',
+      param: 'y',
+      type: 'number',
+      labelKey: 'years',
+      default: 20,
+      min: 0,
+      max: 200,
+      helpKey: 'years.help',
+    },
+    currencySelect('USD'),
+  ],
+  outputs: [
+    { id: 'cagr', labelKey: 'out.cagr', format: 'percent', decimals: 2, primary: true },
+    { id: 'total', labelKey: 'out.total', format: 'percent', decimals: 2 },
+    { id: 'multiple', labelKey: 'out.multiple', format: 'number', decimals: 4 },
+    { id: 'gain', labelKey: 'out.gain', format: 'currency' },
+  ],
+  sources: [
+    {
+      title: 'Contemporary Mathematics, 6.7 Investments',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/contemporary-mathematics/pages/6-7-investments',
+      accessed: '2026-11-24',
+      locator:
+        'annual return = (FV ÷ P)^(1/t) − 1; Example 6.71: $3,000 → $3,660 in 4 years is 5.10%; Example 6.72: $13,000 → $132,293.49 in 20 years is 12.3%',
+    },
+    {
+      title: 'Principles of Macroeconomics 3e, 7.2 Labor Productivity and Economic Growth',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/principles-macroeconomics-3e/pages/7-2-labor-productivity-and-economic-growth',
+      accessed: '2026-11-24',
+      locator: 'compound growth: 100 × (1.03)²⁵ = 209; Table 7.3 values of an original 100',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-24', note: 'First published.' }],
+  related: ['compound-interest', 'percentage', 'simple-interest'],
+  examples: [
+    { id: 'stock', inputs: { start: 13000, end: 132293.49, years: 20 }, expect: { cagr: 12.3 } },
+    {
+      id: 'bond',
+      inputs: { start: 3000, end: 3660, years: 4 },
+      expect: { cagr: 5.0969, total: 22 },
+    },
+    { id: 'gdp', inputs: { start: 100, end: 164, years: 50 }, expect: { cagr: 0.9943 } },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-24',
+};

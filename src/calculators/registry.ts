@@ -19,6 +19,13 @@ import { dateDifference } from './date-time/date-difference';
 import { dateAdd } from './date-time/date-add';
 import { fraction } from './math/fraction';
 import { average } from './math/average';
+import { lcmGcf } from './math/lcm-gcf';
+import { cagr } from './finance/cagr';
+import { margin } from './finance/margin';
+import { salary } from './finance/salary';
+import { grade } from './education/grade';
+import { finalGrade } from './education/final-grade';
+import { time } from './date-time/time';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -31,17 +38,24 @@ export const MODULES: readonly CalculatorModule[] = [
   compoundInterest,
   simpleInterest,
   salesTax,
+  salary,
+  margin,
+  cagr,
   percentage,
   fraction,
   average,
+  lcmGcf,
   scientific,
   bmi,
   age,
   dateDifference,
   dateAdd,
+  time,
   unitConverter,
   currencyConverter,
   gpa,
+  grade,
+  finalGrade,
   tip,
   discount,
 ];

@@ -29,7 +29,7 @@ import { DataTable } from './DataTable';
 import { makeFmt } from '@/calculators/fmt';
 import { decodeState, defaultValues, encodeState } from '@/calculators/url-state';
 import { fill } from '@/lib/fill';
-import { formatOutput } from '@/calculators/format-output';
+import { formatOutput, outputLabel } from '@/calculators/format-output';
 import { addEntry, clearEntries, readEntries, removeEntry, type HistoryEntry } from './history';
 import { HistoryPanel } from './HistoryPanel';
 import { ComparePanel, type CompareRow } from './ComparePanel';
@@ -244,7 +244,7 @@ export function CalculatorIsland({
             d === null || o.format === 'text'
               ? null
               : `${d > 0 ? '+' : d < 0 ? '−' : ''}${out(o.id, Math.abs(d))}`;
-          return { label: ui[o.labelKey] ?? o.id, a: out(o.id, a), b: out(o.id, b), diff };
+          return { label: outputLabel(o, values, ui), a: out(o.id, a), b: out(o.id, b), diff };
         })
     : [];
 
@@ -268,9 +268,9 @@ export function CalculatorIsland({
   }
 
   function resultText() {
-    const lines = [`${ui[primary.labelKey]}: ${out(primary.id, primaryValue)}`];
+    const lines = [`${outputLabel(primary, values, ui)}: ${out(primary.id, primaryValue)}`];
     for (const o of secondary)
-      lines.push(`${ui[o.labelKey]}: ${out(o.id, result.outputs[o.id] ?? null)}`);
+      lines.push(`${outputLabel(o, values, ui)}: ${out(o.id, result.outputs[o.id] ?? null)}`);
     lines.push(currentUrl());
     return lines.join('\n');
   }
@@ -521,13 +521,15 @@ export function CalculatorIsland({
             <div ref={heroRef}>
               {primaryIsNumber || primaryValue === null ? (
                 <ResultHero
-                  label={ui[primary.labelKey] ?? primary.id}
+                  label={outputLabel(primary, values, ui)}
                   value={primaryIsNumber ? (primaryValue as number) : null}
                   format={(n) => out(primary.id, n)}
                 />
               ) : (
                 <div>
-                  <p className="text-sm font-medium text-muted">{ui[primary.labelKey]}</p>
+                  <p className="text-sm font-medium text-muted">
+                    {outputLabel(primary, values, ui)}
+                  </p>
                   <p
                     className="num mt-1 text-result font-semibold tracking-tight"
                     aria-live="polite"
@@ -546,7 +548,7 @@ export function CalculatorIsland({
               <div className="mt-5">
                 <ResultList
                   items={secondary.map((o) => ({
-                    label: ui[o.labelKey] ?? o.id,
+                    label: outputLabel(o, values, ui),
                     value: out(o.id, result.outputs[o.id] ?? null),
                   }))}
                 />
@@ -702,7 +704,7 @@ export function CalculatorIsland({
             {/* Name built from visible text plus a hidden prefix, so it always contains the label (WCAG 2.5.3). */}
             <span className="truncate text-sm text-muted">
               <span className="sr-only">{chrome.backToResult}: </span>
-              {ui[primary.labelKey]}
+              {outputLabel(primary, values, ui)}
             </span>
             <span className="num text-lg font-semibold">{out(primary.id, primaryValue)}</span>
           </button>
