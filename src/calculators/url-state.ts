@@ -3,6 +3,7 @@
  * The canonical URL never includes these params (BRIEF §9), so shared links can't duplicate pages.
  */
 import { parseISODate } from '@/engine/dates';
+import { parseClock } from '@/engine/clock';
 import type { CalculatorDefinition, CalculatorInput, InputValue, InputValues } from './types';
 
 export function defaultValues(def: CalculatorDefinition, today: string): InputValues {
@@ -52,6 +53,8 @@ function decodeOne(input: CalculatorInput, raw: string): InputValue | undefined 
       return raw === '1' ? true : raw === '0' ? false : undefined;
     case 'date':
       return parseISODate(raw) ? raw : undefined;
+    case 'time':
+      return parseClock(raw) === null ? undefined : raw;
     case 'text':
       return raw.slice(0, input.maxLength);
     case 'list': {

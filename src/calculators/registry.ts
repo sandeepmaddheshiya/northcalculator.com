@@ -65,6 +65,8 @@ import { fuelEconomyConverter } from './conversion/fuel-economy-converter';
 import { powerConverter } from './conversion/power-converter';
 import { timeConverter } from './conversion/time-converter';
 import { percentGpa } from './education/percent-gpa';
+import { hoursWorked } from './date-time/hours-worked';
+import { timeDuration } from './date-time/time-duration';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -109,6 +111,8 @@ export const MODULES: readonly CalculatorModule[] = [
   dateAdd,
   daysUntil,
   time,
+  timeDuration,
+  hoursWorked,
   businessDays,
   weekNumber,
   unitConverter,

@@ -68,6 +68,8 @@ const CALCULATORS = [
   ['/en/conversion/power-converter', 'Result'],
   ['/en/conversion/time-unit-converter', 'Result'],
   ['/en/education/percentage-to-gpa-calculator', 'GPA (4.0 scale)'],
+  ['/en/date-time/hours-worked-calculator', 'Total hours (decimal)'],
+  ['/en/date-time/time-duration-calculator', 'Duration'],
 ] as const;
 
 const snapshot = JSON.parse(

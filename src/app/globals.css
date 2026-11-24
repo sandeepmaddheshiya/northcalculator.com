@@ -232,3 +232,9 @@
     font-size: 0.8em;
   }
 }
+
+/* Compact time inputs in list rows: hide Chrome's picker icon so "09:00 AM" fits at 360px.
+   Typing still works, and touch devices open their native picker when the field is tapped. */
+.time-cell::-webkit-calendar-picker-indicator {
+  display: none;
+}

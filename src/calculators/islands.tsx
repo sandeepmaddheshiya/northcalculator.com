@@ -74,6 +74,8 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   'power-converter': dynamic(() => import('./conversion/power-converter/Island')),
   'time-converter': dynamic(() => import('./conversion/time-converter/Island')),
   'percent-gpa': dynamic(() => import('./education/percent-gpa/Island')),
+  'hours-worked': dynamic(() => import('./date-time/hours-worked/Island')),
+  'time-duration': dynamic(() => import('./date-time/time-duration/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {

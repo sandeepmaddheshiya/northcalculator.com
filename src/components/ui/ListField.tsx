@@ -8,7 +8,7 @@ import { Icon } from './Icon';
 export interface ListColumn {
   id: string;
   label: string;
-  kind: 'number' | 'select';
+  kind: 'number' | 'select' | 'time';
   options?: readonly { value: string; label: string }[];
   /** Relative column width (CSS grid fr). */
   width?: number;
@@ -81,6 +81,17 @@ export function ListField({
                       </option>
                     ))}
                   </select>
+                );
+              if (c.kind === 'time')
+                return (
+                  <input
+                    key={c.id}
+                    type="time"
+                    aria-label={name}
+                    value={String(r[c.id] ?? '')}
+                    onChange={(e) => update(i, c.id, e.target.value)}
+                    className={`num time-cell ${cell} px-1.5 text-[15px]`}
+                  />
                 );
               const v = r[c.id];
               return (

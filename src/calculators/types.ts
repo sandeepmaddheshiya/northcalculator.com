@@ -97,8 +97,14 @@ export interface ListInput extends InputBase {
   maxRows: number;
 }
 
+export interface TimeInput extends InputBase {
+  type: 'time';
+  /** Clock time "HH:MM" (24-hour); the browser shows it in the visitor's 12/24-hour style. */
+  default: string;
+}
+
 export type CalculatorInput =
-  NumberInput | DateInput | SelectInput | ToggleInput | TextInput | ListInput;
+  NumberInput | DateInput | TimeInput | SelectInput | ToggleInput | TextInput | ListInput;
 
 export interface CalculatorOutput {
   id: string;

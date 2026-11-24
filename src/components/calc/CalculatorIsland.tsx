@@ -17,6 +17,7 @@ import { SelectField } from '@/components/ui/SelectField';
 import { Segmented } from '@/components/ui/Segmented';
 import { Switch } from '@/components/ui/Switch';
 import { DateField } from '@/components/ui/DateField';
+import { TimeField } from '@/components/ui/TimeField';
 import { ListField } from '@/components/ui/ListField';
 import { Callout } from '@/components/ui/Callout';
 import { Icon } from '@/components/ui/Icon';
@@ -398,6 +399,16 @@ export function CalculatorIsland({
             help={help}
           />
         );
+      case 'time':
+        return (
+          <TimeField
+            key={i.id}
+            label={label(i)}
+            value={String(v ?? '')}
+            onChange={(t) => set(i.id, t)}
+            help={help}
+          />
+        );
       case 'text': {
         const cls =
           'w-full rounded-sm border border-line-strong bg-surface px-3 py-2.5 text-base hover:border-text/60 focus:border-brand focus:shadow-[0_0_0_3px_var(--tok-brand-wash)] focus:outline-none';
@@ -449,16 +460,23 @@ export function CalculatorIsland({
             columns={i.columns.map((c) => ({
               id: c.id,
               label: ui[c.labelKey] ?? c.id,
-              kind: c.type === 'select' || c.type === 'segmented' ? 'select' : 'number',
+              kind:
+                c.type === 'select' || c.type === 'segmented'
+                  ? 'select'
+                  : c.type === 'time'
+                    ? 'time'
+                    : 'number',
               options:
                 'options' in c
                   ? c.options.map((o) => ({ value: o.value, label: ui[o.labelKey] ?? o.value }))
                   : undefined,
               // Short-option selects (grades) stay narrow; wordier ones get the extra room.
               width:
-                'options' in c && c.options.some((o) => (ui[o.labelKey] ?? o.value).length > 3)
-                  ? 3
-                  : 2,
+                c.type === 'time'
+                  ? 4
+                  : 'options' in c && c.options.some((o) => (ui[o.labelKey] ?? o.value).length > 3)
+                    ? 3
+                    : 2,
             }))}
             rowLabel={(n) => fill(ui[`${i.labelKey}.row`] ?? '{n}', { n })}
             addLabel={ui[`${i.labelKey}.add`] ?? '+'}
