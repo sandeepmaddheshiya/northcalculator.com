@@ -87,7 +87,7 @@ export const compute: ComputeFn = (inputs, { fmt }) => {
     math: `D = ${fmt.num(clean(b * c), 12)} ÷ ${fmt.num(a, 12)} = ${fmt.num(d, 10)}`,
   });
   return {
-    outputs: { result: fmt.num(d, 10), simplest, oneTo, quotient },
+    outputs: { result: fmt.sig(d, 10), simplest, oneTo, quotient },
     explain: {
       key: 'explain.solve',
       values: { a: fmt.num(a, 12), b: fmt.num(b, 12), c: fmt.num(c, 12), d: fmt.num(d, 10) },

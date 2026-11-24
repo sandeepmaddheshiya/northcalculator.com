@@ -36,6 +36,8 @@ import { percentDifference } from './math/percent-difference';
 import { fuelCost } from './everyday/fuel-cost';
 import { bmr } from './health/bmr';
 import { calorie } from './health/calorie';
+import { heartRate } from './health/heart-rate';
+import { runningPace } from './health/running-pace';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -63,6 +65,8 @@ export const MODULES: readonly CalculatorModule[] = [
   bmi,
   bmr,
   calorie,
+  heartRate,
+  runningPace,
   age,
   dateDifference,
   dateAdd,

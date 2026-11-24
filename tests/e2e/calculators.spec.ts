@@ -39,6 +39,8 @@ const CALCULATORS = [
   ['/en/everyday/fuel-cost-calculator', 'Fuel cost'],
   ['/en/health/bmr-calculator', 'BMR (kcal per day)'],
   ['/en/health/calorie-calculator', 'Calories per day (kcal)'],
+  ['/en/health/heart-rate-zone-calculator', 'Estimated maximum heart rate (bpm)'],
+  ['/en/health/pace-calculator', 'Pace'],
 ] as const;
 
 const snapshot = JSON.parse(

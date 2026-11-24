@@ -1,0 +1,178 @@
+import type { CalculatorDefinition, NumberInput } from '@/calculators/types';
+
+const showFor = (...modes: string[]) => ({ input: 'mode', in: modes }) as const;
+const num = (
+  id: string,
+  param: string,
+  labelKey: string,
+  def: number,
+  max: number,
+  row: NumberInput['row'],
+  modes: string[],
+): NumberInput => ({
+  id,
+  param,
+  type: 'number',
+  labelKey,
+  default: def,
+  min: 0,
+  max,
+  row,
+  showIf: showFor(...modes),
+});
+
+export const definition: CalculatorDefinition = {
+  id: 'running-pace',
+  slug: { en: 'pace-calculator' },
+  category: 'health',
+  tags: [
+    'running pace',
+    'pace calculator',
+    'marathon pace',
+    'minutes per mile',
+    'minutes per km',
+    'race time',
+    'speed',
+  ],
+  difficulty: 'basic',
+  ymyl: false,
+  schemaCategory: 'HealthApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'mode',
+      param: 'm',
+      type: 'segmented',
+      labelKey: 'mode',
+      default: 'pace',
+      options: [
+        { value: 'pace', labelKey: 'mode.pace' },
+        { value: 'time', labelKey: 'mode.time' },
+        { value: 'distance', labelKey: 'mode.distance' },
+      ],
+    },
+    {
+      id: 'race',
+      param: 'r',
+      type: 'select',
+      labelKey: 'race',
+      default: 'marathon',
+      options: [
+        { value: 'custom', labelKey: 'race.custom' },
+        { value: 'mile', labelKey: 'race.mile' },
+        { value: '5k', labelKey: 'race.5k' },
+        { value: '10k', labelKey: 'race.10k' },
+        { value: 'half', labelKey: 'race.half' },
+        { value: 'marathon', labelKey: 'race.marathon' },
+      ],
+      showIf: showFor('pace', 'time'),
+    },
+    {
+      id: 'distance',
+      param: 'd',
+      type: 'number',
+      labelKey: 'distance',
+      default: 10,
+      min: 0,
+      max: 100000,
+      row: { id: 'dist', legendKey: 'dist' },
+      showIf: { input: 'race', in: ['custom'] },
+    },
+    {
+      id: 'distUnit',
+      param: 'du',
+      type: 'select',
+      labelKey: 'distUnit',
+      default: 'km',
+      options: [
+        { value: 'km', labelKey: 'unit.km' },
+        { value: 'mi', labelKey: 'unit.mi' },
+      ],
+      row: { id: 'dist', legendKey: 'dist' },
+    },
+    num('h', 'th', 'unit.h', 3, 1000, { id: 'time', legendKey: 'time' }, ['pace', 'distance']),
+    num('min', 'tm', 'unit.min', 30, 59.999, { id: 'time', legendKey: 'time' }, [
+      'pace',
+      'distance',
+    ]),
+    num('sec', 'ts', 'unit.s', 0, 59.999, { id: 'time', legendKey: 'time' }, ['pace', 'distance']),
+    num('pmin', 'pm', 'unit.min', 5, 1000, { id: 'pace', legendKey: 'paceIn' }, [
+      'time',
+      'distance',
+    ]),
+    num('psec', 'ps', 'unit.s', 0, 59.999, { id: 'pace', legendKey: 'paceIn' }, [
+      'time',
+      'distance',
+    ]),
+    {
+      id: 'paceUnit',
+      param: 'pu',
+      type: 'segmented',
+      labelKey: 'paceUnit',
+      default: 'km',
+      options: [
+        { value: 'km', labelKey: 'pace.km' },
+        { value: 'mi', labelKey: 'pace.mi' },
+      ],
+    },
+  ],
+  outputs: [
+    { id: 'result', labelKey: 'out.result', labelBy: 'mode', format: 'text', primary: true },
+    { id: 'perKm', labelKey: 'out.perKm', format: 'text' },
+    { id: 'perMi', labelKey: 'out.perMi', format: 'text' },
+    { id: 'kmh', labelKey: 'out.kmh', format: 'number', decimals: 2 },
+    { id: 'mph', labelKey: 'out.mph', format: 'number', decimals: 2 },
+    { id: 'km', labelKey: 'out.km', format: 'number', decimals: 3 },
+  ],
+  sources: [
+    {
+      title: 'Book C – C2.1 Technical Rules, Part VII Road Races',
+      publisher: 'World Athletics',
+      url: 'https://worldathletics.org/about-iaaf/documents/book-of-rules',
+      accessed: '2026-11-24',
+      locator:
+        'standard distances: Road Mile (1609.344 m), 5 km, 10 km, 15 km, 10 Miles, 20 km, Half-Marathon, 25 km, 30 km, Marathon (42.195 km)',
+    },
+    {
+      title: 'Prealgebra 2e, 5.6 Ratios and Rate',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/prealgebra-2e/pages/5-6-ratios-and-rate',
+      accessed: '2026-11-24',
+      locator:
+        'unit rates: Example 5.63, 525 miles in 9 hours; Example 5.65, 455 miles on 14 gallons = 32.5 miles per gallon',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-24', note: 'First published.' }],
+  related: ['heart-rate', 'calorie', 'time'],
+  examples: [
+    {
+      id: 'marathon',
+      inputs: { mode: 'pace', race: 'marathon', h: 3, min: 30, sec: 0, paceUnit: 'km' },
+      expect: { result: '4:59 /km', perMi: '8:01 /mi' },
+    },
+    {
+      id: 'tenk',
+      inputs: { mode: 'time', race: '10k', pmin: 5, psec: 30, paceUnit: 'km' },
+      expect: { result: '55:00' },
+    },
+    {
+      id: 'distance',
+      inputs: {
+        mode: 'distance',
+        h: 0,
+        min: 45,
+        sec: 0,
+        pmin: 9,
+        psec: 0,
+        paceUnit: 'mi',
+        distUnit: 'mi',
+      },
+      expect: { result: '5.00 mi' },
+    },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-24',
+};
