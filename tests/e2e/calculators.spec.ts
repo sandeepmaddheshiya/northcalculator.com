@@ -33,6 +33,10 @@ const CALCULATORS = [
   ['/en/math/ratio-calculator', 'Simplest form'],
   ['/en/math/rounding-calculator', 'Rounded number'],
   ['/en/everyday/unit-price-calculator', 'Better buy'],
+  ['/en/date-time/week-number-calculator', 'Week number'],
+  ['/en/date-time/business-days-calculator', 'Working days'],
+  ['/en/math/percent-difference-calculator', 'Percent difference'],
+  ['/en/everyday/fuel-cost-calculator', 'Fuel cost'],
 ] as const;
 
 const snapshot = JSON.parse(

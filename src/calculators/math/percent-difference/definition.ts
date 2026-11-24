@@ -1,0 +1,97 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+
+export const definition: CalculatorDefinition = {
+  id: 'percent-difference',
+  slug: { en: 'percent-difference-calculator' },
+  category: 'math',
+  tags: [
+    'percent difference',
+    'percentage difference',
+    'percent error',
+    'relative difference',
+    'lab report',
+    'experimental error',
+  ],
+  difficulty: 'basic',
+  ymyl: false,
+  schemaCategory: 'EducationalApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'mode',
+      param: 'm',
+      type: 'segmented',
+      labelKey: 'mode',
+      default: 'difference',
+      options: [
+        { value: 'difference', labelKey: 'mode.difference' },
+        { value: 'error', labelKey: 'mode.error' },
+      ],
+      helpKey: 'mode.help',
+    },
+    {
+      id: 'a',
+      param: 'a',
+      type: 'number',
+      labelKey: 'a',
+      labelBy: 'mode',
+      default: 2.58,
+      allowNegative: true,
+      min: -1e15,
+      max: 1e15,
+    },
+    {
+      id: 'b',
+      param: 'b',
+      type: 'number',
+      labelKey: 'b',
+      labelBy: 'mode',
+      default: 2.61,
+      allowNegative: true,
+      min: -1e15,
+      max: 1e15,
+    },
+  ],
+  outputs: [
+    {
+      id: 'result',
+      labelKey: 'out.result',
+      labelBy: 'mode',
+      format: 'percent',
+      decimals: 2,
+      primary: true,
+    },
+    { id: 'diff', labelKey: 'out.diff', format: 'number', decimals: 6 },
+    { id: 'mean', labelKey: 'out.mean', format: 'number', decimals: 6 },
+  ],
+  sources: [
+    {
+      title: 'Introductory Chemistry (CK-12), 3.13 Percent Error',
+      publisher: 'LibreTexts Chemistry (CK-12 Foundation)',
+      url: 'https://chem.libretexts.org/Bookshelves/Introductory_Chemistry/Introductory_Chemistry_(CK-12)/03:_Measurements/3.13:_Percent_Error',
+      accessed: '2026-11-24',
+      locator:
+        '% error = |experimental − accepted| ÷ accepted × 100%; aluminium density 2.45 g/cm³ against the accepted 2.70 g/cm³ gives 9.26%',
+    },
+    {
+      title: 'Comparing with Percentages',
+      publisher: 'Physics Laboratory, Texas A&M University–Corpus Christi',
+      url: 'https://physlab.tamucc.edu/Percentages%20and%20Uncertainties.pdf',
+      accessed: '2026-11-24',
+      locator:
+        '% error = |measured − accepted| ÷ accepted; % difference = |val₂ − val₁| ÷ ((val₁ + val₂)/2); % change = (new − old) ÷ old',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-24', note: 'First published.' }],
+  related: ['percentage-change', 'percentage', 'average'],
+  examples: [
+    { id: 'balls', inputs: { mode: 'difference', a: 2.58, b: 2.61 }, expect: { result: 1.1561 } },
+    { id: 'aluminium', inputs: { mode: 'error', a: 2.45, b: 2.7 }, expect: { result: 9.2593 } },
+    { id: 'prices', inputs: { mode: 'difference', a: 80, b: 100 }, expect: { result: 22.2222 } },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-24',
+};

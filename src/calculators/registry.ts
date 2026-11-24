@@ -30,6 +30,10 @@ import { percentageChange } from './math/percentage-change';
 import { ratio } from './math/ratio';
 import { rounding } from './math/rounding';
 import { unitPrice } from './everyday/unit-price';
+import { weekNumber } from './date-time/week-number';
+import { businessDays } from './date-time/business-days';
+import { percentDifference } from './math/percent-difference';
+import { fuelCost } from './everyday/fuel-cost';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -47,6 +51,7 @@ export const MODULES: readonly CalculatorModule[] = [
   cagr,
   percentage,
   percentageChange,
+  percentDifference,
   fraction,
   ratio,
   rounding,
@@ -58,6 +63,8 @@ export const MODULES: readonly CalculatorModule[] = [
   dateDifference,
   dateAdd,
   time,
+  businessDays,
+  weekNumber,
   unitConverter,
   currencyConverter,
   gpa,
@@ -66,6 +73,7 @@ export const MODULES: readonly CalculatorModule[] = [
   tip,
   discount,
   unitPrice,
+  fuelCost,
 ];
 
 export const CALCULATORS: readonly CalculatorDefinition[] = MODULES.map((m) => m.definition);
