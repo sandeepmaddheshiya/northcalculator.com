@@ -86,6 +86,9 @@ const CALCULATORS = [
   ['/en/physics/kinetic-energy-calculator', 'Kinetic energy (J)'],
   ['/en/electronics/ohms-law-calculator', 'Resistance (Ω)'],
   ['/en/electronics/electricity-cost-calculator', 'Total cost'],
+  ['/en/chemistry/molar-mass-calculator', 'Molar mass (g/mol)'],
+  ['/en/construction/concrete-calculator', 'Concrete needed (yd³)'],
+  ['/en/math/quadratic-formula-calculator', 'Solutions'],
 ] as const;
 
 const snapshot = JSON.parse(

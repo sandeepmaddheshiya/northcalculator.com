@@ -83,6 +83,9 @@ import { speedDistanceTime } from './physics/speed-distance-time';
 import { kineticEnergy } from './physics/kinetic-energy';
 import { ohmsLaw } from './electronics/ohms-law';
 import { electricityCost } from './electronics/electricity-cost';
+import { molarMass } from './chemistry/molar-mass';
+import { concrete } from './construction/concrete';
+import { quadratic } from './math/quadratic';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -171,6 +174,9 @@ export const MODULES: readonly CalculatorModule[] = [
   kineticEnergy,
   ohmsLaw,
   electricityCost,
+  molarMass,
+  concrete,
+  quadratic,
   fuelCost,
 ];
 
