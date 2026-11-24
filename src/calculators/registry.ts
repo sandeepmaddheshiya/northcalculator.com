@@ -47,6 +47,8 @@ import { savingsGoal } from './finance/savings-goal';
 import { daysUntil } from './date-time/days-until';
 import { randomNumber } from './math/random-number';
 import { dice } from './math/dice';
+import { autoLoan } from './finance/auto-loan';
+import { dti } from './finance/dti';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -56,6 +58,8 @@ import { dice } from './math/dice';
 export const MODULES: readonly CalculatorModule[] = [
   mortgage,
   loan,
+  autoLoan,
+  dti,
   compoundInterest,
   simpleInterest,
   salesTax,

@@ -50,6 +50,8 @@ const CALCULATORS = [
   ['/en/date-time/days-until-calculator', 'Days'],
   ['/en/math/random-number-generator', 'Your numbers'],
   ['/en/math/dice-roller', 'Total'],
+  ['/en/finance/auto-loan-calculator', 'Monthly payment'],
+  ['/en/finance/debt-to-income-ratio-calculator', 'Debt-to-income ratio'],
 ] as const;
 
 const snapshot = JSON.parse(

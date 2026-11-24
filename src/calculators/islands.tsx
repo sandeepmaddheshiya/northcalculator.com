@@ -56,6 +56,8 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   'days-until': dynamic(() => import('./date-time/days-until/Island')),
   'random-number': dynamic(() => import('./math/random-number/Island')),
   dice: dynamic(() => import('./math/dice/Island')),
+  'auto-loan': dynamic(() => import('./finance/auto-loan/Island')),
+  dti: dynamic(() => import('./finance/dti/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {
