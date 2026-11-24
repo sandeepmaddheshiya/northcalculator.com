@@ -92,6 +92,10 @@ const CALCULATORS = [
   ['/en/geometry/triangle-calculator', 'Area (square units)'],
   ['/en/math/slope-calculator', 'Slope (m)'],
   ['/en/chemistry/dilution-calculator', 'Dilution factor (C₁ ÷ C₂)'],
+  ['/en/statistics/confidence-interval-calculator', 'Confidence interval'],
+  ['/en/physics/density-calculator', 'Density in kg/m³'],
+  ['/en/electronics/series-parallel-resistor-calculator', 'Parallel resistance (Ω)'],
+  ['/en/math/trigonometry-calculator', 'csc (1/sin)'],
 ] as const;
 
 const snapshot = JSON.parse(

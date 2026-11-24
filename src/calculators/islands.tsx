@@ -98,6 +98,10 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   triangle: dynamic(() => import('./geometry/triangle/Island')),
   slope: dynamic(() => import('./math/slope/Island')),
   dilution: dynamic(() => import('./chemistry/dilution/Island')),
+  'confidence-interval': dynamic(() => import('./statistics/confidence-interval/Island')),
+  density: dynamic(() => import('./physics/density/Island')),
+  resistors: dynamic(() => import('./electronics/resistors/Island')),
+  trigonometry: dynamic(() => import('./math/trigonometry/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {

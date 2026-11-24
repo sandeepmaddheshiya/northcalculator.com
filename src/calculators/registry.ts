@@ -89,6 +89,10 @@ import { quadratic } from './math/quadratic';
 import { triangle } from './geometry/triangle';
 import { slope } from './math/slope';
 import { dilution } from './chemistry/dilution';
+import { confidenceInterval } from './statistics/confidence-interval';
+import { density } from './physics/density';
+import { resistors } from './electronics/resistors';
+import { trigonometry } from './math/trigonometry';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -183,6 +187,10 @@ export const MODULES: readonly CalculatorModule[] = [
   triangle,
   slope,
   dilution,
+  confidenceInterval,
+  density,
+  resistors,
+  trigonometry,
   fuelCost,
 ];
 

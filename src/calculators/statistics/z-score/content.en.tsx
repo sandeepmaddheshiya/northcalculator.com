@@ -44,16 +44,16 @@ export const content: CalculatorContent = {
     'warn.extreme':
       'This is more than 3 standard deviations from the mean, which happens for fewer than 0.3% of values in a normal distribution.',
     rounding:
-      'Z-scores and values keep 12 significant digits and are shown to 8. Percentages come from the normal curve, accurate to better than 0.00001%, and are shown to 2 decimals.',
+      'Z-scores and values keep 12 significant digits and are shown to 8. Percentages come from the normal curve, computed to about 15 digits, and are shown to 2 decimals.',
   },
   HowItWorks: () => (
     <>
       <Formula label="Z-score">{'z = (x − μ) ÷ σ\nx = μ + zσ'}</Formula>
       <p>
         μ is the mean and σ the standard deviation. The percentage below a z-score is the area to
-        the left of z under the standard normal curve, Φ(z). The calculator uses the Abramowitz and
-        Stegun approximation, which matches the NIST/SEMATECH table to all 5 decimals: for example,
-        the area between 0 and 1.96 is 0.47500, so 95% of values lie within ±1.96.
+        the left of z under the standard normal curve, Φ(z). The calculator computes it from the
+        error function to about 15 digits, so it matches the NIST/SEMATECH table to all 5 decimals:
+        for example, the area between 0 and 1.96 is 0.47500, so 95% of values lie within ±1.96.
       </p>
     </>
   ),

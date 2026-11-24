@@ -1,0 +1,151 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+
+const forType = (...t: string[]) => ({ input: 'type', in: t }) as const;
+
+export const definition: CalculatorDefinition = {
+  id: 'confidence-interval',
+  slug: { en: 'confidence-interval-calculator' },
+  category: 'statistics',
+  tags: [
+    'confidence interval',
+    'margin of error',
+    'standard error',
+    't-distribution',
+    'proportion',
+    'z critical value',
+  ],
+  difficulty: 'advanced',
+  ymyl: false,
+  schemaCategory: 'EducationalApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'type',
+      param: 'k',
+      type: 'segmented',
+      labelKey: 'type',
+      default: 'mean',
+      options: [
+        { value: 'mean', labelKey: 'type.mean' },
+        { value: 'proportion', labelKey: 'type.proportion' },
+      ],
+    },
+    {
+      id: 'mean',
+      param: 'm',
+      type: 'number',
+      labelKey: 'mean',
+      default: 68,
+      allowNegative: true,
+      min: -1e12,
+      max: 1e12,
+      showIf: forType('mean'),
+    },
+    {
+      id: 'sd',
+      param: 's',
+      type: 'number',
+      labelKey: 'sd',
+      default: 3,
+      min: 0,
+      max: 1e12,
+      showIf: forType('mean'),
+    },
+    {
+      id: 'sdKind',
+      param: 'sk',
+      type: 'select',
+      labelKey: 'sdKind',
+      default: 'sample',
+      options: [
+        { value: 'sample', labelKey: 'sdKind.sample' },
+        { value: 'population', labelKey: 'sdKind.population' },
+      ],
+      showIf: forType('mean'),
+    },
+    {
+      id: 'successes',
+      param: 'x',
+      type: 'number',
+      labelKey: 'successes',
+      default: 421,
+      min: 0,
+      max: 1e12,
+      integer: true,
+      showIf: forType('proportion'),
+    },
+    {
+      id: 'n',
+      param: 'n',
+      type: 'number',
+      labelKey: 'n',
+      default: 36,
+      min: 1,
+      max: 1e12,
+      integer: true,
+    },
+    {
+      id: 'level',
+      param: 'c',
+      type: 'number',
+      labelKey: 'level',
+      default: 95,
+      min: 50,
+      max: 99.99,
+      helpKey: 'level.help',
+    },
+  ],
+  outputs: [
+    { id: 'interval', labelKey: 'out.interval', format: 'text', primary: true },
+    { id: 'margin', labelKey: 'out.margin', format: 'sig', decimals: 8 },
+    { id: 'lower', labelKey: 'out.lower', format: 'sig', decimals: 10 },
+    { id: 'upper', labelKey: 'out.upper', format: 'sig', decimals: 10 },
+    { id: 'critical', labelKey: 'out.critical', format: 'sig', decimals: 8 },
+    { id: 'se', labelKey: 'out.se', format: 'sig', decimals: 8 },
+    { id: 'wilson', labelKey: 'out.wilson', format: 'text' },
+  ],
+  sources: [
+    {
+      title:
+        'Introductory Statistics 2e, 8.1 A Single Population Mean Using the Normal Distribution and 8.3 A Population Proportion',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/introductory-statistics-2e/pages/8-3-a-population-proportion',
+      accessed: '2026-11-24',
+      locator:
+        'x̄ ± z·σ/√n (§8.1, Example 8.4: 68, σ = 3, n = 36, 95% → (67.02, 68.98); Example 8.3: 1.024, 0.337, 30, 98% → (0.8809, 1.1671)); p′ ± z√(p′q′/n) (§8.3, Example 8.10: 421 of 500, 95% → (0.810, 0.874); Example 8.11: 300 of 500, 90% → (0.564, 0.636))',
+    },
+    {
+      title:
+        'NIST/SEMATECH e-Handbook of Statistical Methods, 1.3.5.2 Confidence Limits for the Mean and 7.2.4.1 Confidence Intervals (proportions)',
+      publisher: 'National Institute of Standards and Technology',
+      url: 'https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm',
+      accessed: '2026-11-24',
+      locator:
+        'Ȳ ± t(1−α/2, N−1)·s/√N; N = 195, mean 9.261460, s = 0.022789, t = 1.9723 → (9.258242, 9.264679); Wilson interval for a proportion (§7.2.4.1: p̂ = 0.13, n = 200, one-sided lower limit 0.09577); t table §1.3.6.7.2',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-24', note: 'First published.' }],
+  related: ['z-score', 'average', 'probability'],
+  examples: [
+    {
+      id: 'nist',
+      inputs: { type: 'mean', mean: 9.26146, sd: 0.022789, sdKind: 'sample', n: 195, level: 95 },
+      expect: { interval: '(9.2582413, 9.2646787)' },
+    },
+    {
+      id: 'heights',
+      inputs: { type: 'mean', mean: 68, sd: 3, sdKind: 'population', n: 36, level: 95 },
+      expect: { interval: '(67.020018, 68.979982)' },
+    },
+    {
+      id: 'poll',
+      inputs: { type: 'proportion', successes: 421, n: 500, level: 95 },
+      expect: { interval: '(0.81003, 0.87397)' },
+    },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-24',
+};

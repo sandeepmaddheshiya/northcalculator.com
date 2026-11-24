@@ -4,7 +4,7 @@ import { normalCdf } from '@/engine/stats';
 
 /**
  * z = (x − μ) ÷ σ and x = μ + zσ (OpenStax Introductory Statistics 2e §6.1). Percentages below
- * and above come from the standard normal CDF (src/engine/stats.ts; matches the NIST/SEMATECH
+ * and above come from the standard normal CDF (src/engine/stats.ts, erf-based; matches the NIST/SEMATECH
  * table to 5 decimals); "between" is the share within ±|z| of the mean. Percentages to 4 decimals.
  */
 export const compute: ComputeFn = (inputs, { fmt }) => {
