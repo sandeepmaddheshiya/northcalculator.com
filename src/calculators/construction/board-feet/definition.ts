@@ -1,0 +1,105 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+import { currencySelect } from '@/calculators/currencies';
+
+export const definition: CalculatorDefinition = {
+  id: 'board-feet',
+  slug: { en: 'board-foot-calculator' },
+  category: 'construction',
+  tags: ['board feet', 'board foot', 'lumber volume', 'lumber price', 'hardwood', 'BF'],
+  difficulty: 'basic',
+  ymyl: false,
+  currency: { input: 'cur' },
+  schemaCategory: 'UtilitiesApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'thickness',
+      param: 't',
+      type: 'number',
+      labelKey: 'thickness',
+      default: 2,
+      min: 0,
+      max: 1000,
+    },
+    { id: 'width', param: 'w', type: 'number', labelKey: 'width', default: 6, min: 0, max: 10000 },
+    {
+      id: 'length',
+      param: 'l',
+      type: 'number',
+      labelKey: 'length',
+      default: 10,
+      min: 0,
+      max: 100000,
+    },
+    {
+      id: 'count',
+      param: 'n',
+      type: 'number',
+      labelKey: 'count',
+      default: 1,
+      min: 1,
+      max: 1e6,
+      integer: true,
+    },
+    {
+      id: 'price',
+      param: 'p',
+      type: 'currency',
+      labelKey: 'price',
+      default: 0,
+      min: 0,
+      max: 1e6,
+      helpKey: 'price.help',
+    },
+    currencySelect('USD'),
+  ],
+  outputs: [
+    { id: 'boardFeet', labelKey: 'out.boardFeet', format: 'sig', decimals: 8, primary: true },
+    { id: 'each', labelKey: 'out.each', format: 'sig', decimals: 8 },
+    { id: 'cost', labelKey: 'out.cost', format: 'currency' },
+    { id: 'cubicFeet', labelKey: 'out.cubicFeet', format: 'sig', decimals: 8 },
+    { id: 'm3', labelKey: 'out.m3', format: 'sig', decimals: 6 },
+  ],
+  sources: [
+    {
+      title: 'What Is A Board Foot? (Forestry Facts No. 42)',
+      publisher: 'University of Wisconsin–Extension, Department of Forestry',
+      url: 'https://forestry.extension.wisc.edu/files/2023/05/fem_042.pdf',
+      accessed: '2026-11-25',
+      locator:
+        '1 board foot = 12 in × 12 in × 1 in = 144 in³; board feet = thickness (in) × width (in) × length (ft) ÷ 12; a 10 ft 2×6 = 10; an 8 ft 1×8 = 5⅓; a 36 × 60 in stack of 8 ft boards = 1,440; actual 1½ × 5½ in 2×6 = 6.875',
+    },
+    {
+      title: 'Measuring Timber Products Harvested from Your Woodland (EC 1127)',
+      publisher: 'Oregon State University Extension Service',
+      url: 'https://extension.oregonstate.edu/sites/extd8/files/documents/ec1127.pdf',
+      accessed: '2026-11-25',
+      locator:
+        'Bd ft = thickness (in) × width (in) × length (ft) ÷ 12; a plank 2 in by 8 in by 24 ft = 32 board feet',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-25', note: 'First published.' }],
+  related: ['concrete', 'volume', 'unit-price'],
+  examples: [
+    {
+      id: 'twoBySix',
+      inputs: { thickness: 2, width: 6, length: 10, count: 1, price: 0 },
+      expect: { boardFeet: 10 },
+    },
+    {
+      id: 'plank',
+      inputs: { thickness: 2, width: 8, length: 24, count: 1, price: 0 },
+      expect: { boardFeet: 32 },
+    },
+    {
+      id: 'priced',
+      inputs: { thickness: 1, width: 8, length: 8, count: 6, price: 4.5, cur: 'USD' },
+      expect: { boardFeet: 32, cost: 144 },
+    },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-25',
+};

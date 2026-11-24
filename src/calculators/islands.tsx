@@ -110,6 +110,10 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   'percent-yield': dynamic(() => import('./chemistry/percent-yield/Island')),
   projectile: dynamic(() => import('./physics/projectile/Island')),
   'linear-regression': dynamic(() => import('./statistics/linear-regression/Island')),
+  'board-feet': dynamic(() => import('./construction/board-feet/Island')),
+  'rc-time-constant': dynamic(() => import('./electronics/rc-time-constant/Island')),
+  'work-power': dynamic(() => import('./physics/work-power/Island')),
+  wave: dynamic(() => import('./physics/wave/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {

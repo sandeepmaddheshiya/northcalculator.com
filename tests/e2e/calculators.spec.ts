@@ -104,6 +104,10 @@ const CALCULATORS = [
   ['/en/chemistry/percent-yield-calculator', 'Shortfall (theoretical − actual)'],
   ['/en/physics/projectile-motion-calculator', 'Time of flight (s)'],
   ['/en/statistics/linear-regression-calculator', 'Regression line'],
+  ['/en/construction/board-foot-calculator', 'Total board feet'],
+  ['/en/electronics/rc-time-constant-calculator', 'Time constant τ (s)'],
+  ['/en/physics/work-and-power-calculator', 'Work (kJ)'],
+  ['/en/physics/wavelength-frequency-calculator', 'Period (s)'],
 ] as const;
 
 const snapshot = JSON.parse(

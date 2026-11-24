@@ -101,6 +101,10 @@ import { ph } from './chemistry/ph';
 import { percentYield } from './chemistry/percent-yield';
 import { projectile } from './physics/projectile';
 import { linearRegression } from './statistics/linear-regression';
+import { boardFeet } from './construction/board-feet';
+import { rcTimeConstant } from './electronics/rc-time-constant';
+import { workPower } from './physics/work-power';
+import { wave } from './physics/wave';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -207,6 +211,10 @@ export const MODULES: readonly CalculatorModule[] = [
   percentYield,
   projectile,
   linearRegression,
+  boardFeet,
+  rcTimeConstant,
+  workPower,
+  wave,
   fuelCost,
 ];
 
