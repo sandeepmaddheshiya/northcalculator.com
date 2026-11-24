@@ -69,6 +69,7 @@ import { hoursWorked } from './date-time/hours-worked';
 import { timeDuration } from './date-time/time-duration';
 import { breakEven } from './finance/break-even';
 import { timeZone } from './date-time/time-zone';
+import { inflation } from './finance/inflation';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -88,6 +89,7 @@ export const MODULES: readonly CalculatorModule[] = [
   cagr,
   roi,
   breakEven,
+  inflation,
   savingsGoal,
   percentage,
   percentageChange,

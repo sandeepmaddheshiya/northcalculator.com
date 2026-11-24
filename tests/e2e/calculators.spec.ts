@@ -72,6 +72,7 @@ const CALCULATORS = [
   ['/en/date-time/time-duration-calculator', 'Duration'],
   ['/en/finance/break-even-calculator', 'Units to sell'],
   ['/en/date-time/time-zone-converter', 'Converted time'],
+  ['/en/finance/inflation-calculator', 'Equivalent value'],
 ] as const;
 
 const snapshot = JSON.parse(
