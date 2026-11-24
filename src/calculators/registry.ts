@@ -93,6 +93,10 @@ import { confidenceInterval } from './statistics/confidence-interval';
 import { density } from './physics/density';
 import { resistors } from './electronics/resistors';
 import { trigonometry } from './math/trigonometry';
+import { idealGas } from './chemistry/ideal-gas';
+import { force } from './physics/force';
+import { freeFall } from './physics/free-fall';
+import { sampleSize } from './statistics/sample-size';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -191,6 +195,10 @@ export const MODULES: readonly CalculatorModule[] = [
   density,
   resistors,
   trigonometry,
+  idealGas,
+  force,
+  freeFall,
+  sampleSize,
   fuelCost,
 ];
 

@@ -96,6 +96,10 @@ const CALCULATORS = [
   ['/en/physics/density-calculator', 'Density in kg/m³'],
   ['/en/electronics/series-parallel-resistor-calculator', 'Parallel resistance (Ω)'],
   ['/en/math/trigonometry-calculator', 'csc (1/sin)'],
+  ['/en/chemistry/ideal-gas-law-calculator', 'Temperature (K)'],
+  ['/en/physics/force-calculator', 'Weight of the mass at gₙ (N)'],
+  ['/en/physics/free-fall-calculator', 'Landing speed (km/h)'],
+  ['/en/statistics/sample-size-calculator', 'Sample size needed'],
 ] as const;
 
 const snapshot = JSON.parse(
