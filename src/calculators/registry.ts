@@ -72,6 +72,10 @@ import { timeZone } from './date-time/time-zone';
 import { inflation } from './finance/inflation';
 import { caloriesBurned } from './health/calories-burned';
 import { debtPayoff } from './finance/debt-payoff';
+import { area } from './geometry/area';
+import { circle } from './geometry/circle';
+import { pythagorean } from './geometry/pythagorean';
+import { volume } from './geometry/volume';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -149,6 +153,10 @@ export const MODULES: readonly CalculatorModule[] = [
   billSplit,
   discount,
   unitPrice,
+  area,
+  circle,
+  pythagorean,
+  volume,
   fuelCost,
 ];
 

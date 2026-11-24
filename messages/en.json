@@ -25,7 +25,13 @@
     "date-time": "Date & Time",
     "conversion": "Unit Conversion",
     "education": "Education",
-    "everyday": "Everyday Life"
+    "everyday": "Everyday Life",
+    "geometry": "Geometry",
+    "statistics": "Statistics & Probability",
+    "physics": "Physics",
+    "electronics": "Electrical & Electronics",
+    "chemistry": "Chemistry",
+    "construction": "Construction & Home"
   },
   "search": {
     "open": "Search calculators",
@@ -166,7 +172,13 @@
       "date-time": "Count the days, weeks and months between dates, work out an exact age, or add time to a date. Calculations run on calendar dates, so time zones and daylight-saving changes can't shift a result by a day.",
       "conversion": "Convert lengths, weights, volumes, temperatures and more using exact factors defined by international standards. Each converter states the factor it uses and whether it's exact by definition or rounded.",
       "education": "Grade point averages and grade calculations with the scale written out, so you can match it to your school's own rules. Courses, credits and weightings are all editable.",
-      "everyday": "Quick, practical calculators for tips, bills and shopping, with the arithmetic shown so you can trust the split."
+      "everyday": "Quick, practical calculators for tips, bills and shopping, with the arithmetic shown so you can trust the split.",
+      "geometry": "Area, perimeter, volume and right triangles, with the formula for each shape written out. Results use the full value of π, and the pages for circles and round solids also show the answer you would get with π rounded to 3.14, as many textbooks do.",
+      "statistics": "Probabilities, counting, z-scores and other statistics with the method shown step by step, using the definitions taught in introductory statistics courses.",
+      "physics": "Motion, force and energy from the standard equations of introductory physics, with SI units and the working shown.",
+      "electronics": "Voltage, current, resistance and power from Ohm’s law and the power formula, with each step shown in SI units.",
+      "chemistry": "Molar mass and related calculations based on IUPAC standard atomic weights, with the sum shown element by element.",
+      "construction": "Quantities for building and home projects, such as concrete, worked out from measured dimensions with the unit conversions shown."
     }
   },
   "offline": {

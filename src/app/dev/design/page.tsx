@@ -74,6 +74,12 @@ const CATS: CategoryKey[] = [
   'conversion',
   'education',
   'everyday',
+  'geometry',
+  'statistics',
+  'physics',
+  'electronics',
+  'chemistry',
+  'construction',
 ];
 
 function Section({

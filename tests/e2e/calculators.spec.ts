@@ -75,6 +75,10 @@ const CALCULATORS = [
   ['/en/finance/inflation-calculator', 'Equivalent value'],
   ['/en/health/calories-burned-calculator', 'Calories burned (kcal)'],
   ['/en/finance/debt-payoff-calculator', 'Months until debt-free'],
+  ['/en/geometry/area-calculator', 'Area (square units)'],
+  ['/en/geometry/circle-calculator', 'Area (square units)'],
+  ['/en/geometry/pythagorean-theorem-calculator', 'Hypotenuse c'],
+  ['/en/geometry/volume-calculator', 'Volume (cubic units)'],
 ] as const;
 
 const snapshot = JSON.parse(

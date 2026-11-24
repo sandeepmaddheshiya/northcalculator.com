@@ -8,7 +8,7 @@ export interface CategoryDefinition {
   order: number;
 }
 
-/** Wave 1 categories (docs/taxonomy-and-wave1.md). Wave 2 categories are added with their first calculator. */
+/** Wave 1 and Wave 2 categories (docs/taxonomy-and-wave1.md). Hubs with no calculators are not rendered. */
 export const CATEGORIES: readonly CategoryDefinition[] = [
   { key: 'finance', slug: { en: 'finance' }, order: 1 },
   { key: 'math', slug: { en: 'math' }, order: 2 },
@@ -17,6 +17,12 @@ export const CATEGORIES: readonly CategoryDefinition[] = [
   { key: 'conversion', slug: { en: 'conversion' }, order: 5 },
   { key: 'education', slug: { en: 'education' }, order: 6 },
   { key: 'everyday', slug: { en: 'everyday' }, order: 7 },
+  { key: 'geometry', slug: { en: 'geometry' }, order: 8 },
+  { key: 'statistics', slug: { en: 'statistics' }, order: 9 },
+  { key: 'physics', slug: { en: 'physics' }, order: 10 },
+  { key: 'electronics', slug: { en: 'electronics' }, order: 11 },
+  { key: 'chemistry', slug: { en: 'chemistry' }, order: 12 },
+  { key: 'construction', slug: { en: 'construction' }, order: 13 },
 ];
 
 export function getCategory(key: CategoryKey): CategoryDefinition {

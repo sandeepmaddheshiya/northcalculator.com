@@ -81,6 +81,10 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   inflation: dynamic(() => import('./finance/inflation/Island')),
   'calories-burned': dynamic(() => import('./health/calories-burned/Island')),
   'debt-payoff': dynamic(() => import('./finance/debt-payoff/Island')),
+  area: dynamic(() => import('./geometry/area/Island')),
+  circle: dynamic(() => import('./geometry/circle/Island')),
+  pythagorean: dynamic(() => import('./geometry/pythagorean/Island')),
+  volume: dynamic(() => import('./geometry/volume/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {

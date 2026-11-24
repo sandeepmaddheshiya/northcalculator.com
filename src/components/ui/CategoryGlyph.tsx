@@ -3,7 +3,19 @@
  * as Icon but with a filled accent so categories are recognisable at a glance.
  */
 export type CategoryKey =
-  'math' | 'finance' | 'health' | 'date-time' | 'conversion' | 'education' | 'everyday';
+  | 'math'
+  | 'finance'
+  | 'health'
+  | 'date-time'
+  | 'conversion'
+  | 'education'
+  | 'everyday'
+  | 'geometry'
+  | 'statistics'
+  | 'physics'
+  | 'electronics'
+  | 'chemistry'
+  | 'construction';
 
 const GLYPHS: Record<CategoryKey, { stroke: string; accent?: string }> = {
   // ± on a ruled baseline
@@ -29,6 +41,21 @@ const GLYPHS: Record<CategoryKey, { stroke: string; accent?: string }> = {
     stroke: 'M6 3h12v18l-2-1.5L14 21l-2-1.5L10 21l-2-1.5L6 21zM9 8h6M9 12h6',
     accent: 'M9 15h3v2H9z',
   },
+  // set square with a right-angle mark
+  geometry: { stroke: 'M4 20V4l16 16H4zM4 15h5v5', accent: 'M8 12a1.5 1.5 0 1 1 0 .1z' },
+  // bell curve over an axis with one bar
+  statistics: { stroke: 'M3 20h18M3 18c4 0 5-12 9-12s5 12 9 12', accent: 'M11 12h2v8h-2z' },
+  // pendulum swinging from a bar
+  physics: { stroke: 'M4 4h16M12 4l5 12', accent: 'M17 15a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z' },
+  // resistor zigzag between two leads
+  electronics: { stroke: 'M2 12h5l1.5-4 3 8 3-8 3 8 1.5-4H22', accent: 'M10.5 19h3v2h-3z' },
+  // flask with liquid level
+  chemistry: {
+    stroke: 'M9 3h6M10 3v6l-5 10a1.5 1.5 0 0 0 1.4 2h11.2a1.5 1.5 0 0 0 1.4-2L14 9V3',
+    accent: 'M7.5 15h9l2 4h-13z',
+  },
+  // house outline with a ruler tick
+  construction: { stroke: 'M3 11 12 4l9 7M5 10v10h14V10', accent: 'M10 14h4v6h-4z' },
 };
 
 export function CategoryGlyph({
