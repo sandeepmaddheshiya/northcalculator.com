@@ -76,6 +76,9 @@ import { area } from './geometry/area';
 import { circle } from './geometry/circle';
 import { pythagorean } from './geometry/pythagorean';
 import { volume } from './geometry/volume';
+import { combinations } from './statistics/combinations';
+import { zScore } from './statistics/z-score';
+import { probability } from './statistics/probability';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -157,6 +160,9 @@ export const MODULES: readonly CalculatorModule[] = [
   circle,
   pythagorean,
   volume,
+  combinations,
+  zScore,
+  probability,
   fuelCost,
 ];
 

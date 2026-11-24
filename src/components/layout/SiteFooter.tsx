@@ -14,7 +14,8 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
   const categories = categoriesFor(locale);
   const year = new Date().getFullYear();
 
-  const linkCls = 'text-muted hover:text-text underline-offset-4 hover:underline';
+  const linkCls =
+    'inline-block py-0.5 text-muted hover:text-text underline-offset-4 hover:underline';
   return (
     <footer className="no-print mt-24 border-t border-line bg-surface">
       <Container className="grid gap-10 py-12 sm:grid-cols-[1.4fr_1fr_1fr] lg:grid-cols-[2fr_1fr_1fr_1fr]">
@@ -31,7 +32,7 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
             <h2 className="text-xs font-semibold tracking-wider text-subtle uppercase">
               {t('calculators')}
             </h2>
-            <ul className="mt-3 space-y-2 text-sm">
+            <ul className="mt-3 space-y-1 text-sm">
               {categories.map((c) => (
                 <li key={c.key}>
                   <Link href={`/${c.slug[locale]}`} className={linkCls}>
@@ -46,7 +47,7 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
           <h2 className="text-xs font-semibold tracking-wider text-subtle uppercase">
             {t('about')}
           </h2>
-          <ul className="mt-3 space-y-2 text-sm">
+          <ul className="mt-3 space-y-1 text-sm">
             <li>
               <Link href="/about" className={linkCls}>
                 {t('about')}
@@ -73,7 +74,7 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
           <h2 className="text-xs font-semibold tracking-wider text-subtle uppercase">
             {t('legal')}
           </h2>
-          <ul className="mt-3 space-y-2 text-sm">
+          <ul className="mt-3 space-y-1 text-sm">
             <li>
               <Link href="/privacy" className={linkCls}>
                 {t('privacy')}

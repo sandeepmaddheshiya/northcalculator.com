@@ -79,6 +79,9 @@ const CALCULATORS = [
   ['/en/geometry/circle-calculator', 'Area (square units)'],
   ['/en/geometry/pythagorean-theorem-calculator', 'Hypotenuse c'],
   ['/en/geometry/volume-calculator', 'Volume (cubic units)'],
+  ['/en/statistics/permutation-combination-calculator', 'Combinations, nCr'],
+  ['/en/statistics/z-score-calculator', 'Z-score'],
+  ['/en/statistics/probability-calculator', 'P(A or B)'],
 ] as const;
 
 const snapshot = JSON.parse(

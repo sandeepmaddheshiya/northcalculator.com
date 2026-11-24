@@ -1,0 +1,105 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+
+export const definition: CalculatorDefinition = {
+  id: 'probability',
+  slug: { en: 'probability-calculator' },
+  category: 'statistics',
+  tags: [
+    'probability',
+    'P(A or B)',
+    'P(A and B)',
+    'independent events',
+    'mutually exclusive',
+    'complement',
+  ],
+  difficulty: 'basic',
+  ymyl: false,
+  schemaCategory: 'EducationalApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'pa',
+      param: 'a',
+      type: 'number',
+      labelKey: 'pa',
+      default: 0.45,
+      min: 0,
+      max: 1,
+      helpKey: 'p.help',
+    },
+    { id: 'pb', param: 'b', type: 'number', labelKey: 'pb', default: 0.6, min: 0, max: 1 },
+    {
+      id: 'relation',
+      param: 'r',
+      type: 'select',
+      labelKey: 'relation',
+      default: 'given',
+      options: [
+        { value: 'independent', labelKey: 'relation.independent' },
+        { value: 'exclusive', labelKey: 'relation.exclusive' },
+        { value: 'given', labelKey: 'relation.given' },
+      ],
+    },
+    {
+      id: 'pab',
+      param: 'ab',
+      type: 'number',
+      labelKey: 'pab',
+      default: 0.2,
+      min: 0,
+      max: 1,
+      showIf: { input: 'relation', in: ['given'] },
+    },
+  ],
+  outputs: [
+    { id: 'or', labelKey: 'out.or', format: 'sig', decimals: 10, primary: true },
+    { id: 'and', labelKey: 'out.and', format: 'sig', decimals: 10 },
+    { id: 'notA', labelKey: 'out.notA', format: 'sig', decimals: 10 },
+    { id: 'notB', labelKey: 'out.notB', format: 'sig', decimals: 10 },
+    { id: 'neither', labelKey: 'out.neither', format: 'sig', decimals: 10 },
+    { id: 'exactlyOne', labelKey: 'out.exactlyOne', format: 'sig', decimals: 10 },
+  ],
+  sources: [
+    {
+      title: 'Contemporary Mathematics, 7.8 The Addition Rule for Probability',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/contemporary-mathematics/pages/7-8-the-addition-rule-for-probability',
+      accessed: '2026-11-24',
+      locator:
+        'P(E or F) = P(E) + P(F) − P(E and F); Example 7.29: 3/6 + 1/6 = 2/3; Example 7.30: 0.45 + 0.6 − 0.2 = 0.85',
+    },
+    {
+      title: 'Introductory Statistics 2e, 3.3 Two Basic Rules of Probability',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/introductory-statistics-2e/pages/3-3-two-basic-rules-of-probability',
+      accessed: '2026-11-24',
+      locator:
+        'P(A AND B) = P(A)P(B) when independent; P(A OR B) = P(A) + P(B) − P(A AND B); Example 3.14: 0.6 + 0.35 = 0.95; Example 3.15: 0.65 + 0.65 − 0.585 = 0.715; Example 3.19: P(B′) = 1 − P(B)',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-24', note: 'First published.' }],
+  related: ['combinations', 'z-score', 'random-number'],
+  examples: [
+    {
+      id: 'die',
+      inputs: { pa: 0.5, pb: 1 / 6, relation: 'exclusive' },
+      expect: { or: 0.666666666667 },
+    },
+    {
+      id: 'overlap',
+      inputs: { pa: 0.45, pb: 0.6, relation: 'given', pab: 0.2 },
+      expect: { or: 0.85, neither: 0.15 },
+    },
+    { id: 'trip', inputs: { pa: 0.6, pb: 0.35, relation: 'exclusive' }, expect: { or: 0.95 } },
+    {
+      id: 'independent',
+      inputs: { pa: 0.6, pb: 0.5, relation: 'independent' },
+      expect: { and: 0.3, or: 0.8 },
+    },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-24',
+};

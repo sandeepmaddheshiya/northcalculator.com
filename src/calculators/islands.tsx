@@ -85,6 +85,9 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   circle: dynamic(() => import('./geometry/circle/Island')),
   pythagorean: dynamic(() => import('./geometry/pythagorean/Island')),
   volume: dynamic(() => import('./geometry/volume/Island')),
+  combinations: dynamic(() => import('./statistics/combinations/Island')),
+  'z-score': dynamic(() => import('./statistics/z-score/Island')),
+  probability: dynamic(() => import('./statistics/probability/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {
