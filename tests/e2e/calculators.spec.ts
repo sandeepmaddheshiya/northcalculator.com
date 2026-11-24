@@ -29,6 +29,10 @@ const CALCULATORS = [
   ['/en/education/grade-calculator', 'Weighted grade'],
   ['/en/education/final-grade-calculator', 'Score needed on the final'],
   ['/en/date-time/time-calculator', 'Result'],
+  ['/en/math/percentage-change-calculator', 'Percentage change'],
+  ['/en/math/ratio-calculator', 'Simplest form'],
+  ['/en/math/rounding-calculator', 'Rounded number'],
+  ['/en/everyday/unit-price-calculator', 'Better buy'],
 ] as const;
 
 const snapshot = JSON.parse(

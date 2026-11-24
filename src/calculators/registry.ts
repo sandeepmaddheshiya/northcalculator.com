@@ -26,6 +26,10 @@ import { salary } from './finance/salary';
 import { grade } from './education/grade';
 import { finalGrade } from './education/final-grade';
 import { time } from './date-time/time';
+import { percentageChange } from './math/percentage-change';
+import { ratio } from './math/ratio';
+import { rounding } from './math/rounding';
+import { unitPrice } from './everyday/unit-price';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -42,7 +46,10 @@ export const MODULES: readonly CalculatorModule[] = [
   margin,
   cagr,
   percentage,
+  percentageChange,
   fraction,
+  ratio,
+  rounding,
   average,
   lcmGcf,
   scientific,
@@ -58,6 +65,7 @@ export const MODULES: readonly CalculatorModule[] = [
   finalGrade,
   tip,
   discount,
+  unitPrice,
 ];
 
 export const CALCULATORS: readonly CalculatorDefinition[] = MODULES.map((m) => m.definition);

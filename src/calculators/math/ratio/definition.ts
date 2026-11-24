@@ -1,0 +1,92 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+
+export const definition: CalculatorDefinition = {
+  id: 'ratio',
+  slug: { en: 'ratio-calculator' },
+  category: 'math',
+  tags: ['ratio', 'simplify ratio', 'proportion', 'scale ratio', 'missing value', 'cross multiply'],
+  difficulty: 'basic',
+  ymyl: false,
+  schemaCategory: 'EducationalApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'mode',
+      param: 'm',
+      type: 'segmented',
+      labelKey: 'mode',
+      default: 'simplify',
+      options: [
+        { value: 'simplify', labelKey: 'mode.simplify' },
+        { value: 'solve', labelKey: 'mode.solve' },
+      ],
+    },
+    {
+      id: 'a',
+      param: 'a',
+      type: 'number',
+      labelKey: 'a',
+      default: 15,
+      min: 0,
+      max: 1e12,
+      row: { id: 'ab', legendKey: 'ab' },
+    },
+    {
+      id: 'b',
+      param: 'b',
+      type: 'number',
+      labelKey: 'b',
+      default: 27,
+      min: 0,
+      max: 1e12,
+      row: { id: 'ab', legendKey: 'ab' },
+    },
+    {
+      id: 'c',
+      param: 'c',
+      type: 'number',
+      labelKey: 'c',
+      default: 80,
+      min: 0,
+      max: 1e12,
+      showIf: { input: 'mode', in: ['solve'] },
+      helpKey: 'c.help',
+    },
+  ],
+  outputs: [
+    { id: 'result', labelKey: 'out.result', labelBy: 'mode', format: 'text', primary: true },
+    { id: 'simplest', labelKey: 'out.simplest', format: 'text' },
+    { id: 'oneTo', labelKey: 'out.oneTo', format: 'text' },
+    { id: 'quotient', labelKey: 'out.quotient', format: 'number', decimals: 6 },
+  ],
+  sources: [
+    {
+      title: 'Prealgebra 2e, 5.6 Ratios and Rate',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/prealgebra-2e/pages/5-6-ratios-and-rate',
+      accessed: '2026-11-24',
+      locator:
+        'Examples 5.58–5.59: 15 to 27 = 5/9, 45 to 18 = 5/2, 4.8 to 11.2 = 3/7, 2.7 to 0.54 = 5/1',
+    },
+    {
+      title: 'Prealgebra 2e, 6.5 Solve Proportions and their Applications',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/prealgebra-2e/pages/6-5-solve-proportions-and-their-applications',
+      accessed: '2026-11-24',
+      locator:
+        'Example 6.42: x/63 = 4/7 gives 36; Example 6.45: 5 ml per 25 lb gives 16 ml for 80 lb; Example 6.47: $325 at 12.54 pesos gives 4,075.5',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-24', note: 'First published.' }],
+  related: ['fraction', 'percentage', 'lcm-gcf'],
+  examples: [
+    { id: 'simplify', inputs: { mode: 'simplify', a: 15, b: 27 }, expect: { result: '5 : 9' } },
+    { id: 'decimals', inputs: { mode: 'simplify', a: 4.8, b: 11.2 }, expect: { result: '3 : 7' } },
+    { id: 'dose', inputs: { mode: 'solve', a: 25, b: 5, c: 80 }, expect: { result: '16' } },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-24',
+};

@@ -1,0 +1,76 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+
+export const definition: CalculatorDefinition = {
+  id: 'percentage-change',
+  slug: { en: 'percentage-change-calculator' },
+  category: 'math',
+  tags: [
+    'percentage change',
+    'percent increase',
+    'percent decrease',
+    'percent change',
+    'growth rate',
+    'price change',
+  ],
+  difficulty: 'basic',
+  ymyl: false,
+  schemaCategory: 'EducationalApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'from',
+      param: 'a',
+      type: 'number',
+      labelKey: 'from',
+      default: 26,
+      allowNegative: true,
+      min: -1e15,
+      max: 1e15,
+    },
+    {
+      id: 'to',
+      param: 'b',
+      type: 'number',
+      labelKey: 'to',
+      default: 36,
+      allowNegative: true,
+      min: -1e15,
+      max: 1e15,
+    },
+  ],
+  outputs: [
+    { id: 'change', labelKey: 'out.change', format: 'percent', decimals: 2, primary: true },
+    { id: 'difference', labelKey: 'out.difference', format: 'number', decimals: 6 },
+    { id: 'multiplier', labelKey: 'out.multiplier', format: 'number', decimals: 6 },
+    { id: 'reverse', labelKey: 'out.reverse', format: 'percent', decimals: 2 },
+  ],
+  sources: [
+    {
+      title: 'Prealgebra 2e, 6.2 Solve General Applications of Percent',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/prealgebra-2e/pages/6-2-solve-general-applications-of-percent',
+      accessed: '2026-11-24',
+      locator:
+        'percent increase/decrease as a percent of the original amount; Example 6.23: $26 → $36 is a 38.5% increase; Example 6.24: $3.71 → $3.64 is a 1.9% decrease',
+    },
+    {
+      title: 'Guide for the Use of the International System of Units (SI), NIST SP 811',
+      publisher: 'National Institute of Standards and Technology',
+      url: 'https://www.nist.gov/pml/special-publication-811',
+      accessed: '2026-11-24',
+      locator: '§7.10.2: the percent symbol means 0.01',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-24', note: 'First published.' }],
+  related: ['percentage', 'cagr', 'discount'],
+  examples: [
+    { id: 'fees', inputs: { from: 26, to: 36 }, expect: { change: 38.4615 } },
+    { id: 'gas', inputs: { from: 3.71, to: 3.64 }, expect: { change: -1.8868 } },
+    { id: 'roundtrip', inputs: { from: 80, to: 60 }, expect: { change: -25, reverse: 33.3333 } },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-24',
+};

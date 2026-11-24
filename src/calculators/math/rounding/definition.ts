@@ -1,0 +1,120 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+
+export const METHODS = [
+  'halfUp',
+  'halfEven',
+  'halfDown',
+  'up',
+  'down',
+  'ceiling',
+  'floor',
+] as const;
+
+export const definition: CalculatorDefinition = {
+  id: 'rounding',
+  slug: { en: 'rounding-calculator' },
+  category: 'math',
+  tags: [
+    'rounding',
+    'round to decimal places',
+    'significant figures',
+    'sig figs',
+    'round half to even',
+    'nearest ten',
+    'nearest hundredth',
+  ],
+  difficulty: 'basic',
+  ymyl: false,
+  schemaCategory: 'EducationalApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'value',
+      param: 'v',
+      type: 'text',
+      labelKey: 'value',
+      default: '18.379',
+      maxLength: 80,
+      helpKey: 'value.help',
+    },
+    {
+      id: 'to',
+      param: 't',
+      type: 'segmented',
+      labelKey: 'to',
+      default: 'dp',
+      options: [
+        { value: 'dp', labelKey: 'to.dp' },
+        { value: 'sf', labelKey: 'to.sf' },
+      ],
+    },
+    {
+      id: 'digits',
+      param: 'd',
+      type: 'number',
+      labelKey: 'digits',
+      labelBy: 'to',
+      default: 2,
+      min: -15,
+      max: 30,
+      integer: true,
+      allowNegative: true,
+      helpKey: 'digits.help',
+    },
+    {
+      id: 'method',
+      param: 'm',
+      type: 'select',
+      labelKey: 'method',
+      default: 'halfUp',
+      options: METHODS.map((m) => ({ value: m, labelKey: `method.${m}` })),
+      helpKey: 'method.help',
+    },
+  ],
+  outputs: [
+    { id: 'result', labelKey: 'out.result', format: 'text', primary: true },
+    { id: 'scientific', labelKey: 'out.scientific', format: 'text' },
+    { id: 'sigfigs', labelKey: 'out.sigfigs', format: 'integer' },
+  ],
+  sources: [
+    {
+      title: 'Chemistry 2e, 1.5 Measurement Uncertainty, Accuracy, and Precision',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/chemistry-2e/pages/1-5-measurement-uncertainty-accuracy-and-precision',
+      accessed: '2026-11-24',
+      locator:
+        'counting significant figures; rounding a trailing 5 to the even digit; Example 1.3: 31.57 → 32, 8.1649 → 8.16, 0.051065 → 0.05106, 0.90275 → 0.9028',
+    },
+    {
+      title: 'Prealgebra 2e, 5.1 Decimals',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/prealgebra-2e/pages/5-1-decimals',
+      accessed: '2026-11-24',
+      locator: 'How To: round a decimal; Examples 5.9–5.10: 18.379 → 18.38, 18.4 and 18',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-24', note: 'First published.' }],
+  related: ['scientific-calculator', 'fraction', 'percentage'],
+  examples: [
+    {
+      id: 'school',
+      inputs: { value: '18.379', to: 'dp', digits: 2, method: 'halfUp' },
+      expect: { result: '18.38' },
+    },
+    {
+      id: 'chem',
+      inputs: { value: '0.90275', to: 'sf', digits: 4, method: 'halfEven' },
+      expect: { result: '0.9028', sigfigs: 5 },
+    },
+    {
+      id: 'hundreds',
+      inputs: { value: '48,350', to: 'dp', digits: -2, method: 'halfUp' },
+      expect: { result: '48400' },
+    },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-24',
+};

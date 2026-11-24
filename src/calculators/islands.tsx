@@ -35,6 +35,10 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   grade: dynamic(() => import('./education/grade/Island')),
   'final-grade': dynamic(() => import('./education/final-grade/Island')),
   time: dynamic(() => import('./date-time/time/Island')),
+  'percentage-change': dynamic(() => import('./math/percentage-change/Island')),
+  ratio: dynamic(() => import('./math/ratio/Island')),
+  rounding: dynamic(() => import('./math/rounding/Island')),
+  'unit-price': dynamic(() => import('./everyday/unit-price/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {
