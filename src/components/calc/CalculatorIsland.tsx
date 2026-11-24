@@ -29,6 +29,7 @@ import { DataTable } from './DataTable';
 import { makeFmt } from '@/calculators/fmt';
 import { decodeState, defaultValues, encodeState } from '@/calculators/url-state';
 import { fill } from '@/lib/fill';
+import { newSeed } from '@/engine/random';
 import { formatOutput, outputLabel } from '@/calculators/format-output';
 import { addEntry, clearEntries, readEntries, removeEntry, type HistoryEntry } from './history';
 import { HistoryPanel } from './HistoryPanel';
@@ -99,7 +100,11 @@ export function CalculatorIsland({
       const next = { ...v };
       for (const i of def.inputs)
         if (i.type === 'date' && i.default === 'today' && v[i.id] === buildToday) next[i.id] = iso;
-      return { ...next, ...fromUrl } as InputValues;
+      const merged = { ...next, ...fromUrl } as InputValues;
+      // Random tools: a fresh draw on each visit unless the link carries a seed.
+      if (def.reroll && fromUrl[def.reroll.input] === undefined)
+        merged[def.reroll.input] = newSeed();
+      return merged;
     });
     setRecent(readEntries('history', def.id));
     setSaved(readEntries('saved', def.id));
@@ -295,7 +300,7 @@ export function CalculatorIsland({
   }
 
   const renderInput = (i: CalculatorInput) => {
-    if (!visible(i)) return null;
+    if (!visible(i) || i.hidden) return null;
     const v = values[i.id];
     const help = i.helpKey ? ui[i.helpKey] : undefined;
     switch (i.type) {
@@ -509,6 +514,15 @@ export function CalculatorIsland({
               </summary>
               <div className="space-y-5 border-t border-line p-4">{advanced.map(renderInput)}</div>
             </details>
+          )}
+          {def.reroll && (
+            <Button
+              variant="primary"
+              onClick={() => set(def.reroll!.input, newSeed())}
+              className="w-full sm:w-auto"
+            >
+              {ui[def.reroll.labelKey] ?? def.reroll.labelKey}
+            </Button>
           )}
           <p className="flex gap-2 text-xs text-subtle">
             <Icon name="lock" size={14} className="mt-0.5 shrink-0" />

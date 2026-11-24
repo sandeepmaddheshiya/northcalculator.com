@@ -84,7 +84,7 @@ describe('content gate: definitions', () => {
 
 /** Every ui key a definition refers to (labels, options, help, outputs, rounding). */
 function referencedKeys(def: CalculatorDefinition): string[] {
-  const keys = [def.roundingKey];
+  const keys = [def.roundingKey, ...(def.reroll ? [def.reroll.labelKey] : [])];
   const inputs = def.inputs.flatMap((i) => (i.type === 'list' ? [i, ...i.columns] : [i]));
   for (const i of inputs) {
     if (i.helpKey) keys.push(i.helpKey);

@@ -48,6 +48,8 @@ const CALCULATORS = [
   ['/en/finance/roi-calculator', 'Return on investment'],
   ['/en/finance/savings-goal-calculator', 'Save each year'],
   ['/en/date-time/days-until-calculator', 'Days'],
+  ['/en/math/random-number-generator', 'Your numbers'],
+  ['/en/math/dice-roller', 'Total'],
 ] as const;
 
 const snapshot = JSON.parse(
@@ -203,4 +205,21 @@ test('the result label follows the mode (output labelBy)', async ({ page }) => {
   await expect(page.getByText('Annual salary', { exact: true }).first()).toBeVisible();
   await page.getByLabel('Paid per').selectOption('year');
   await expect(page.getByText('Hourly rate', { exact: true }).first()).toBeVisible();
+});
+
+test('random tools draw on load, reroll on demand and keep the seed in the URL', async ({
+  page,
+}) => {
+  await page.goto('/en/math/dice-roller', { waitUntil: 'networkidle' });
+  await expect(page).toHaveURL(/[?&]s=[0-9a-f]{32}/);
+  const seed1 = new URL(page.url()).searchParams.get('s');
+  await page.getByRole('button', { name: 'Roll', exact: true }).click();
+  await expect.poll(() => new URL(page.url()).searchParams.get('s')).not.toBe(seed1);
+  const shared = page.url();
+  const rolls = await page
+    .getByText(/^\d+(, \d+)+$/)
+    .first()
+    .textContent();
+  await page.goto(shared, { waitUntil: 'networkidle' });
+  await expect(page.getByText(rolls!, { exact: true }).first()).toBeVisible();
 });

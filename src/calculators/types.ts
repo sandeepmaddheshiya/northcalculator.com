@@ -34,6 +34,8 @@ interface InputBase {
   advanced?: boolean;
   /** Consecutive inputs with the same row id render side by side under one legend (ui[legendKey]). */
   row?: { id: string; legendKey: string };
+  /** Kept in state and the URL but not rendered (e.g. a random seed set by the reroll button). */
+  hidden?: boolean;
 }
 
 export interface NumberInput extends InputBase {
@@ -257,4 +259,9 @@ export interface CalculatorDefinition {
     'FinanceApplication' | 'HealthApplication' | 'EducationalApplication' | 'UtilitiesApplication';
   /** How results are rounded, stated on the page (BRIEF §3). */
   roundingKey: string;
+  /**
+   * Random tools: a button (ui[labelKey]) writes a fresh crypto-random seed into this (hidden) text
+   * input. Compute stays pure; the seed in the URL makes a shared result reproducible.
+   */
+  reroll?: { input: string; labelKey: string };
 }

@@ -157,3 +157,9 @@ Short ADRs. Status: Proposed → Accepted (after owner approval) → Superseded.
 
 - **Status:** Accepted 2026-11-24
 - **Decision:** Phase 4 delivers the tooling (`pnpm i18n:status`, key-parity check, `docs/i18n-rollout.md`) but no new live locale. BRIEF §8 forbids publishing machine-translated or unreviewed pages, and no fluent reviewers are available yet. Every locale stays `planned` (not routed) until a reviewer signs it off.
+
+## ADR-027: Random tools use a seeded generator and a reroll action
+
+- **Status:** Accepted 2026-11-24
+- **Context:** The random number generator and dice roller need fresh randomness, but compute functions must stay pure and deterministic (tests, SSR, embeds, history).
+- **Decision:** Randomness enters only as an input. A definition can declare `reroll: { input, labelKey }`; the generic island then shows a button that writes a 128-bit seed from `crypto.getRandomValues` into that input, and draws one on first load when the URL has no seed. The input is `hidden` (kept in state and the URL, not rendered). Compute turns the seed into numbers with xoshiro128** (verified against the reference test vector) and unbiased rejection sampling. A shared link reproduces the exact draw. The tools are not for security purposes and say so.

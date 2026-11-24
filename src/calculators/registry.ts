@@ -45,6 +45,8 @@ import { scientificNotation } from './math/scientific-notation';
 import { roi } from './finance/roi';
 import { savingsGoal } from './finance/savings-goal';
 import { daysUntil } from './date-time/days-until';
+import { randomNumber } from './math/random-number';
+import { dice } from './math/dice';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -72,6 +74,8 @@ export const MODULES: readonly CalculatorModule[] = [
   root,
   logarithm,
   scientificNotation,
+  randomNumber,
+  dice,
   average,
   lcmGcf,
   scientific,
