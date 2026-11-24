@@ -47,6 +47,10 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   calorie: dynamic(() => import('./health/calorie/Island')),
   'heart-rate': dynamic(() => import('./health/heart-rate/Island')),
   'running-pace': dynamic(() => import('./health/running-pace/Island')),
+  exponent: dynamic(() => import('./math/exponent/Island')),
+  root: dynamic(() => import('./math/root/Island')),
+  logarithm: dynamic(() => import('./math/logarithm/Island')),
+  'scientific-notation': dynamic(() => import('./math/scientific-notation/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {

@@ -38,6 +38,10 @@ import { bmr } from './health/bmr';
 import { calorie } from './health/calorie';
 import { heartRate } from './health/heart-rate';
 import { runningPace } from './health/running-pace';
+import { exponent } from './math/exponent';
+import { root } from './math/root';
+import { logarithm } from './math/logarithm';
+import { scientificNotation } from './math/scientific-notation';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -59,6 +63,10 @@ export const MODULES: readonly CalculatorModule[] = [
   fraction,
   ratio,
   rounding,
+  exponent,
+  root,
+  logarithm,
+  scientificNotation,
   average,
   lcmGcf,
   scientific,

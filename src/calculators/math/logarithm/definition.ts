@@ -1,0 +1,85 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+
+export const definition: CalculatorDefinition = {
+  id: 'logarithm',
+  slug: { en: 'log-calculator' },
+  category: 'math',
+  tags: [
+    'logarithm',
+    'log',
+    'natural log',
+    'ln',
+    'log base 2',
+    'common logarithm',
+    'change of base',
+  ],
+  difficulty: 'basic',
+  ymyl: false,
+  schemaCategory: 'EducationalApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    { id: 'x', param: 'x', type: 'number', labelKey: 'x', default: 1000, min: 0, max: 1e300 },
+    {
+      id: 'baseKind',
+      param: 'k',
+      type: 'segmented',
+      labelKey: 'baseKind',
+      default: '10',
+      options: [
+        { value: '10', labelKey: 'baseKind.10' },
+        { value: 'e', labelKey: 'baseKind.e' },
+        { value: '2', labelKey: 'baseKind.2' },
+        { value: 'custom', labelKey: 'baseKind.custom' },
+      ],
+    },
+    {
+      id: 'b',
+      param: 'b',
+      type: 'number',
+      labelKey: 'b',
+      default: 5,
+      min: 0,
+      max: 1e15,
+      showIf: { input: 'baseKind', in: ['custom'] },
+    },
+  ],
+  outputs: [
+    { id: 'result', labelKey: 'out.result', format: 'sig', decimals: 12, primary: true },
+    { id: 'ln', labelKey: 'out.ln', format: 'sig', decimals: 12 },
+    { id: 'log10', labelKey: 'out.log10', format: 'sig', decimals: 12 },
+    { id: 'log2', labelKey: 'out.log2', format: 'sig', decimals: 12 },
+  ],
+  sources: [
+    {
+      title: 'Intermediate Algebra 2e, 10.3 Evaluate and Graph Logarithmic Functions',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/intermediate-algebra-2e/pages/10-3-evaluate-and-graph-logarithmic-functions',
+      accessed: '2026-11-24',
+      locator:
+        'y = log_a x ⇔ x = aʸ; common log base 10, natural log base e; Example 10.21: log₅ 25 = 2, log₉ 3 = 1/2, log₂ (1/16) = −4; Example 10.26: log 10¹⁰ = 10',
+    },
+    {
+      title: 'Intermediate Algebra 2e, 10.4 Use the Properties of Logarithms',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/intermediate-algebra-2e/pages/10-4-use-the-properties-of-logarithms',
+      accessed: '2026-11-24',
+      locator: 'change-of-base formula: log_a M = log_b M ÷ log_b a',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-24', note: 'First published.' }],
+  related: ['exponent', 'scientific-calculator', 'compound-interest'],
+  examples: [
+    { id: 'common', inputs: { x: 1000, baseKind: '10' }, expect: { result: 3 } },
+    { id: 'custom', inputs: { x: 25, baseKind: 'custom', b: 5 }, expect: { result: 2 } },
+    {
+      id: 'doubling',
+      inputs: { x: 2, baseKind: 'custom', b: 1.07 },
+      expect: { result: 10.2447683511 },
+    },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-24',
+};

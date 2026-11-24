@@ -41,6 +41,10 @@ const CALCULATORS = [
   ['/en/health/calorie-calculator', 'Calories per day (kcal)'],
   ['/en/health/heart-rate-zone-calculator', 'Estimated maximum heart rate (bpm)'],
   ['/en/health/pace-calculator', 'Pace'],
+  ['/en/math/exponent-calculator', 'Result'],
+  ['/en/math/square-root-calculator', 'Root'],
+  ['/en/math/log-calculator', 'Logarithm'],
+  ['/en/math/scientific-notation-calculator', 'Scientific notation'],
 ] as const;
 
 const snapshot = JSON.parse(

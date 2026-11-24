@@ -69,7 +69,7 @@ describe('unit-price: properties', () => {
     fc.assert(
       fc.property(fc.array(row, { minLength: 1, maxLength: 10 }), (rows) => {
         const u = run(rows).outputs.unit as number;
-        return rows.every((r) => u <= r.price / r.qty + 5e-5);
+        return rows.every((r) => u <= r.price / r.qty + 5e-5 + 1e-12); // rounded half-up to 4 dp
       }),
     ));
   it('scaling a package (price and quantity together) keeps its unit price', () =>
