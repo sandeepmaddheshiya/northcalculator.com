@@ -37,6 +37,8 @@ const CALCULATORS = [
   ['/en/date-time/business-days-calculator', 'Working days'],
   ['/en/math/percent-difference-calculator', 'Percent difference'],
   ['/en/everyday/fuel-cost-calculator', 'Fuel cost'],
+  ['/en/health/bmr-calculator', 'BMR (kcal per day)'],
+  ['/en/health/calorie-calculator', 'Calories per day (kcal)'],
 ] as const;
 
 const snapshot = JSON.parse(

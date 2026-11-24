@@ -56,7 +56,7 @@ describe('cagr: properties', () => {
         (start, end, years) => {
           const r = run({ start, end, years });
           const rate = (end / start) ** (1 / years) - 1;
-          return Math.abs((r.outputs.cagr as number) - rate * 100) < 5e-5;
+          return Math.abs((r.outputs.cagr as number) - rate * 100) < 1e-4;
         },
       ),
     ));

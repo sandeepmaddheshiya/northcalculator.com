@@ -43,6 +43,8 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   'business-days': dynamic(() => import('./date-time/business-days/Island')),
   'percent-difference': dynamic(() => import('./math/percent-difference/Island')),
   'fuel-cost': dynamic(() => import('./everyday/fuel-cost/Island')),
+  bmr: dynamic(() => import('./health/bmr/Island')),
+  calorie: dynamic(() => import('./health/calorie/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {

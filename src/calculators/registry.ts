@@ -34,6 +34,8 @@ import { weekNumber } from './date-time/week-number';
 import { businessDays } from './date-time/business-days';
 import { percentDifference } from './math/percent-difference';
 import { fuelCost } from './everyday/fuel-cost';
+import { bmr } from './health/bmr';
+import { calorie } from './health/calorie';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -59,6 +61,8 @@ export const MODULES: readonly CalculatorModule[] = [
   lcmGcf,
   scientific,
   bmi,
+  bmr,
+  calorie,
   age,
   dateDifference,
   dateAdd,
