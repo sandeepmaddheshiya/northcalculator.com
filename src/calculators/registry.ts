@@ -79,6 +79,10 @@ import { volume } from './geometry/volume';
 import { combinations } from './statistics/combinations';
 import { zScore } from './statistics/z-score';
 import { probability } from './statistics/probability';
+import { speedDistanceTime } from './physics/speed-distance-time';
+import { kineticEnergy } from './physics/kinetic-energy';
+import { ohmsLaw } from './electronics/ohms-law';
+import { electricityCost } from './electronics/electricity-cost';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -163,6 +167,10 @@ export const MODULES: readonly CalculatorModule[] = [
   combinations,
   zScore,
   probability,
+  speedDistanceTime,
+  kineticEnergy,
+  ohmsLaw,
+  electricityCost,
   fuelCost,
 ];
 

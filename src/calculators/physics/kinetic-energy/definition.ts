@@ -1,0 +1,152 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+
+const showFor = (...modes: string[]) => ({ input: 'find', in: modes }) as const;
+
+export const definition: CalculatorDefinition = {
+  id: 'kinetic-energy',
+  slug: { en: 'kinetic-energy-calculator' },
+  category: 'physics',
+  tags: ['kinetic energy', 'KE = ½mv²', 'joules', 'mass', 'velocity', 'work-energy theorem'],
+  difficulty: 'basic',
+  ymyl: false,
+  schemaCategory: 'EducationalApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'find',
+      param: 'f',
+      type: 'segmented',
+      labelKey: 'find',
+      default: 'energy',
+      options: [
+        { value: 'energy', labelKey: 'find.energy' },
+        { value: 'mass', labelKey: 'find.mass' },
+        { value: 'speed', labelKey: 'find.speed' },
+      ],
+    },
+    {
+      id: 'mass',
+      param: 'm',
+      type: 'number',
+      labelKey: 'mass',
+      default: 80,
+      min: 0,
+      max: 1e30,
+      row: { id: 'mass', legendKey: 'massRow' },
+      showIf: showFor('energy', 'speed'),
+    },
+    {
+      id: 'massUnit',
+      param: 'mu',
+      type: 'select',
+      labelKey: 'massUnit',
+      default: 'kg',
+      options: [
+        { value: 'kg', labelKey: 'unit.kg' },
+        { value: 'g', labelKey: 'unit.g' },
+        { value: 'lb', labelKey: 'unit.lb' },
+      ],
+      row: { id: 'mass', legendKey: 'massRow' },
+      showIf: showFor('energy', 'speed'),
+    },
+    {
+      id: 'speed',
+      param: 'v',
+      type: 'number',
+      labelKey: 'speed',
+      default: 10,
+      min: 0,
+      max: 3e8,
+      row: { id: 'spd', legendKey: 'spdRow' },
+      showIf: showFor('energy', 'mass'),
+    },
+    {
+      id: 'speedUnit',
+      param: 'vu',
+      type: 'select',
+      labelKey: 'speedUnit',
+      default: 'ms',
+      options: [
+        { value: 'ms', labelKey: 'unit.ms' },
+        { value: 'kmh', labelKey: 'unit.kmh' },
+        { value: 'mph', labelKey: 'unit.mph' },
+      ],
+      row: { id: 'spd', legendKey: 'spdRow' },
+      showIf: showFor('energy', 'mass'),
+    },
+    {
+      id: 'energy',
+      param: 'k',
+      type: 'number',
+      labelKey: 'energy',
+      default: 4000,
+      min: 0,
+      max: 1e40,
+      showIf: showFor('mass', 'speed'),
+    },
+  ],
+  outputs: [
+    {
+      id: 'result',
+      labelKey: 'out.result',
+      labelBy: 'find',
+      format: 'sig',
+      decimals: 8,
+      primary: true,
+    },
+    { id: 'kj', labelKey: 'out.kj', format: 'sig', decimals: 8 },
+    { id: 'kg', labelKey: 'out.kg', format: 'sig', decimals: 8 },
+    { id: 'ms', labelKey: 'out.ms', format: 'sig', decimals: 8 },
+    { id: 'kmh', labelKey: 'out.kmh', format: 'sig', decimals: 8 },
+  ],
+  sources: [
+    {
+      title: 'College Physics 2e, 7.2 Kinetic Energy and the Work-Energy Theorem',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/college-physics-2e/pages/7-2-kinetic-energy-and-the-work-energy-theorem',
+      accessed: '2026-11-24',
+      locator:
+        'KE = ½mv² (Eq. 7.12); Example 7.2: 30.0 kg at 0.500 m/s = 3.75 J; Example 7.4: ½mv² = 95.75 J, m = 30.0 kg → v = 2.53 m/s',
+    },
+    {
+      title: 'University Physics Volume 1, 7.2 Kinetic Energy',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/university-physics-volume-1/pages/7-2-kinetic-energy',
+      accessed: '2026-11-24',
+      locator:
+        'K = ½mv² (Eq. 7.6); Example 7.6: 80 kg at 10 m/s = 4.0 kJ, asteroid 4.2 × 10²³ J at 22 km/s → m = 1.7 × 10¹⁵ kg; Example 7.7: 75.0 kg at 1.50 m/s = 84.4 J; Example 7.8: 0.624 kg at 7.5 m/s = 17.6 J',
+    },
+    {
+      title:
+        'NIST Guide to the SI (Special Publication 811), Appendix B.8: Factors for Units Listed Alphabetically',
+      publisher: 'National Institute of Standards and Technology',
+      url: 'https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8',
+      accessed: '2026-11-24',
+      locator: 'pound (avoirdupois) = 0.45359237 kg; mile per hour = 0.44704 m/s',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-24', note: 'First published.' }],
+  related: ['speed-distance-time', 'energy-converter', 'ohms-law'],
+  examples: [
+    {
+      id: 'athlete',
+      inputs: { find: 'energy', mass: 80, massUnit: 'kg', speed: 10, speedUnit: 'ms' },
+      expect: { result: 4000, kj: 4 },
+    },
+    {
+      id: 'package',
+      inputs: { find: 'energy', mass: 30, massUnit: 'kg', speed: 0.5, speedUnit: 'ms' },
+      expect: { result: 3.75 },
+    },
+    {
+      id: 'speed',
+      inputs: { find: 'speed', mass: 30, massUnit: 'kg', energy: 95.75 },
+      expect: { result: 2.52652594155 },
+    },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-24',
+};

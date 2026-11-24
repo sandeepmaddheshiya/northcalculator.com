@@ -82,6 +82,10 @@ const CALCULATORS = [
   ['/en/statistics/permutation-combination-calculator', 'Combinations, nCr'],
   ['/en/statistics/z-score-calculator', 'Z-score'],
   ['/en/statistics/probability-calculator', 'P(A or B)'],
+  ['/en/physics/speed-distance-time-calculator', 'Average speed'],
+  ['/en/physics/kinetic-energy-calculator', 'Kinetic energy (J)'],
+  ['/en/electronics/ohms-law-calculator', 'Resistance (Ω)'],
+  ['/en/electronics/electricity-cost-calculator', 'Total cost'],
 ] as const;
 
 const snapshot = JSON.parse(

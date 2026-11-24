@@ -49,7 +49,9 @@ describe('temperature-converter: properties', () => {
     fc.assert(
       fc.property(
         fc.double({ min: -400, max: 5000, noNaN: true }),
-        (x) => Math.abs(run(run(x, 'f', 'c'), 'c', 'f') - x) < 1e-8,
+        // Each conversion keeps 12 significant digits, so allow a relative error above two
+        // half-steps (about 1.4e-8 near 5000 °F).
+        (x) => Math.abs(run(run(x, 'f', 'c'), 'c', 'f') - x) < 1e-10 * Math.max(1, Math.abs(x)),
       ),
     ));
   it('a 1 °C difference is a 1.8 °F difference', () =>
