@@ -49,6 +49,9 @@ import { randomNumber } from './math/random-number';
 import { dice } from './math/dice';
 import { autoLoan } from './finance/auto-loan';
 import { dti } from './finance/dti';
+import { testScore } from './education/test-score';
+import { cgpa } from './education/cgpa';
+import { billSplit } from './everyday/bill-split';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -100,7 +103,10 @@ export const MODULES: readonly CalculatorModule[] = [
   gpa,
   grade,
   finalGrade,
+  testScore,
+  cgpa,
   tip,
+  billSplit,
   discount,
   unitPrice,
   fuelCost,

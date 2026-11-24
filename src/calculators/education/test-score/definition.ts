@@ -1,0 +1,96 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+
+export const definition: CalculatorDefinition = {
+  id: 'test-score',
+  slug: { en: 'test-score-calculator' },
+  category: 'education',
+  tags: [
+    'test score',
+    'percentage grade',
+    'quiz score',
+    'exam percentage',
+    'points to percent',
+    'teacher grading',
+  ],
+  difficulty: 'basic',
+  ymyl: false,
+  schemaCategory: 'EducationalApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'total',
+      param: 't',
+      type: 'number',
+      labelKey: 'total',
+      default: 40,
+      min: 0,
+      max: 1e6,
+      helpKey: 'total.help',
+    },
+    {
+      id: 'mode',
+      param: 'm',
+      type: 'segmented',
+      labelKey: 'mode',
+      default: 'wrong',
+      options: [
+        { value: 'wrong', labelKey: 'mode.wrong' },
+        { value: 'right', labelKey: 'mode.right' },
+      ],
+    },
+    {
+      id: 'n',
+      param: 'n',
+      type: 'number',
+      labelKey: 'n',
+      labelBy: 'mode',
+      default: 3,
+      min: 0,
+      max: 1e6,
+    },
+  ],
+  outputs: [
+    { id: 'percent', labelKey: 'out.percent', format: 'percent', decimals: 2, primary: true },
+    { id: 'letter', labelKey: 'out.letter', format: 'text' },
+    { id: 'right', labelKey: 'out.right', format: 'number', decimals: 2 },
+    { id: 'wrong', labelKey: 'out.wrong', format: 'number', decimals: 2 },
+    { id: 'perItem', labelKey: 'out.perItem', format: 'number', decimals: 4 },
+  ],
+  sources: [
+    {
+      title: 'Prealgebra 2e, 6.5 Solve Proportions and their Applications',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/prealgebra-2e/pages/6-5-solve-proportions-and-their-applications',
+      accessed: '2026-11-24',
+      locator:
+        'percent proportion amount ÷ base = percent ÷ 100; Example 6.54: 9 is 12.5% of 72; Example 6.51: 36 is 45% of 80',
+    },
+    {
+      title: 'Explain Weighted Grades in Canvas',
+      publisher: 'IT Support Services, California State University, Chico',
+      url: 'https://support.csuchico.edu/TDClient/1984/Portal/KB/ArticleDet?ID=115237',
+      accessed: '2026-11-24',
+      locator: 'points earned ÷ points possible: 50 ÷ 60 = 83.3%',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-24', note: 'First published.' }],
+  related: ['grade', 'final-grade', 'percentage'],
+  examples: [
+    {
+      id: 'wrong',
+      inputs: { total: 40, mode: 'wrong', n: 3 },
+      expect: { percent: 92.5, letter: 'A' },
+    },
+    {
+      id: 'points',
+      inputs: { total: 60, mode: 'right', n: 50 },
+      expect: { percent: 83.3333, letter: 'B' },
+    },
+    { id: 'per', inputs: { total: 25, mode: 'wrong', n: 1 }, expect: { percent: 96, perItem: 4 } },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-24',
+};

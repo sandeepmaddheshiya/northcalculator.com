@@ -52,6 +52,9 @@ const CALCULATORS = [
   ['/en/math/dice-roller', 'Total'],
   ['/en/finance/auto-loan-calculator', 'Monthly payment'],
   ['/en/finance/debt-to-income-ratio-calculator', 'Debt-to-income ratio'],
+  ['/en/education/test-score-calculator', 'Score'],
+  ['/en/education/cgpa-to-percentage-calculator', 'Indicative percentage'],
+  ['/en/everyday/split-bill-calculator', 'Total bill'],
 ] as const;
 
 const snapshot = JSON.parse(
