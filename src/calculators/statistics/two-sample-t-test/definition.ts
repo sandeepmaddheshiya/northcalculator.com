@@ -1,0 +1,161 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+
+const n = (id: string, param: string, def: number, row: string, integer = false) =>
+  ({
+    id,
+    param,
+    type: 'number',
+    labelKey: id,
+    default: def,
+    min: integer ? 2 : id.startsWith('s') ? 0 : -1e15,
+    max: 1e15,
+    allowNegative: !integer && !id.startsWith('s'),
+    integer,
+    row: { id: row, legendKey: `${row}Row` },
+  }) as const;
+
+export const definition: CalculatorDefinition = {
+  id: 'two-sample-t-test',
+  slug: { en: 'two-sample-t-test-calculator' },
+  category: 'statistics',
+  tags: [
+    'two-sample t-test',
+    "Welch's t-test",
+    'pooled t-test',
+    'difference of means',
+    'independent samples',
+    'p-value',
+  ],
+  difficulty: 'advanced',
+  ymyl: false,
+  schemaCategory: 'EducationalApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    n('n1', 'a', 9, 'g1', true),
+    n('m1', 'b', 2, 'g1'),
+    n('s1', 'c', 0.866, 'g1'),
+    n('n2', 'd', 16, 'g2', true),
+    n('m2', 'e', 3.2, 'g2'),
+    n('s2', 'f', 1, 'g2'),
+    {
+      id: 'tail',
+      param: 't',
+      type: 'select',
+      labelKey: 'tail',
+      default: 'two',
+      options: [
+        { value: 'two', labelKey: 'tail.two' },
+        { value: 'right', labelKey: 'tail.right' },
+        { value: 'left', labelKey: 'tail.left' },
+      ],
+    },
+    {
+      id: 'alpha',
+      param: 'a2',
+      type: 'select',
+      labelKey: 'alpha',
+      default: '0.05',
+      options: [
+        { value: '0.1', labelKey: 'alpha.10' },
+        { value: '0.05', labelKey: 'alpha.05' },
+        { value: '0.01', labelKey: 'alpha.01' },
+      ],
+    },
+    {
+      id: 'method',
+      param: 'v',
+      type: 'segmented',
+      labelKey: 'method',
+      default: 'welch',
+      options: [
+        { value: 'welch', labelKey: 'method.welch' },
+        { value: 'pooled', labelKey: 'method.pooled' },
+      ],
+      helpKey: 'method.help',
+    },
+  ],
+  outputs: [
+    { id: 'p', labelKey: 'out.p', format: 'sig', decimals: 6, primary: true },
+    { id: 'decision', labelKey: 'out.decision', format: 'text' },
+    { id: 't', labelKey: 'out.t', format: 'sig', decimals: 8 },
+    { id: 'df', labelKey: 'out.df', format: 'sig', decimals: 6 },
+    { id: 'critical', labelKey: 'out.critical', format: 'sig', decimals: 6 },
+    { id: 'diff', labelKey: 'out.diff', format: 'sig', decimals: 8 },
+    { id: 'se', labelKey: 'out.se', format: 'sig', decimals: 8 },
+    { id: 'sp', labelKey: 'out.sp', format: 'sig', decimals: 8 },
+  ],
+  sources: [
+    {
+      title:
+        'Introductory Statistics 2e, 10.1 Two Population Means with Unknown Standard Deviations',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/introductory-statistics-2e/pages/10-1-two-population-means-with-unknown-standard-deviations',
+      accessed: '2026-11-25',
+      locator:
+        'SE = √(s₁²/n₁ + s₂²/n₂), Aspin–Welch df, variances not pooled; Example 10.1: n 9, x̄ 2, s 0.866 vs n 16, x̄ 3.2, s 1.00, two-tailed → df ≈ 18.8462, t = −3.14, p = 0.0054, reject at 5%; Example 10.2: n 11, x̄ 4, s 1.5 vs n 9, x̄ 3.5, s 1, right-tailed → p = 0.1928',
+    },
+    {
+      title:
+        'NIST/SEMATECH e-Handbook of Statistical Methods, 1.3.5.3 Two-Sample t-Test for Equal Means',
+      publisher: 'National Institute of Standards and Technology',
+      url: 'https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm',
+      accessed: '2026-11-25',
+      locator:
+        'Unequal- and equal-variance T, pooled sp, Welch–Satterthwaite ν; AUTO83B: n 249, mean 20.14458, s 6.41470 vs n 79, mean 30.48101, s 6.10771 → sp 6.34260, T = −12.62059, ν = 326, t(0.975, 326) = 1.9673, t(0.95, 326) = 1.6495, reject',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-25', note: 'First published.' }],
+  related: ['t-test', 'confidence-interval', 'standard-deviation'],
+  examples: [
+    {
+      id: 'sports',
+      inputs: {
+        n1: 9,
+        m1: 2,
+        s1: 0.866,
+        n2: 16,
+        m2: 3.2,
+        s2: 1,
+        tail: 'two',
+        alpha: '0.05',
+        method: 'welch',
+      },
+      expect: { t: -3.14239029229 },
+    },
+    {
+      id: 'colleges',
+      inputs: {
+        n1: 11,
+        m1: 4,
+        s1: 1.5,
+        n2: 9,
+        m2: 3.5,
+        s2: 1,
+        tail: 'right',
+        alpha: '0.01',
+        method: 'welch',
+      },
+      expect: { p: 0.192818543419 },
+    },
+    {
+      id: 'mpg',
+      inputs: {
+        n1: 249,
+        m1: 20.14458,
+        s1: 6.4147,
+        n2: 79,
+        m2: 30.48101,
+        s2: 6.10771,
+        tail: 'two',
+        alpha: '0.05',
+        method: 'pooled',
+      },
+      expect: { df: 326 },
+    },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-25',
+};

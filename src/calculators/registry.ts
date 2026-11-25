@@ -144,6 +144,9 @@ import { impedance } from './electronics/impedance';
 import { tTest } from './statistics/t-test';
 import { orbit } from './physics/orbit';
 import { buffer } from './chemistry/buffer';
+import { twoSampleTTest } from './statistics/two-sample-t-test';
+import { collision } from './physics/collision';
+import { gibbs } from './chemistry/gibbs';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -293,6 +296,9 @@ export const MODULES: readonly CalculatorModule[] = [
   tTest,
   orbit,
   buffer,
+  twoSampleTTest,
+  collision,
+  gibbs,
   fuelCost,
 ];
 

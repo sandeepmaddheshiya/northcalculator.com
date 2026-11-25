@@ -153,6 +153,9 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   't-test': dynamic(() => import('./statistics/t-test/Island')),
   orbit: dynamic(() => import('./physics/orbit/Island')),
   buffer: dynamic(() => import('./chemistry/buffer/Island')),
+  'two-sample-t-test': dynamic(() => import('./statistics/two-sample-t-test/Island')),
+  collision: dynamic(() => import('./physics/collision/Island')),
+  gibbs: dynamic(() => import('./chemistry/gibbs/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {

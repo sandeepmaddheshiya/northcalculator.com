@@ -147,6 +147,9 @@ const CALCULATORS = [
   ['/en/statistics/t-test-calculator', 'Degrees of freedom'],
   ['/en/physics/orbital-period-calculator', 'Orbital speed (km/h)'],
   ['/en/chemistry/buffer-ph-calculator', 'Base-to-acid ratio'],
+  ['/en/statistics/two-sample-t-test-calculator', 'Standard error of the difference'],
+  ['/en/physics/collision-calculator', 'Total momentum (kg·m/s)'],
+  ['/en/chemistry/gibbs-free-energy-calculator', 'Entropy term TΔS (kJ/mol)'],
 ] as const;
 
 const snapshot = JSON.parse(
