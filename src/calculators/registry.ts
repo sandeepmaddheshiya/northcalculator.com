@@ -141,6 +141,9 @@ import { reactance } from './electronics/reactance';
 import { empiricalFormula } from './chemistry/empirical-formula';
 import { refraction } from './physics/refraction';
 import { impedance } from './electronics/impedance';
+import { tTest } from './statistics/t-test';
+import { orbit } from './physics/orbit';
+import { buffer } from './chemistry/buffer';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -287,6 +290,9 @@ export const MODULES: readonly CalculatorModule[] = [
   empiricalFormula,
   refraction,
   impedance,
+  tTest,
+  orbit,
+  buffer,
   fuelCost,
 ];
 

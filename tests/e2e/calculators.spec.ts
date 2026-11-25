@@ -144,6 +144,9 @@ const CALCULATORS = [
   ['/en/chemistry/empirical-formula-calculator', 'Moles and mole ratio'],
   ['/en/physics/snells-law-calculator', 'Speed of light in the second material (m/s)'],
   ['/en/electronics/rlc-impedance-calculator', 'Power factor (cos φ)'],
+  ['/en/statistics/t-test-calculator', 'Degrees of freedom'],
+  ['/en/physics/orbital-period-calculator', 'Orbital speed (km/h)'],
+  ['/en/chemistry/buffer-ph-calculator', 'Base-to-acid ratio'],
 ] as const;
 
 const snapshot = JSON.parse(
