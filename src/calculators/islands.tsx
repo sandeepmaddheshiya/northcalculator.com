@@ -130,6 +130,10 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   'voltage-divider': dynamic(() => import('./electronics/voltage-divider/Island')),
   'arc-sector': dynamic(() => import('./geometry/arc-sector/Island')),
   'surface-area': dynamic(() => import('./geometry/surface-area/Island')),
+  'combined-gas': dynamic(() => import('./chemistry/combined-gas/Island')),
+  'linear-system': dynamic(() => import('./math/linear-system/Island')),
+  doppler: dynamic(() => import('./physics/doppler/Island')),
+  buoyancy: dynamic(() => import('./physics/buoyancy/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {

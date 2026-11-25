@@ -121,6 +121,10 @@ import { capacitor } from './electronics/capacitor';
 import { voltageDivider } from './electronics/voltage-divider';
 import { arcSector } from './geometry/arc-sector';
 import { surfaceArea } from './geometry/surface-area';
+import { combinedGas } from './chemistry/combined-gas';
+import { linearSystem } from './math/linear-system';
+import { doppler } from './physics/doppler';
+import { buoyancy } from './physics/buoyancy';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -247,6 +251,10 @@ export const MODULES: readonly CalculatorModule[] = [
   voltageDivider,
   arcSector,
   surfaceArea,
+  combinedGas,
+  linearSystem,
+  doppler,
+  buoyancy,
   fuelCost,
 ];
 

@@ -124,6 +124,10 @@ const CALCULATORS = [
   ['/en/electronics/voltage-divider-calculator', 'Voltage across R1 (V)'],
   ['/en/geometry/arc-length-sector-area-calculator', 'Chord length'],
   ['/en/geometry/surface-area-calculator', 'Volume (cubic units)'],
+  ['/en/chemistry/combined-gas-law-calculator', 'PV ÷ T (stays constant)'],
+  ['/en/math/system-of-equations-calculator', 'Determinant D'],
+  ['/en/physics/doppler-effect-calculator', 'Frequency ratio'],
+  ['/en/physics/buoyancy-calculator', 'Mass of fluid displaced (kg)'],
 ] as const;
 
 const snapshot = JSON.parse(
