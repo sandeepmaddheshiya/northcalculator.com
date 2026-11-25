@@ -154,6 +154,9 @@ const CALCULATORS = [
   ['/en/physics/heat-conduction-calculator', 'Heat flux (W/m²)'],
   ['/en/chemistry/arrhenius-equation-calculator', 'Rate ratio k₂ ÷ k₁'],
   ['/en/electronics/transformer-calculator', 'Turns ratio N_s ÷ N_p'],
+  ['/en/statistics/chi-square-calculator', 'Observed and expected counts'],
+  ['/en/physics/flow-rate-calculator', 'Pipe cross-section (cm²)'],
+  ['/en/chemistry/freezing-point-depression-calculator', 'Particle molality i × m (mol/kg)'],
 ] as const;
 
 const snapshot = JSON.parse(

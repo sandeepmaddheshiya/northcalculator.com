@@ -151,6 +151,9 @@ import { stairs } from './construction/stairs';
 import { conduction } from './physics/conduction';
 import { arrhenius } from './chemistry/arrhenius';
 import { transformer } from './electronics/transformer';
+import { chiSquare } from './statistics/chi-square';
+import { flowRate } from './physics/flow-rate';
+import { colligative } from './chemistry/colligative';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -307,6 +310,9 @@ export const MODULES: readonly CalculatorModule[] = [
   conduction,
   arrhenius,
   transformer,
+  chiSquare,
+  flowRate,
+  colligative,
   fuelCost,
 ];
 

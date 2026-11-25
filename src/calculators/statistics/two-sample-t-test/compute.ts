@@ -1,7 +1,6 @@
 import type { ComputeFn, ComputeResult } from '@/calculators/types';
 import { clean } from '@/engine/money';
-import { tInv } from '@/engine/stats';
-import { pValue, type Tail } from '@/calculators/statistics/t-test/compute';
+import { pValue, tInv, type Tail } from '@/engine/stats';
 
 /**
  * Two-sample t-test for independent means (NIST/SEMATECH e-Handbook §1.3.5.3; OpenStax

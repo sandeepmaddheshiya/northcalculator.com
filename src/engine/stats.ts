@@ -146,3 +146,18 @@ export function tInv(p: number, nu: number): number {
   }
   return (lo + hi) / 2;
 }
+
+/** Alternative hypothesis for a t-test. */
+export type Tail = 'two' | 'right' | 'left';
+
+/** P(T > t) for Student's t with ν degrees of freedom. */
+export function upperTail(t: number, nu: number): number {
+  const half = 0.5 * betaInc(nu / (nu + t * t), nu / 2, 0.5);
+  return t >= 0 ? half : 1 - half;
+}
+
+export function pValue(t: number, nu: number, tail: Tail): number {
+  if (tail === 'right') return upperTail(t, nu);
+  if (tail === 'left') return upperTail(-t, nu);
+  return Math.min(1, 2 * upperTail(Math.abs(t), nu));
+}

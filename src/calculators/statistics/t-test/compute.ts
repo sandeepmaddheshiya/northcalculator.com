@@ -1,6 +1,6 @@
 import type { ComputeFn, ComputeResult } from '@/calculators/types';
 import { clean } from '@/engine/money';
-import { betaInc, tInv } from '@/engine/stats';
+import { pValue, tInv, type Tail } from '@/engine/stats';
 import { parseList, sum } from '@/calculators/math/average/compute';
 
 /**
@@ -10,19 +10,7 @@ import { parseList, sum } from '@/calculators/math/average/compute';
  * their precision. Critical values are t quantiles (engine/stats tInv). Assumes a random sample
  * from a roughly normal population, or a large sample.
  */
-export type Tail = 'two' | 'right' | 'left';
-
-/** P(T > t) for Student's t with ν degrees of freedom. */
-export function upperTail(t: number, nu: number): number {
-  const half = 0.5 * betaInc(nu / (nu + t * t), nu / 2, 0.5);
-  return t >= 0 ? half : 1 - half;
-}
-
-export function pValue(t: number, nu: number, tail: Tail): number {
-  if (tail === 'right') return upperTail(t, nu);
-  if (tail === 'left') return upperTail(-t, nu);
-  return Math.min(1, 2 * upperTail(Math.abs(t), nu));
-}
+export { pValue, upperTail, type Tail } from '@/engine/stats';
 
 export const compute: ComputeFn = (inputs, ctx) => {
   const { fmt } = ctx;
