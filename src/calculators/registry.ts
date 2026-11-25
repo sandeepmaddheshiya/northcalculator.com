@@ -125,6 +125,10 @@ import { combinedGas } from './chemistry/combined-gas';
 import { linearSystem } from './math/linear-system';
 import { doppler } from './physics/doppler';
 import { buoyancy } from './physics/buoyancy';
+import { primeFactorization } from './math/prime-factorization';
+import { percentile } from './statistics/percentile';
+import { coulomb } from './electronics/coulomb';
+import { torque } from './physics/torque';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -255,6 +259,10 @@ export const MODULES: readonly CalculatorModule[] = [
   linearSystem,
   doppler,
   buoyancy,
+  primeFactorization,
+  percentile,
+  coulomb,
+  torque,
   fuelCost,
 ];
 

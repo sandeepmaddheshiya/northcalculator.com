@@ -128,6 +128,10 @@ const CALCULATORS = [
   ['/en/math/system-of-equations-calculator', 'Determinant D'],
   ['/en/physics/doppler-effect-calculator', 'Frequency ratio'],
   ['/en/physics/buoyancy-calculator', 'Mass of fluid displaced (kg)'],
+  ['/en/math/prime-factorization-calculator', 'Number of divisors'],
+  ['/en/statistics/percentile-calculator', 'Interquartile range (IQR)'],
+  ['/en/electronics/coulombs-law-calculator', 'Field of charge 1 at that distance (N/C)'],
+  ['/en/physics/torque-calculator', 'Torque (lbf·ft)'],
 ] as const;
 
 const snapshot = JSON.parse(

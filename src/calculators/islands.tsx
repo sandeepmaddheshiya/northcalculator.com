@@ -134,6 +134,10 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   'linear-system': dynamic(() => import('./math/linear-system/Island')),
   doppler: dynamic(() => import('./physics/doppler/Island')),
   buoyancy: dynamic(() => import('./physics/buoyancy/Island')),
+  'prime-factorization': dynamic(() => import('./math/prime-factorization/Island')),
+  percentile: dynamic(() => import('./statistics/percentile/Island')),
+  coulomb: dynamic(() => import('./electronics/coulomb/Island')),
+  torque: dynamic(() => import('./physics/torque/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {

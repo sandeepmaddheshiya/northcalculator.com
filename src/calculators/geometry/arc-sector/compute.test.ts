@@ -44,7 +44,7 @@ describe('arc-sector: behaviour', () => {
 });
 
 describe('arc-sector: properties', () => {
-  it('sector = ½ r × arc, segment ≤ sector, degrees and radians agree', () =>
+  it('sector = ½ r × arc; segment ≤ sector up to 180° and ≥ beyond (it then includes the triangle); degrees and radians agree', () =>
     fc.assert(
       fc.property(
         fc.double({ min: 0.01, max: 1e4, noNaN: true }),
@@ -54,7 +54,9 @@ describe('arc-sector: properties', () => {
           const rad = out(r, (d * Math.PI) / 180, 'rad');
           return (
             Math.abs(o.sector! - 0.5 * r * o.arc!) <= 1e-9 * (o.sector! + 1e-12) &&
-            o.segment! <= o.sector! * (1 + 1e-12) + 1e-12 &&
+            (d <= 180
+              ? o.segment! <= o.sector! * (1 + 1e-12) + 1e-12
+              : o.segment! >= o.sector! * (1 - 1e-12) - 1e-12) &&
             Math.abs(rad.arc! - o.arc!) <= 1e-9 * (o.arc! + 1e-12)
           );
         },
