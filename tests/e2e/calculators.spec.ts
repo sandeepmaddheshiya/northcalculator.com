@@ -150,6 +150,7 @@ const CALCULATORS = [
   ['/en/statistics/two-sample-t-test-calculator', 'Standard error of the difference'],
   ['/en/physics/collision-calculator', 'Total momentum (kg·m/s)'],
   ['/en/chemistry/gibbs-free-energy-calculator', 'Entropy term TΔS (kJ/mol)'],
+  ['/en/construction/stair-calculator', 'Number of treads'],
 ] as const;
 
 const snapshot = JSON.parse(

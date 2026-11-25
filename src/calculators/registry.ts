@@ -147,6 +147,7 @@ import { buffer } from './chemistry/buffer';
 import { twoSampleTTest } from './statistics/two-sample-t-test';
 import { collision } from './physics/collision';
 import { gibbs } from './chemistry/gibbs';
+import { stairs } from './construction/stairs';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -299,6 +300,7 @@ export const MODULES: readonly CalculatorModule[] = [
   twoSampleTTest,
   collision,
   gibbs,
+  stairs,
   fuelCost,
 ];
 
