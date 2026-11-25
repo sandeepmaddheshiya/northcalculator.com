@@ -117,6 +117,10 @@ import { poisson } from './statistics/poisson';
 import { pendulum } from './physics/pendulum';
 import { centripetal } from './physics/centripetal';
 import { thinLens } from './physics/thin-lens';
+import { capacitor } from './electronics/capacitor';
+import { voltageDivider } from './electronics/voltage-divider';
+import { arcSector } from './geometry/arc-sector';
+import { surfaceArea } from './geometry/surface-area';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -239,6 +243,10 @@ export const MODULES: readonly CalculatorModule[] = [
   pendulum,
   centripetal,
   thinLens,
+  capacitor,
+  voltageDivider,
+  arcSector,
+  surfaceArea,
   fuelCost,
 ];
 

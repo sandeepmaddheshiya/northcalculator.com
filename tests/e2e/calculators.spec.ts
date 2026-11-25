@@ -120,6 +120,10 @@ const CALCULATORS = [
   ['/en/physics/pendulum-period-calculator', 'Full swings per minute'],
   ['/en/physics/centripetal-force-calculator', 'Centripetal force (N)'],
   ['/en/physics/thin-lens-equation-calculator', 'Lens power (diopters)'],
+  ['/en/electronics/capacitor-energy-calculator', 'Charge Q (C)'],
+  ['/en/electronics/voltage-divider-calculator', 'Voltage across R1 (V)'],
+  ['/en/geometry/arc-length-sector-area-calculator', 'Chord length'],
+  ['/en/geometry/surface-area-calculator', 'Volume (cubic units)'],
 ] as const;
 
 const snapshot = JSON.parse(
