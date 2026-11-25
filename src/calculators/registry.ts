@@ -113,6 +113,10 @@ import { binomial } from './statistics/binomial';
 import { specificHeat } from './physics/specific-heat';
 import { halfLife } from './chemistry/half-life';
 import { gravitation } from './physics/gravitation';
+import { poisson } from './statistics/poisson';
+import { pendulum } from './physics/pendulum';
+import { centripetal } from './physics/centripetal';
+import { thinLens } from './physics/thin-lens';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -231,6 +235,10 @@ export const MODULES: readonly CalculatorModule[] = [
   specificHeat,
   halfLife,
   gravitation,
+  poisson,
+  pendulum,
+  centripetal,
+  thinLens,
   fuelCost,
 ];
 

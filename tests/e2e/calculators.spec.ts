@@ -116,6 +116,10 @@ const CALCULATORS = [
   ['/en/physics/specific-heat-calculator', 'Heat (kJ)'],
   ['/en/chemistry/half-life-calculator', 'Number of half-lives'],
   ['/en/physics/gravitational-force-calculator', 'Gravitational force (N)'],
+  ['/en/statistics/poisson-distribution-calculator', 'Standard deviation √μ'],
+  ['/en/physics/pendulum-period-calculator', 'Full swings per minute'],
+  ['/en/physics/centripetal-force-calculator', 'Centripetal force (N)'],
+  ['/en/physics/thin-lens-equation-calculator', 'Lens power (diopters)'],
 ] as const;
 
 const snapshot = JSON.parse(

@@ -1,0 +1,78 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+
+export const definition: CalculatorDefinition = {
+  id: 'poisson',
+  slug: { en: 'poisson-distribution-calculator' },
+  category: 'statistics',
+  tags: [
+    'Poisson distribution',
+    'Poisson probability',
+    'events per interval',
+    'rate',
+    'cumulative Poisson',
+    'λ',
+  ],
+  difficulty: 'basic',
+  ymyl: false,
+  schemaCategory: 'EducationalApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'mean',
+      param: 'm',
+      type: 'number',
+      labelKey: 'mean',
+      default: 0.75,
+      min: 0,
+      max: 1e6,
+      helpKey: 'mean.help',
+    },
+    {
+      id: 'x',
+      param: 'x',
+      type: 'number',
+      labelKey: 'x',
+      default: 1,
+      min: 0,
+      max: 1e7,
+      integer: true,
+    },
+  ],
+  outputs: [
+    { id: 'eq', labelKey: 'out.eq', format: 'sig', decimals: 10, primary: true },
+    { id: 'le', labelKey: 'out.le', format: 'sig', decimals: 10 },
+    { id: 'lt', labelKey: 'out.lt', format: 'sig', decimals: 10 },
+    { id: 'ge', labelKey: 'out.ge', format: 'sig', decimals: 10 },
+    { id: 'gt', labelKey: 'out.gt', format: 'sig', decimals: 10 },
+    { id: 'sd', labelKey: 'out.sd', format: 'sig', decimals: 10 },
+  ],
+  sources: [
+    {
+      title: 'Introductory Statistics 2e, 4.6 Poisson Distribution',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/introductory-statistics-2e/pages/4-6-poisson-distribution',
+      accessed: '2026-11-25',
+      locator:
+        'P(x) = μˣe^(−μ) ÷ x!, σ = √μ; Example 4.29: μ = 0.75, P(x > 1) = 0.1734; Example 4.30: μ = 147, P(x = 160) ≈ 0.0180, P(x ≤ 160) ≈ 0.8666, σ ≈ 12.1244; Example 4.31: μ ≈ 1.7292, P(x = 2) ≈ 0.2653, P(x > 2) = 0.2505',
+    },
+    {
+      title: 'NIST/SEMATECH e-Handbook of Statistical Methods, 1.3.6.6.19 Poisson Distribution',
+      publisher: 'National Institute of Standards and Technology',
+      url: 'https://www.itl.nist.gov/div898/handbook/eda/section3/eda366j.htm',
+      accessed: '2026-11-25',
+      locator: 'p(x; λ) = e^(−λ)λˣ ÷ x!; F(x; λ) = Σ for i ≤ x; mean λ, standard deviation √λ',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-25', note: 'First published.' }],
+  related: ['binomial', 'probability', 'z-score'],
+  examples: [
+    { id: 'calls', inputs: { mean: 0.75, x: 1 }, expect: { gt: 0.173358532703 } },
+    { id: 'email', inputs: { mean: 147, x: 160 }, expect: { eq: 0.0180313597923 } },
+    { id: 'texts', inputs: { mean: 1.72916666667, x: 2 }, expect: { eq: 0.265262691996 } },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-25',
+};

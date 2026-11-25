@@ -122,6 +122,10 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   'specific-heat': dynamic(() => import('./physics/specific-heat/Island')),
   'half-life': dynamic(() => import('./chemistry/half-life/Island')),
   gravitation: dynamic(() => import('./physics/gravitation/Island')),
+  poisson: dynamic(() => import('./statistics/poisson/Island')),
+  pendulum: dynamic(() => import('./physics/pendulum/Island')),
+  centripetal: dynamic(() => import('./physics/centripetal/Island')),
+  'thin-lens': dynamic(() => import('./physics/thin-lens/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {
