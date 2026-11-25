@@ -151,6 +151,9 @@ const CALCULATORS = [
   ['/en/physics/collision-calculator', 'Total momentum (kg·m/s)'],
   ['/en/chemistry/gibbs-free-energy-calculator', 'Entropy term TΔS (kJ/mol)'],
   ['/en/construction/stair-calculator', 'Number of treads'],
+  ['/en/physics/heat-conduction-calculator', 'Heat flux (W/m²)'],
+  ['/en/chemistry/arrhenius-equation-calculator', 'Rate ratio k₂ ÷ k₁'],
+  ['/en/electronics/transformer-calculator', 'Turns ratio N_s ÷ N_p'],
 ] as const;
 
 const snapshot = JSON.parse(

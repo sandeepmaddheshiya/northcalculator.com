@@ -148,6 +148,9 @@ import { twoSampleTTest } from './statistics/two-sample-t-test';
 import { collision } from './physics/collision';
 import { gibbs } from './chemistry/gibbs';
 import { stairs } from './construction/stairs';
+import { conduction } from './physics/conduction';
+import { arrhenius } from './chemistry/arrhenius';
+import { transformer } from './electronics/transformer';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -301,6 +304,9 @@ export const MODULES: readonly CalculatorModule[] = [
   collision,
   gibbs,
   stairs,
+  conduction,
+  arrhenius,
+  transformer,
   fuelCost,
 ];
 
