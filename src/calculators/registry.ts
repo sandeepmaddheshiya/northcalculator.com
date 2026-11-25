@@ -154,6 +154,9 @@ import { transformer } from './electronics/transformer';
 import { chiSquare } from './statistics/chi-square';
 import { flowRate } from './physics/flow-rate';
 import { colligative } from './chemistry/colligative';
+import { bernoulli } from './physics/bernoulli';
+import { nernst } from './chemistry/nernst';
+import { wireResistance } from './electronics/wire-resistance';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -313,6 +316,9 @@ export const MODULES: readonly CalculatorModule[] = [
   chiSquare,
   flowRate,
   colligative,
+  bernoulli,
+  nernst,
+  wireResistance,
   fuelCost,
 ];
 

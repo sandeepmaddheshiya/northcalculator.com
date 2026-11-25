@@ -157,6 +157,9 @@ const CALCULATORS = [
   ['/en/statistics/chi-square-calculator', 'Observed and expected counts'],
   ['/en/physics/flow-rate-calculator', 'Pipe cross-section (cm²)'],
   ['/en/chemistry/freezing-point-depression-calculator', 'Particle molality i × m (mol/kg)'],
+  ['/en/physics/bernoulli-equation-calculator', 'Pressure drop P₁ − P₂ (kPa)'],
+  ['/en/chemistry/nernst-equation-calculator', 'log₁₀ K'],
+  ['/en/electronics/wire-resistance-calculator', 'Resistance per metre (Ω/m)'],
 ] as const;
 
 const snapshot = JSON.parse(
