@@ -108,6 +108,10 @@ const CALCULATORS = [
   ['/en/electronics/rc-time-constant-calculator', 'Time constant τ (s)'],
   ['/en/physics/work-and-power-calculator', 'Work (kJ)'],
   ['/en/physics/wavelength-frequency-calculator', 'Period (s)'],
+  ['/en/finance/vat-calculator', 'Price including VAT'],
+  ['/en/physics/momentum-impulse-calculator', 'Final momentum (kg·m/s)'],
+  ['/en/physics/pressure-calculator', 'Pressure (kPa)'],
+  ['/en/physics/hookes-law-spring-calculator', 'Stored energy (J)'],
 ] as const;
 
 const snapshot = JSON.parse(

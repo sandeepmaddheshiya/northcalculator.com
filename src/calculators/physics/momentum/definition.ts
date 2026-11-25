@@ -1,0 +1,86 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+
+export const definition: CalculatorDefinition = {
+  id: 'momentum',
+  slug: { en: 'momentum-impulse-calculator' },
+  category: 'physics',
+  tags: ['momentum', 'p = mv', 'impulse', 'average force', 'collision', 'kg·m/s'],
+  difficulty: 'basic',
+  ymyl: false,
+  schemaCategory: 'EducationalApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    { id: 'mass', param: 'm', type: 'number', labelKey: 'mass', default: 0.057, min: 0, max: 1e30 },
+    {
+      id: 'v1',
+      param: 'u',
+      type: 'number',
+      labelKey: 'v1',
+      default: 0,
+      allowNegative: true,
+      min: -3e8,
+      max: 3e8,
+    },
+    {
+      id: 'v2',
+      param: 'v',
+      type: 'number',
+      labelKey: 'v2',
+      default: 58,
+      allowNegative: true,
+      min: -3e8,
+      max: 3e8,
+    },
+    {
+      id: 'time',
+      param: 't',
+      type: 'number',
+      labelKey: 'time',
+      default: 0.005,
+      min: 0,
+      max: 1e9,
+      helpKey: 'time.help',
+    },
+  ],
+  outputs: [
+    { id: 'impulse', labelKey: 'out.impulse', format: 'sig', decimals: 8, primary: true },
+    { id: 'p1', labelKey: 'out.p1', format: 'sig', decimals: 8 },
+    { id: 'p2', labelKey: 'out.p2', format: 'sig', decimals: 8 },
+    { id: 'force', labelKey: 'out.force', format: 'sig', decimals: 8 },
+    { id: 'gs', labelKey: 'out.gs', format: 'sig', decimals: 6 },
+  ],
+  sources: [
+    {
+      title: 'College Physics 2e, 8.1 Linear Momentum and Force and 8.2 Impulse',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/college-physics-2e/pages/8-1-linear-momentum-and-force',
+      accessed: '2026-11-25',
+      locator:
+        'p = mv (Eq. 8.2), F_net = Δp/Δt (Eq. 8.8), impulse F_net·Δt = Δp (§8.2, Eq. 8.18); Example 8.1: 110 kg at 8.00 m/s → 880 kg·m/s, 0.410 kg at 25.0 m/s → 10.3; Example 8.2: 0.057 kg to 58 m/s in 5.0 ms → 3.3 kg·m/s, 660 N',
+    },
+    {
+      title: 'University Physics Volume 1, 9.1 Linear Momentum and 9.2 Impulse and Collisions',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/university-physics-volume-1/pages/9-2-impulse-and-collisions',
+      accessed: '2026-11-25',
+      locator:
+        'J = F_ave·Δt = Δp (Eq. 9.5–9.7); 1400 kg at 15 m/s → 21,000 kg·m/s; Example 9.2: 860 N driver from 27 m/s in 2.5 s → 948 N, in 0.20 s → 11,853 N; Example 9.3: 2 × 10⁹ kg to 7.5 × 10⁷ m/s in 60 s → 2.5 × 10¹⁵ N',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-25', note: 'First published.' }],
+  related: ['force', 'kinetic-energy', 'speed-distance-time'],
+  examples: [
+    {
+      id: 'serve',
+      inputs: { mass: 0.057, v1: 0, v2: 58, time: 0.005 },
+      expect: { impulse: 3.306, force: 661.2 },
+    },
+    { id: 'player', inputs: { mass: 110, v1: 0, v2: 8, time: 0 }, expect: { p2: 880 } },
+    { id: 'airbag', inputs: { mass: 87.8, v1: 27, v2: 0, time: 2.5 }, expect: { force: -948.24 } },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-25',
+};

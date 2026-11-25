@@ -114,6 +114,10 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   'rc-time-constant': dynamic(() => import('./electronics/rc-time-constant/Island')),
   'work-power': dynamic(() => import('./physics/work-power/Island')),
   wave: dynamic(() => import('./physics/wave/Island')),
+  vat: dynamic(() => import('./finance/vat/Island')),
+  momentum: dynamic(() => import('./physics/momentum/Island')),
+  pressure: dynamic(() => import('./physics/pressure/Island')),
+  'hookes-law': dynamic(() => import('./physics/hookes-law/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {

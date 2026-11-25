@@ -105,6 +105,10 @@ import { boardFeet } from './construction/board-feet';
 import { rcTimeConstant } from './electronics/rc-time-constant';
 import { workPower } from './physics/work-power';
 import { wave } from './physics/wave';
+import { vat } from './finance/vat';
+import { momentum } from './physics/momentum';
+import { pressure } from './physics/pressure';
+import { hookesLaw } from './physics/hookes-law';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -215,6 +219,10 @@ export const MODULES: readonly CalculatorModule[] = [
   rcTimeConstant,
   workPower,
   wave,
+  vat,
+  momentum,
+  pressure,
+  hookesLaw,
   fuelCost,
 ];
 
