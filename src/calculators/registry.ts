@@ -132,6 +132,9 @@ import { torque } from './physics/torque';
 import { npv } from './finance/npv';
 import { expectedValue } from './statistics/expected-value';
 import { molarity } from './chemistry/molarity';
+import { standardDeviation } from './statistics/standard-deviation';
+import { depreciation } from './finance/depreciation';
+import { potentialEnergy } from './physics/potential-energy';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -269,6 +272,9 @@ export const MODULES: readonly CalculatorModule[] = [
   npv,
   expectedValue,
   molarity,
+  standardDeviation,
+  depreciation,
+  potentialEnergy,
   fuelCost,
 ];
 

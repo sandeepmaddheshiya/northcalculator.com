@@ -25,7 +25,7 @@ export function parseList(raw: string, locale: string): { values: number[]; bad:
   return { values, bad };
 }
 
-function sum(xs: number[]): number {
+export function sum(xs: number[]): number {
   let s = 0;
   let c = 0;
   for (const x of xs) {

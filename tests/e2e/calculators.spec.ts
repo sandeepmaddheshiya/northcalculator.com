@@ -135,6 +135,9 @@ const CALCULATORS = [
   ['/en/finance/npv-irr-calculator', 'Profitability index'],
   ['/en/statistics/expected-value-calculator', 'Sum of probabilities'],
   ['/en/chemistry/molarity-calculator', 'Moles of solute'],
+  ['/en/statistics/standard-deviation-calculator', 'Sum of squared deviations'],
+  ['/en/finance/depreciation-calculator', 'Depreciation schedule'],
+  ['/en/physics/potential-energy-calculator', 'Speed after falling that height from rest (m/s)'],
 ] as const;
 
 const snapshot = JSON.parse(
