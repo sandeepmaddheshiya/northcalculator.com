@@ -30,6 +30,7 @@ export const definition: CalculatorDefinition = {
       allowNegative: true,
       min: -3e8,
       max: 3e8,
+      helpKey: 'v2.help',
     },
     {
       id: 'time',
