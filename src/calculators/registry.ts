@@ -135,6 +135,9 @@ import { molarity } from './chemistry/molarity';
 import { standardDeviation } from './statistics/standard-deviation';
 import { depreciation } from './finance/depreciation';
 import { potentialEnergy } from './physics/potential-energy';
+import { percentComposition } from './chemistry/percent-composition';
+import { acceleration } from './physics/acceleration';
+import { reactance } from './electronics/reactance';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -275,6 +278,9 @@ export const MODULES: readonly CalculatorModule[] = [
   standardDeviation,
   depreciation,
   potentialEnergy,
+  percentComposition,
+  acceleration,
+  reactance,
   fuelCost,
 ];
 

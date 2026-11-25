@@ -138,6 +138,9 @@ const CALCULATORS = [
   ['/en/statistics/standard-deviation-calculator', 'Sum of squared deviations'],
   ['/en/finance/depreciation-calculator', 'Depreciation schedule'],
   ['/en/physics/potential-energy-calculator', 'Speed after falling that height from rest (m/s)'],
+  ['/en/chemistry/percent-composition-calculator', 'Composition by element'],
+  ['/en/physics/acceleration-calculator', 'Acceleration in g'],
+  ['/en/electronics/reactance-calculator', 'Angular frequency ω (rad/s)'],
 ] as const;
 
 const snapshot = JSON.parse(

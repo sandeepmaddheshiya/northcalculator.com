@@ -501,7 +501,8 @@ export function CalculatorIsland({
           className="no-print-controls space-y-5"
         >
           {groupRows(main).map((g) =>
-            g.row ? (
+            // A row whose inputs are all hidden (showIf) renders nothing, not an empty legend.
+            !g.items.some((i) => visible(i) && !i.hidden) ? null : g.row ? (
               <fieldset key={g.row.id} className="min-w-0">
                 <legend className="mb-2 text-sm font-semibold">
                   {ui[g.row.legendKey] ?? g.row.id}

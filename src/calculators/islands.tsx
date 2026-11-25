@@ -144,6 +144,9 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   'standard-deviation': dynamic(() => import('./statistics/standard-deviation/Island')),
   depreciation: dynamic(() => import('./finance/depreciation/Island')),
   'potential-energy': dynamic(() => import('./physics/potential-energy/Island')),
+  'percent-composition': dynamic(() => import('./chemistry/percent-composition/Island')),
+  acceleration: dynamic(() => import('./physics/acceleration/Island')),
+  reactance: dynamic(() => import('./electronics/reactance/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {
