@@ -4,7 +4,7 @@ Read `BRIEF.md` (the owner's brief, condensed) and `docs/decisions.md` (ADRs) be
 
 ## Status
 
-- Phase 0 ✅ · Phase 1 ✅ · Phase 2 ✅ (10 flagships) · Phase 3: infrastructure ✅ (generator, inline search answers, history/saved, compare, PWA/offline, homepage samples); Wave 1 at 71 of ~90 calculators; Wave 2 in progress (geometry 5, statistics 6, physics 11, electronics 4, chemistry 5, construction 2, algebra/trig 3, business 1) (docs/taxonomy-and-wave1.md).
+- Phase 0 ✅ · Phase 1 ✅ · Phase 2 ✅ (10 flagships) · Phase 3: infrastructure ✅ (generator, inline search answers, history/saved, compare, PWA/offline, homepage samples); Wave 1 at 71 of ~90 calculators; Wave 2 in progress (geometry 5, statistics 7, physics 14, electronics 4, chemistry 6, construction 2, algebra/trig 3, business 1) (docs/taxonomy-and-wave1.md).
 - Phase 4: tooling and runbook ✅ (`pnpm i18n:status`, docs/i18n-rollout.md); no locale goes live until a fluent reviewer signs it off (ADR-026).
 - Phase 5: embeds ✅ (`/embed/{locale}/{id}`, ADR-024); workers deferred (ADR-025); Wave 2 calculators not started.
 - Phase 6: launch docs ✅ (docs/seo-launch-checklist.md, docs/growth.md); deploy, DNS and Search Console need the owner.

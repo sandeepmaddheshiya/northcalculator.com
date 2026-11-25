@@ -109,6 +109,10 @@ import { vat } from './finance/vat';
 import { momentum } from './physics/momentum';
 import { pressure } from './physics/pressure';
 import { hookesLaw } from './physics/hookes-law';
+import { binomial } from './statistics/binomial';
+import { specificHeat } from './physics/specific-heat';
+import { halfLife } from './chemistry/half-life';
+import { gravitation } from './physics/gravitation';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -223,6 +227,10 @@ export const MODULES: readonly CalculatorModule[] = [
   momentum,
   pressure,
   hookesLaw,
+  binomial,
+  specificHeat,
+  halfLife,
+  gravitation,
   fuelCost,
 ];
 

@@ -59,8 +59,22 @@ export function NumberField({
   const fmtLocale = formatLocale;
   const t = (k: keyof ValidationMessages, v: Record<string, string> = {}) => fill(messages[k], v);
   const id = useId();
-  const show = (v: number | null) =>
-    v === null ? '' : formatNumber(v, fmtLocale, { maxDecimals }).replace('−', '-');
+  const show = (v: number | null) => {
+    if (v === null) return '';
+    // Very large or small values (planet masses, ion concentrations) would show as long strings of
+    // zeros, so they use the e-notation the parser accepts: a locale-formatted mantissa + e + exponent.
+    const a = Math.abs(v);
+    if (a !== 0 && (a >= 1e15 || a < 1e-6)) {
+      let exp = Math.floor(Math.log10(a));
+      let mantissa = Number((v / 10 ** exp).toPrecision(12));
+      if (Math.abs(mantissa) >= 10) {
+        mantissa /= 10;
+        exp += 1;
+      }
+      return `${formatNumber(mantissa, fmtLocale, { maxDecimals: 11 }).replace('−', '-')}e${exp}`;
+    }
+    return formatNumber(v, fmtLocale, { maxDecimals }).replace('−', '-');
+  };
   const [text, setText] = useState(() => show(value));
   const [error, setError] = useState<string | null>(null);
   const [lastValue, setLastValue] = useState(value);

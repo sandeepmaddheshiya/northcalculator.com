@@ -112,6 +112,10 @@ const CALCULATORS = [
   ['/en/physics/momentum-impulse-calculator', 'Final momentum (kg·m/s)'],
   ['/en/physics/pressure-calculator', 'Pressure (kPa)'],
   ['/en/physics/hookes-law-spring-calculator', 'Stored energy (J)'],
+  ['/en/statistics/binomial-probability-calculator', 'Mean (np)'],
+  ['/en/physics/specific-heat-calculator', 'Heat (kJ)'],
+  ['/en/chemistry/half-life-calculator', 'Number of half-lives'],
+  ['/en/physics/gravitational-force-calculator', 'Gravitational force (N)'],
 ] as const;
 
 const snapshot = JSON.parse(
