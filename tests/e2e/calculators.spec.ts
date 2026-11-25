@@ -141,6 +141,9 @@ const CALCULATORS = [
   ['/en/chemistry/percent-composition-calculator', 'Composition by element'],
   ['/en/physics/acceleration-calculator', 'Acceleration in g'],
   ['/en/electronics/reactance-calculator', 'Angular frequency ω (rad/s)'],
+  ['/en/chemistry/empirical-formula-calculator', 'Moles and mole ratio'],
+  ['/en/physics/snells-law-calculator', 'Speed of light in the second material (m/s)'],
+  ['/en/electronics/rlc-impedance-calculator', 'Power factor (cos φ)'],
 ] as const;
 
 const snapshot = JSON.parse(

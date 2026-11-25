@@ -8,11 +8,11 @@ import { clean } from '@/engine/money';
  * X_L − X_C and the resonant frequency f₀ = 1 ÷ (2π√(LC)) (College Physics Eq. 23.72).
  * Resistance is ignored: real coils and capacitors also have some.
  */
-const HZ = { Hz: 1, kHz: 1e3, MHz: 1e6 } as const;
-const HENRY = { H: 1, mH: 1e-3, uH: 1e-6 } as const;
-const FARAD = { F: 1, uF: 1e-6, nF: 1e-9, pF: 1e-12 } as const;
+export const HZ = { Hz: 1, kHz: 1e3, MHz: 1e6 } as const;
+export const HENRY = { H: 1, mH: 1e-3, uH: 1e-6 } as const;
+export const FARAD = { F: 1, uF: 1e-6, nF: 1e-9, pF: 1e-12 } as const;
 
-const pick = <T extends Record<string, number>>(map: T, v: unknown, d: keyof T): keyof T =>
+export const pick = <T extends Record<string, number>>(map: T, v: unknown, d: keyof T): keyof T =>
   typeof v === 'string' && v in map ? (v as keyof T) : d;
 
 export const compute: ComputeFn = (inputs, { fmt }) => {

@@ -206,8 +206,13 @@ export function CalculatorIsland({
       label: ui[o.labelKey] ?? o.value,
     }));
   };
-  const visible = (i: CalculatorInput) =>
-    !i.showIf || i.showIf.in.includes(values[i.showIf.input] as string | boolean);
+  // Visibility cascades: an input shown by another input is hidden when that input is hidden.
+  const visible = (i: CalculatorInput, depth = 0): boolean => {
+    if (!i.showIf) return true;
+    if (!i.showIf.in.includes(values[i.showIf.input] as string | boolean)) return false;
+    const parent = def.inputs.find((p) => p.id === i.showIf!.input);
+    return !parent || depth > 5 || visible(parent, depth + 1);
+  };
   const label = (i: CalculatorInput) =>
     (i.labelBy ? ui[`${i.labelKey}.${String(values[i.labelBy])}`] : undefined) ??
     ui[i.labelKey] ??
@@ -518,7 +523,7 @@ export function CalculatorIsland({
               renderInput(g.items[0]!)
             ),
           )}
-          {advanced.some(visible) && (
+          {advanced.some((i) => visible(i)) && (
             <details
               className="group rounded-sm border border-line bg-surface"
               open={advanced.some((i) => values[i.id] !== defaults[i.id])}

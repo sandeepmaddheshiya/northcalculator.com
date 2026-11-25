@@ -147,6 +147,9 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   'percent-composition': dynamic(() => import('./chemistry/percent-composition/Island')),
   acceleration: dynamic(() => import('./physics/acceleration/Island')),
   reactance: dynamic(() => import('./electronics/reactance/Island')),
+  'empirical-formula': dynamic(() => import('./chemistry/empirical-formula/Island')),
+  refraction: dynamic(() => import('./physics/refraction/Island')),
+  impedance: dynamic(() => import('./electronics/impedance/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {

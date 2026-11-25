@@ -138,6 +138,9 @@ import { potentialEnergy } from './physics/potential-energy';
 import { percentComposition } from './chemistry/percent-composition';
 import { acceleration } from './physics/acceleration';
 import { reactance } from './electronics/reactance';
+import { empiricalFormula } from './chemistry/empirical-formula';
+import { refraction } from './physics/refraction';
+import { impedance } from './electronics/impedance';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -281,6 +284,9 @@ export const MODULES: readonly CalculatorModule[] = [
   percentComposition,
   acceleration,
   reactance,
+  empiricalFormula,
+  refraction,
+  impedance,
   fuelCost,
 ];
 
