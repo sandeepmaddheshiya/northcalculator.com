@@ -132,6 +132,9 @@ const CALCULATORS = [
   ['/en/statistics/percentile-calculator', 'Interquartile range (IQR)'],
   ['/en/electronics/coulombs-law-calculator', 'Field of charge 1 at that distance (N/C)'],
   ['/en/physics/torque-calculator', 'Torque (lbf·ft)'],
+  ['/en/finance/npv-irr-calculator', 'Profitability index'],
+  ['/en/statistics/expected-value-calculator', 'Sum of probabilities'],
+  ['/en/chemistry/molarity-calculator', 'Moles of solute'],
 ] as const;
 
 const snapshot = JSON.parse(

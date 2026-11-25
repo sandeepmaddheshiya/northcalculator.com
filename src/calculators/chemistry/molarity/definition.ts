@@ -1,0 +1,153 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+
+const forFind = (...f: string[]) => ({ input: 'find', in: f }) as const;
+
+export const definition: CalculatorDefinition = {
+  id: 'molarity',
+  slug: { en: 'molarity-calculator' },
+  category: 'chemistry',
+  tags: [
+    'molarity',
+    'mol/L',
+    'concentration',
+    'moles of solute',
+    'grams to molarity',
+    'solution preparation',
+  ],
+  difficulty: 'basic',
+  ymyl: false,
+  schemaCategory: 'EducationalApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'find',
+      param: 'q',
+      type: 'segmented',
+      labelKey: 'find',
+      default: 'molarity',
+      options: [
+        { value: 'molarity', labelKey: 'find.molarity' },
+        { value: 'amount', labelKey: 'find.amount' },
+        { value: 'volume', labelKey: 'find.volume' },
+      ],
+    },
+    {
+      id: 'amount',
+      param: 'n',
+      type: 'number',
+      labelKey: 'amount',
+      labelBy: 'au',
+      default: 42.23,
+      min: 0,
+      max: 1e12,
+      row: { id: 'amt', legendKey: 'amt' },
+      showIf: forFind('molarity', 'volume'),
+    },
+    {
+      id: 'au',
+      param: 'au',
+      type: 'select',
+      labelKey: 'au',
+      default: 'g',
+      options: [
+        { value: 'g', labelKey: 'au.g' },
+        { value: 'mol', labelKey: 'au.mol' },
+      ],
+      row: { id: 'amt', legendKey: 'amt' },
+    },
+    {
+      id: 'mm',
+      param: 'mm',
+      type: 'number',
+      labelKey: 'mm',
+      default: 53.5,
+      min: 0,
+      max: 1e7,
+      showIf: { input: 'au', in: ['g'] },
+      helpKey: 'mm.help',
+    },
+    {
+      id: 'volume',
+      param: 'v',
+      type: 'number',
+      labelKey: 'volume',
+      default: 500,
+      min: 0,
+      max: 1e12,
+      row: { id: 'vol', legendKey: 'vol' },
+      showIf: forFind('molarity', 'amount'),
+    },
+    {
+      id: 'vu',
+      param: 'vu',
+      type: 'select',
+      labelKey: 'vu',
+      default: 'mL',
+      options: [
+        { value: 'mL', labelKey: 'vu.mL' },
+        { value: 'L', labelKey: 'vu.L' },
+      ],
+      row: { id: 'vol', legendKey: 'vol' },
+    },
+    {
+      id: 'molarity',
+      param: 'm',
+      type: 'number',
+      labelKey: 'molarity',
+      default: 0.25,
+      min: 0,
+      max: 1e6,
+      showIf: forFind('amount', 'volume'),
+    },
+  ],
+  outputs: [
+    { id: 'result', labelKey: 'out.result', labelBy: 'find', format: 'text', primary: true },
+    { id: 'M', labelKey: 'out.M', format: 'sig', decimals: 8 },
+    { id: 'mol', labelKey: 'out.mol', format: 'sig', decimals: 8 },
+    { id: 'grams', labelKey: 'out.grams', format: 'sig', decimals: 8 },
+    { id: 'L', labelKey: 'out.L', format: 'sig', decimals: 8 },
+  ],
+  sources: [
+    {
+      title: 'Chemistry 2e, 3.3 Molarity',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/chemistry-2e/pages/3-3-molarity',
+      accessed: '2026-11-25',
+      locator:
+        'M = mol solute ÷ L solution; Example 3.14: 0.133 mol in 355 mL → 0.375 M; Example 3.16: 25.2 g acetic acid (60.052 g/mol) in 0.500 L → 0.839 M; Example 3.17: 0.250 L of 5.30 M NaCl → 77.4 g; Example 3.18: 75.6 g acetic acid at 0.839 M → 1.50 L',
+    },
+    {
+      title:
+        'Introductory Chemistry (LibreTexts), 13.6 Specifying Solution Concentration: Molarity',
+      publisher: 'Marisa Alviar-Agnew and Henry Agnew, Sacramento City College (LibreTexts)',
+      url: 'https://chem.libretexts.org/Bookshelves/Introductory_Chemistry/Introductory_Chemistry_(LibreTexts)/13%3A_Solutions/13.06%3A_Specifying_Solution_Concentration-_Molarity',
+      accessed: '2026-11-25',
+      locator:
+        'molarity = moles of solute ÷ liters of solution; Example 13.6.1: 42.23 g NH₄Cl (53.50 g/mol) in 500.0 mL → 1.579 M; Example 13.6.3: 4.88 mol at 2.35 M → 2.08 L; Example 13.6.4: 3.00 L of 0.250 M KMnO₄ (158.04 g/mol) → 119 g',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-25', note: 'First published.' }],
+  related: ['dilution', 'molar-mass', 'ph'],
+  examples: [
+    {
+      id: 'ammonium',
+      inputs: { find: 'molarity', amount: 42.23, au: 'g', mm: 53.5, volume: 500, vu: 'mL' },
+      expect: { M: 1.57869158879 },
+    },
+    {
+      id: 'permanganate',
+      inputs: { find: 'amount', molarity: 0.25, volume: 3, vu: 'L', au: 'g', mm: 158.04 },
+      expect: { grams: 118.53 },
+    },
+    {
+      id: 'sugar',
+      inputs: { find: 'molarity', amount: 0.133, au: 'mol', volume: 355, vu: 'mL' },
+      expect: { M: 0.374647887324 },
+    },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-25',
+};

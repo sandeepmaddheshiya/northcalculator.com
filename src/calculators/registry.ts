@@ -129,6 +129,9 @@ import { primeFactorization } from './math/prime-factorization';
 import { percentile } from './statistics/percentile';
 import { coulomb } from './electronics/coulomb';
 import { torque } from './physics/torque';
+import { npv } from './finance/npv';
+import { expectedValue } from './statistics/expected-value';
+import { molarity } from './chemistry/molarity';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -263,6 +266,9 @@ export const MODULES: readonly CalculatorModule[] = [
   percentile,
   coulomb,
   torque,
+  npv,
+  expectedValue,
+  molarity,
   fuelCost,
 ];
 
