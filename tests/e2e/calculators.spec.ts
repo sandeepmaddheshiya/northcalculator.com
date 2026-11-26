@@ -169,6 +169,9 @@ const CALCULATORS = [
   ['/en/physics/carnot-efficiency-calculator', 'Refrigerator COP (best possible)'],
   ['/en/statistics/exponential-distribution-calculator', 'Median'],
   ['/en/chemistry/solution-concentration-calculator', 'Parts per billion (ppb)'],
+  ['/en/electronics/electric-potential-calculator', 'Electric field E (N/C)'],
+  ['/en/physics/magnetic-force-calculator', 'Cyclotron frequency (Hz)'],
+  ['/en/chemistry/clausius-clapeyron-calculator', 'ΔH_vap (kJ/mol)'],
 ] as const;
 
 const snapshot = JSON.parse(

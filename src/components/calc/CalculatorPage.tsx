@@ -122,6 +122,7 @@ export async function CalculatorPage({ mod, locale }: { mod: CalculatorModule; l
           <p className="mt-2 text-lg text-muted">{content.promise}</p>
         </header>
         <CalculatorIslandFor
+          category={def.category}
           id={def.id}
           locale={locale}
           today={today}

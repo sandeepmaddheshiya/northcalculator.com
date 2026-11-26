@@ -57,6 +57,7 @@ export default async function EmbedPage({
     <main className="p-4 sm:p-5">
       <h1 className="mb-4 text-xl font-semibold">{content.name}</h1>
       <CalculatorIslandFor
+        category={mod.definition.category}
         id={mod.definition.id}
         locale={locale}
         today={buildToday()}

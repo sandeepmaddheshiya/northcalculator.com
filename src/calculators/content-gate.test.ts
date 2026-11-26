@@ -42,10 +42,15 @@ describe('content gate: definitions', () => {
     }
   });
 
-  it('every module has a client island registered in islands.tsx', () => {
-    const src = readFileSync(new URL('./islands.tsx', import.meta.url), 'utf8');
-    for (const c of CALCULATORS)
-      expect(src, `island for ${c.id}`).toMatch(new RegExp(`(^|\\s)'?${c.id}'?: dynamic\\(`, 'm'));
+  it('every module has a client island in its category map (ADR-028)', () => {
+    const top = readFileSync(new URL('./islands.tsx', import.meta.url), 'utf8');
+    for (const c of CALCULATORS) {
+      expect(top, `category map for ${c.category}`).toContain(`import('./islands/${c.category}')`);
+      const src = readFileSync(new URL(`./islands/${c.category}.tsx`, import.meta.url), 'utf8');
+      expect(src, `island for ${c.id}`).toMatch(
+        new RegExp(`(^|\\s)'?${c.id}'?: dynamic\\(\\(\\) => import\\('\\.\\./${c.category}/`, 'm'),
+      );
+    }
   });
 
   it.each(CALCULATORS.map((c) => [c.id, c] as const))(

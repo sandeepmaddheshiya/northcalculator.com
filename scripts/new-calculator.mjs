@@ -150,11 +150,31 @@ r = r.replace(
 );
 writeFileSync(reg, r);
 
-const isl = 'src/calculators/islands.tsx';
+// Island: add to the category's client map (ADR-028), creating it on a category's first calculator.
+const isl = `src/calculators/islands/${category}.tsx`;
+if (!existsSync(isl)) {
+  writeFileSync(
+    isl,
+    readFileSync('src/calculators/islands/math.tsx', 'utf8')
+      .replace(
+        /^\/\*\*.*\*\/$/m,
+        `/** ${category} calculators: id → island chunk (ADR-028). Loaded only on ${category} pages. */`,
+      )
+      .replace(/(const ISLANDS[^{]+\{\n)(?:.*\n)*?(\};)/, '$1$2'),
+  );
+  const top = 'src/calculators/islands.tsx';
+  writeFileSync(
+    top,
+    readFileSync(top, 'utf8').replace(
+      /(const CATEGORIES[^{]+\{\n(?:.*\n)*?)(\};)/,
+      `$1  '${category}': dynamic(() => import('./islands/${category}')),\n$2`,
+    ),
+  );
+}
 let s = readFileSync(isl, 'utf8');
 s = s.replace(
-  /(export const ISLANDS[^{]+\{\n(?:.*\n)*?)(\};)/,
-  `$1  '${id}': dynamic(() => import('./${category}/${id}/Island')),\n$2`,
+  /(const ISLANDS[^{]+\{\n(?:.*\n)*?)(\};)/,
+  `$1  '${id}': dynamic(() => import('../${category}/${id}/Island')),\n$2`,
 );
 writeFileSync(isl, s);
 

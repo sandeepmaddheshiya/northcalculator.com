@@ -166,6 +166,9 @@ import { pairedTTest } from './statistics/paired-t-test';
 import { carnot } from './physics/carnot';
 import { exponential } from './statistics/exponential';
 import { concentration } from './chemistry/concentration';
+import { electricPotential } from './electronics/electric-potential';
+import { magneticForce } from './physics/magnetic-force';
+import { vaporPressure } from './chemistry/vapor-pressure';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -337,6 +340,9 @@ export const MODULES: readonly CalculatorModule[] = [
   carnot,
   exponential,
   concentration,
+  electricPotential,
+  magneticForce,
+  vaporPressure,
   fuelCost,
 ];
 

@@ -3,7 +3,11 @@
  * Post-build for the static export (ADR-010):
  *  1. Injects a strict per-page Content-Security-Policy <meta> with SHA-256 hashes of every
  *     inline executable script (static export cannot use nonces). No 'unsafe-inline' for scripts.
- *  2. Verifies every page: lang attribute, exactly one <h1>, canonical (unless noindex),
+ *  2. Preloads each calculator page's island chunks (ADR-028). The island sits behind two levels
+ *     of next/dynamic, and Next only emits preloads for the first, so without this the island would
+ *     load one round trip after hydration and check:bundle could not see it. Fails the build if a
+ *     calculator page's island cannot be resolved (e.g. a changed compiler output format).
+ *  3. Verifies every page: lang attribute, exactly one <h1>, canonical (unless noindex),
  *     no placeholder copy. Fails the build on any violation.
  */
 import { createHash } from 'node:crypto';
@@ -22,11 +26,62 @@ function htmlFiles(dir) {
   });
 }
 
+// Island chunk lists, resolved from the compiled category map the page itself loads:
+//   "id":(0,x.default)(()=>y.A(LOADER),…)  and  LOADER,a=>{a.v(e=>Promise.all(["static/chunks/…"]…
+// The same map is compiled once per route (pages, embeds) with different shared chunks, so the
+// lookup only searches chunks that page references.
+const parsed = new Map();
+function parseChunk(file) {
+  if (parsed.has(file)) return parsed.get(file);
+  const js = readFileSync(path.join(OUT, '_next', file), 'utf8');
+  const loaders = new Map();
+  const entries = new Map();
+  for (const m of js.matchAll(/(\d+),\w+=>\{\w+\.v\(\w+=>Promise\.all\(\[([^\]]*)\]\.map/g))
+    loaders.set(
+      m[1],
+      [...m[2].matchAll(/"(static\/chunks\/[^"]+\.js)"/g)].map((x) => x[1]),
+    );
+  for (const m of js.matchAll(
+    /(?:"([\w-]+)"|([\w$]+)):\(0,[\w$]+\.default\)\(\(\)=>[\w$]+\.A\((\d+)\)/g,
+  ))
+    entries.set(m[1] ?? m[2], m[3]);
+  const r = { loaders, entries };
+  parsed.set(file, r);
+  return r;
+}
+function islandChunks(html, id) {
+  const refs = [
+    ...new Set([...html.matchAll(/\/_next\/(static\/chunks\/[^"\\]+\.js)/g)].map((m) => m[1])),
+  ];
+  for (const f of refs) {
+    const { entries, loaders } = parseChunk(f);
+    const chunks = entries.has(id) ? loaders.get(entries.get(id)) : undefined;
+    if (chunks?.length) return chunks;
+  }
+  return undefined;
+}
+
 const errors = [];
 let count = 0;
+let preloaded = 0;
 for (const file of htmlFiles(OUT)) {
   let html = readFileSync(file, 'utf8');
   const page = file.slice(OUT.length);
+
+  // 2. Island preloads for calculator pages and embeds.
+  const island = html.match(/\\"category\\":\\"([\w-]+)\\",\\"id\\":\\"([\w-]+)\\"/);
+  if (island) {
+    const chunks = islandChunks(html, island[2]);
+    if (!chunks?.length) errors.push(`${page}: cannot resolve island chunks for ${island[2]}`);
+    else {
+      const links = chunks
+        .filter((c) => !html.includes(`/_next/${c}`))
+        .map((c) => `<link rel="preload" as="script" href="/_next/${c}"/>`)
+        .join('');
+      html = html.replace('</head>', `${links}</head>`);
+      preloaded++;
+    }
+  }
 
   // 1. CSP hashes for inline executable scripts (JSON-LD data blocks are not executed).
   const hashes = new Set();
@@ -60,7 +115,7 @@ for (const file of htmlFiles(OUT)) {
   writeFileSync(file, html);
   count++;
 
-  // 2. Page sanity checks (the redirect stub at /index.html is exempt).
+  // 3. Page sanity checks (the redirect stub at /index.html is exempt).
   if (page === '/index.html') continue;
   if (!/<html[^>]*\blang="[^"]+"/.test(html)) errors.push(`${page}: missing <html lang>`);
   const h1 = (html.match(/<h1[\s>]/g) ?? []).length;
@@ -73,7 +128,7 @@ for (const file of htmlFiles(OUT)) {
   }
 }
 
-console.log(`postbuild: CSP injected into ${count} pages`);
+console.log(`postbuild: CSP injected into ${count} pages, island preloads on ${preloaded}`);
 if (errors.length) {
   console.error(errors.map((e) => `  ✗ ${e}`).join('\n'));
   process.exit(1);
