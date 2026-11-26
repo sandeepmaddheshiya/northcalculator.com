@@ -23,6 +23,7 @@ const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   'proportion-test': dynamic(() => import('../statistics/proportion-test/Island')),
   'paired-t-test': dynamic(() => import('../statistics/paired-t-test/Island')),
   exponential: dynamic(() => import('../statistics/exponential/Island')),
+  anova: dynamic(() => import('../statistics/anova/Island')),
 };
 
 export default function Islands({ id, ...props }: IslandProps & { id: string }) {

@@ -169,6 +169,9 @@ import { concentration } from './chemistry/concentration';
 import { electricPotential } from './electronics/electric-potential';
 import { magneticForce } from './physics/magnetic-force';
 import { vaporPressure } from './chemistry/vapor-pressure';
+import { anova } from './statistics/anova';
+import { thermalExpansion } from './physics/thermal-expansion';
+import { beerLambert } from './chemistry/beer-lambert';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -343,6 +346,9 @@ export const MODULES: readonly CalculatorModule[] = [
   electricPotential,
   magneticForce,
   vaporPressure,
+  anova,
+  thermalExpansion,
+  beerLambert,
   fuelCost,
 ];
 

@@ -23,6 +23,7 @@ const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   nernst: dynamic(() => import('../chemistry/nernst/Island')),
   concentration: dynamic(() => import('../chemistry/concentration/Island')),
   'vapor-pressure': dynamic(() => import('../chemistry/vapor-pressure/Island')),
+  'beer-lambert': dynamic(() => import('../chemistry/beer-lambert/Island')),
 };
 
 export default function Islands({ id, ...props }: IslandProps & { id: string }) {

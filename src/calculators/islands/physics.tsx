@@ -38,6 +38,7 @@ const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   relativity: dynamic(() => import('../physics/relativity/Island')),
   carnot: dynamic(() => import('../physics/carnot/Island')),
   'magnetic-force': dynamic(() => import('../physics/magnetic-force/Island')),
+  'thermal-expansion': dynamic(() => import('../physics/thermal-expansion/Island')),
 };
 
 export default function Islands({ id, ...props }: IslandProps & { id: string }) {

@@ -172,6 +172,9 @@ const CALCULATORS = [
   ['/en/electronics/electric-potential-calculator', 'Electric field E (N/C)'],
   ['/en/physics/magnetic-force-calculator', 'Cyclotron frequency (Hz)'],
   ['/en/chemistry/clausius-clapeyron-calculator', 'ΔH_vap (kJ/mol)'],
+  ['/en/statistics/anova-calculator', 'Critical value of F'],
+  ['/en/physics/thermal-expansion-calculator', 'Change (%)'],
+  ['/en/chemistry/beer-lambert-law-calculator', 'Light absorbed (%)'],
 ] as const;
 
 const snapshot = JSON.parse(
