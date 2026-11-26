@@ -163,6 +163,9 @@ const CALCULATORS = [
   ['/en/physics/photon-energy-calculator', 'Energy per mole of photons (kJ/mol)'],
   ['/en/statistics/proportion-test-calculator', 'Standard error under H₀ (%)'],
   ['/en/electronics/rl-time-constant-calculator', 'Five time constants (s)'],
+  ['/en/physics/de-broglie-wavelength-calculator', 'Momentum p (kg·m/s)'],
+  ['/en/physics/time-dilation-calculator', 'Lorentz factor γ'],
+  ['/en/statistics/paired-t-test-calculator', 'SD of the differences'],
 ] as const;
 
 const snapshot = JSON.parse(

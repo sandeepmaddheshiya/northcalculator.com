@@ -160,6 +160,9 @@ import { wireResistance } from './electronics/wire-resistance';
 import { photon } from './physics/photon';
 import { proportionTest } from './statistics/proportion-test';
 import { rlCircuit } from './electronics/rl-circuit';
+import { deBroglie } from './physics/de-broglie';
+import { relativity } from './physics/relativity';
+import { pairedTTest } from './statistics/paired-t-test';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -325,6 +328,9 @@ export const MODULES: readonly CalculatorModule[] = [
   photon,
   proportionTest,
   rlCircuit,
+  deBroglie,
+  relativity,
+  pairedTTest,
   fuelCost,
 ];
 
