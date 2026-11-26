@@ -163,6 +163,9 @@ import { rlCircuit } from './electronics/rl-circuit';
 import { deBroglie } from './physics/de-broglie';
 import { relativity } from './physics/relativity';
 import { pairedTTest } from './statistics/paired-t-test';
+import { carnot } from './physics/carnot';
+import { exponential } from './statistics/exponential';
+import { concentration } from './chemistry/concentration';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -331,6 +334,9 @@ export const MODULES: readonly CalculatorModule[] = [
   deBroglie,
   relativity,
   pairedTTest,
+  carnot,
+  exponential,
+  concentration,
   fuelCost,
 ];
 

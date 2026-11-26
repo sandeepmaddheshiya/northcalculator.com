@@ -1,0 +1,116 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+
+export const definition: CalculatorDefinition = {
+  id: 'exponential',
+  slug: { en: 'exponential-distribution-calculator' },
+  category: 'statistics',
+  tags: [
+    'exponential distribution',
+    'waiting time probability',
+    'decay rate',
+    'memoryless property',
+    'reliability',
+    'mean time between failures',
+  ],
+  difficulty: 'basic',
+  ymyl: false,
+  schemaCategory: 'EducationalApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'by',
+      param: 'b',
+      type: 'segmented',
+      labelKey: 'by',
+      default: 'mean',
+      options: [
+        { value: 'mean', labelKey: 'by.mean' },
+        { value: 'rate', labelKey: 'by.rate' },
+      ],
+    },
+    {
+      id: 'param',
+      param: 'm',
+      type: 'number',
+      labelKey: 'param',
+      labelBy: 'by',
+      default: 10,
+      min: 0,
+      max: 1e15,
+    },
+    { id: 'x', param: 'x', type: 'number', labelKey: 'x', default: 7, min: 0, max: 1e15 },
+    {
+      id: 'x2',
+      param: 'y',
+      type: 'number',
+      labelKey: 'x2',
+      default: 0,
+      min: 0,
+      max: 1e15,
+      helpKey: 'x2.help',
+    },
+    {
+      id: 'pct',
+      param: 'p',
+      type: 'percent',
+      labelKey: 'pct',
+      default: 80,
+      min: 0,
+      max: 100,
+      advanced: true,
+    },
+  ],
+  outputs: [
+    { id: 'below', labelKey: 'out.below', format: 'sig', decimals: 6, primary: true },
+    { id: 'above', labelKey: 'out.above', format: 'sig', decimals: 6 },
+    { id: 'between', labelKey: 'out.between', format: 'sig', decimals: 6 },
+    { id: 'pdf', labelKey: 'out.pdf', format: 'sig', decimals: 6 },
+    { id: 'percentile', labelKey: 'out.percentile', format: 'sig', decimals: 6 },
+    { id: 'mean', labelKey: 'out.mean', format: 'sig', decimals: 6 },
+    { id: 'median', labelKey: 'out.median', format: 'sig', decimals: 6 },
+    { id: 'rate', labelKey: 'out.rate', format: 'sig', decimals: 6 },
+  ],
+  sources: [
+    {
+      title: 'Introductory Statistics 2e, 5.3 The Exponential Distribution',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/introductory-statistics-2e/pages/5-3-the-exponential-distribution',
+      accessed: '2026-11-26',
+      locator:
+        'f(x) = m e^(−mx), P(X < x) = 1 − e^(−mx), m = 1/μ, σ = μ, k = ln(1 − area)/(−m); Example 5.7: μ 4 → f(5) = 0.072; Example 5.8: P(X < 5) = 0.7135, P(4 < X < 5) = 0.0814, median 2.8; Example 5.9: μ 10 → P(X > 7) = 0.4966, 80th percentile 16.1, P(9 < X < 11) = 0.0737; Example 5.11: m 0.5 → P(X < 1) = 0.3935, P(X > 5) = 0.0821, 70th percentile 2.41',
+    },
+    {
+      title:
+        'NIST/SEMATECH e-Handbook of Statistical Methods, 1.3.6.6.7 Exponential Distribution and 8.1.6.1 Exponential',
+      publisher: 'National Institute of Standards and Technology',
+      url: 'https://www.itl.nist.gov/div898/handbook/apr/section1/apr161.htm',
+      accessed: '2026-11-26',
+      locator:
+        'f(t) = λe^(−λt), F(t) = 1 − e^(−λt), R(t) = e^(−λt), mean 1/λ, median ln 2/λ ≅ 0.693/λ, variance 1/λ²; percent point G(p) = −β ln(1 − p); λ = 0.01 at 100 hours → PDF 0.0037, CDF 0.6321',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-26', note: 'First published.' }],
+  related: ['poisson', 'half-life', 'z-score'],
+  examples: [
+    {
+      id: 'parts',
+      inputs: { by: 'mean', param: 10, x: 7, x2: 0, pct: 80 },
+      expect: { above: 0.496585303791 },
+    },
+    {
+      id: 'clerk',
+      inputs: { by: 'mean', param: 4, x: 4, x2: 5, pct: 50 },
+      expect: { between: 0.0813746443113 },
+    },
+    {
+      id: 'reliability',
+      inputs: { by: 'rate', param: 0.01, x: 100, x2: 0, pct: 50 },
+      expect: { below: 0.632120558829 },
+    },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-26',
+};

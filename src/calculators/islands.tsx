@@ -172,6 +172,9 @@ export const ISLANDS: Record<string, ComponentType<IslandProps>> = {
   'de-broglie': dynamic(() => import('./physics/de-broglie/Island')),
   relativity: dynamic(() => import('./physics/relativity/Island')),
   'paired-t-test': dynamic(() => import('./statistics/paired-t-test/Island')),
+  carnot: dynamic(() => import('./physics/carnot/Island')),
+  exponential: dynamic(() => import('./statistics/exponential/Island')),
+  concentration: dynamic(() => import('./chemistry/concentration/Island')),
 };
 
 export function CalculatorIslandFor({ id, ...props }: IslandProps & { id: string }) {

@@ -1,0 +1,128 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+
+export const definition: CalculatorDefinition = {
+  id: 'carnot',
+  slug: { en: 'carnot-efficiency-calculator' },
+  category: 'physics',
+  tags: [
+    'Carnot efficiency',
+    'heat engine efficiency',
+    'second law of thermodynamics',
+    'coefficient of performance',
+    'heat pump COP',
+    'refrigerator COP',
+  ],
+  difficulty: 'basic',
+  ymyl: false,
+  schemaCategory: 'EducationalApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'th',
+      param: 'h',
+      type: 'number',
+      labelKey: 'th',
+      default: 300,
+      allowNegative: true,
+      min: -273.15,
+      max: 1e6,
+      row: { id: 'temps', legendKey: 'tempsRow' },
+    },
+    {
+      id: 'tc',
+      param: 'c',
+      type: 'number',
+      labelKey: 'tc',
+      default: 27,
+      allowNegative: true,
+      min: -273.15,
+      max: 1e6,
+      row: { id: 'temps', legendKey: 'tempsRow' },
+    },
+    {
+      id: 'tu',
+      param: 'u',
+      type: 'segmented',
+      labelKey: 'tu',
+      default: 'C',
+      options: [
+        { value: 'C', labelKey: 'tu.C' },
+        { value: 'K', labelKey: 'tu.K' },
+      ],
+    },
+    {
+      id: 'given',
+      param: 'g',
+      type: 'select',
+      labelKey: 'given',
+      default: 'none',
+      options: [
+        { value: 'none', labelKey: 'given.none' },
+        { value: 'work', labelKey: 'given.work' },
+        { value: 'heat', labelKey: 'given.heat' },
+      ],
+    },
+    {
+      id: 'amount',
+      param: 'a',
+      type: 'number',
+      labelKey: 'amount',
+      labelBy: 'given',
+      default: 300,
+      min: 0,
+      max: 1e18,
+      showIf: { input: 'given', in: ['work', 'heat'] },
+    },
+  ],
+  outputs: [
+    { id: 'eff', labelKey: 'out.eff', format: 'sig', decimals: 6, primary: true },
+    { id: 'kP', labelKey: 'out.kP', format: 'sig', decimals: 6 },
+    { id: 'kR', labelKey: 'out.kR', format: 'sig', decimals: 6 },
+    { id: 'qh', labelKey: 'out.qh', format: 'sig', decimals: 6 },
+    { id: 'w', labelKey: 'out.w', format: 'sig', decimals: 6 },
+    { id: 'qc', labelKey: 'out.qc', format: 'sig', decimals: 6 },
+  ],
+  sources: [
+    {
+      title:
+        'College Physics 2e, 15.3 Heat Engines and Their Efficiency and 15.4 Carnot’s Perfect Heat Engine',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/college-physics-2e/pages/15-4-carnots-perfect-heat-engine-the-second-law-of-thermodynamics-restated',
+      accessed: '2026-11-26',
+      locator:
+        'Eff = W/Q_h = 1 − Q_c/Q_h (Eqs. 15.26–15.27), Eff_C = 1 − T_c/T_h (Eq. 15.34); Example 15.4: 300 °C and 27.0 °C → 573 K and 300 K → 0.476 (47.6%); Example 15.3: Q_h 2.50 × 10¹⁴ J, Q_c 1.48 × 10¹⁴ J → W 1.02 × 10¹⁴ J, 40.8%',
+    },
+    {
+      title: 'University Physics Volume 2, 4.5 The Carnot Cycle',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/university-physics-volume-2/pages/4-5-the-carnot-cycle',
+      accessed: '2026-11-26',
+      locator:
+        'e = 1 − T_c/T_h (Eq. 4.5), K_R = T_c/(T_h − T_c) (Eq. 4.6), K_P = T_h/(T_h − T_c) (Eq. 4.7); Example 4.2: e 0.60, T_c 300 K → T_h 750 K; W 300 J → Q_h 500 J, Q_c 200 J; Example 4.3: heat pump 0 °C to 20.0 °C delivering 30.0 kJ → W 2 kJ',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-26', note: 'First published.' }],
+  related: ['specific-heat', 'conduction', 'gibbs'],
+  examples: [
+    {
+      id: 'reactor',
+      inputs: { th: 300, tc: 27, tu: 'C', given: 'none', amount: 0 },
+      expect: { eff: 47.6315100759 },
+    },
+    {
+      id: 'engine',
+      inputs: { th: 750, tc: 300, tu: 'K', given: 'work', amount: 300 },
+      expect: { eff: 60, qh: 500, qc: 200 },
+    },
+    {
+      id: 'heatpump',
+      inputs: { th: 20, tc: 0, tu: 'C', given: 'heat', amount: 30 },
+      expect: { w: 2.04673375405 },
+    },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-26',
+};

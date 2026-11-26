@@ -166,6 +166,9 @@ const CALCULATORS = [
   ['/en/physics/de-broglie-wavelength-calculator', 'Momentum p (kg·m/s)'],
   ['/en/physics/time-dilation-calculator', 'Lorentz factor γ'],
   ['/en/statistics/paired-t-test-calculator', 'SD of the differences'],
+  ['/en/physics/carnot-efficiency-calculator', 'Refrigerator COP (best possible)'],
+  ['/en/statistics/exponential-distribution-calculator', 'Median'],
+  ['/en/chemistry/solution-concentration-calculator', 'Parts per billion (ppb)'],
 ] as const;
 
 const snapshot = JSON.parse(
