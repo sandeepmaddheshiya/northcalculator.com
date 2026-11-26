@@ -514,7 +514,10 @@ export function CalculatorIsland({
                 </legend>
                 <div
                   className="grid items-end gap-3"
-                  style={{ gridTemplateColumns: `repeat(${g.items.length}, minmax(0, 1fr))` }}
+                  // Size the row by the inputs actually shown, so hidden unit selects leave no gaps.
+                  style={{
+                    gridTemplateColumns: `repeat(${g.items.filter((i) => visible(i) && !i.hidden).length}, minmax(0, 1fr))`,
+                  }}
                 >
                   {g.items.map(renderInput)}
                 </div>

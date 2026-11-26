@@ -157,6 +157,9 @@ import { colligative } from './chemistry/colligative';
 import { bernoulli } from './physics/bernoulli';
 import { nernst } from './chemistry/nernst';
 import { wireResistance } from './electronics/wire-resistance';
+import { photon } from './physics/photon';
+import { proportionTest } from './statistics/proportion-test';
+import { rlCircuit } from './electronics/rl-circuit';
 
 /**
  * Central registry: one line per calculator module (each folder's index.ts).
@@ -319,6 +322,9 @@ export const MODULES: readonly CalculatorModule[] = [
   bernoulli,
   nernst,
   wireResistance,
+  photon,
+  proportionTest,
+  rlCircuit,
   fuelCost,
 ];
 

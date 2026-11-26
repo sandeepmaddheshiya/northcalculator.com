@@ -1,0 +1,157 @@
+import type { CalculatorDefinition } from '@/calculators/types';
+
+const forFrom = (...f: string[]) => ({ input: 'from', in: f }) as const;
+
+export const definition: CalculatorDefinition = {
+  id: 'photon',
+  slug: { en: 'photon-energy-calculator' },
+  category: 'physics',
+  tags: [
+    'photon energy',
+    'E = hf',
+    'wavelength to energy',
+    'electronvolts',
+    'Planck’s constant',
+    'frequency to wavelength',
+  ],
+  difficulty: 'basic',
+  ymyl: false,
+  schemaCategory: 'EducationalApplication',
+  roundingKey: 'rounding',
+  inputs: [
+    {
+      id: 'from',
+      param: 'q',
+      type: 'segmented',
+      labelKey: 'from',
+      default: 'wavelength',
+      options: [
+        { value: 'wavelength', labelKey: 'from.wavelength' },
+        { value: 'frequency', labelKey: 'from.frequency' },
+        { value: 'energy', labelKey: 'from.energy' },
+      ],
+    },
+    {
+      id: 'value',
+      param: 'v',
+      type: 'number',
+      labelKey: 'value',
+      labelBy: 'from',
+      default: 580,
+      min: 0,
+      max: 1e40,
+      row: { id: 'in', legendKey: 'inRow' },
+    },
+    {
+      id: 'lu',
+      param: 'lu',
+      type: 'select',
+      labelKey: 'unit',
+      default: 'nm',
+      options: [
+        { value: 'nm', labelKey: 'unit.nm' },
+        { value: 'um', labelKey: 'unit.um' },
+        { value: 'm', labelKey: 'unit.m' },
+      ],
+      row: { id: 'in', legendKey: 'inRow' },
+      showIf: forFrom('wavelength'),
+    },
+    {
+      id: 'fu',
+      param: 'fu',
+      type: 'select',
+      labelKey: 'unit',
+      default: 'Hz',
+      options: [
+        { value: 'Hz', labelKey: 'unit.Hz' },
+        { value: 'MHz', labelKey: 'unit.MHz' },
+        { value: 'THz', labelKey: 'unit.THz' },
+      ],
+      row: { id: 'in', legendKey: 'inRow' },
+      showIf: forFrom('frequency'),
+    },
+    {
+      id: 'eu',
+      param: 'eu',
+      type: 'select',
+      labelKey: 'unit',
+      default: 'eV',
+      options: [
+        { value: 'eV', labelKey: 'unit.eV' },
+        { value: 'keV', labelKey: 'unit.keV' },
+        { value: 'J', labelKey: 'unit.J' },
+      ],
+      row: { id: 'in', legendKey: 'inRow' },
+      showIf: forFrom('energy'),
+    },
+    {
+      id: 'power',
+      param: 'p',
+      type: 'number',
+      labelKey: 'power',
+      default: 10,
+      min: 0,
+      max: 1e30,
+      advanced: true,
+      helpKey: 'power.help',
+    },
+  ],
+  outputs: [
+    { id: 'ev', labelKey: 'out.ev', format: 'sig', decimals: 6, primary: true },
+    { id: 'joules', labelKey: 'out.joules', format: 'sig', decimals: 6 },
+    { id: 'nm', labelKey: 'out.nm', format: 'sig', decimals: 6 },
+    { id: 'hz', labelKey: 'out.hz', format: 'sig', decimals: 6 },
+    { id: 'kjmol', labelKey: 'out.kjmol', format: 'sig', decimals: 6 },
+    { id: 'rate', labelKey: 'out.rate', format: 'sig', decimals: 6 },
+  ],
+  sources: [
+    {
+      title: 'College Physics 2e, 29.3 Photon Energies and the Electromagnetic Spectrum',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/college-physics-2e/pages/29-3-photon-energies-and-the-electromagnetic-spectrum',
+      accessed: '2026-11-26',
+      locator:
+        'E = hf = hc/λ (Eq. 29.12), h = 4.14 × 10⁻¹⁵ eV·s, hc = 1240 eV·nm; Example 29.3: 100 nm → 12.4 eV; Example 29.4: 580 nm → 3.43 × 10⁻¹⁹ J, 10.0 W of it → 2.92 × 10¹⁹ photons/s; 10²¹ Hz → 6.63 × 10⁻¹³ J = 4.14 MeV',
+    },
+    {
+      title: 'University Physics Volume 3, 6.2 Photoelectric Effect',
+      publisher: 'OpenStax, Rice University',
+      url: 'https://openstax.org/books/university-physics-volume-3/pages/6-2-photoelectric-effect',
+      accessed: '2026-11-26',
+      locator:
+        'E_f = hf (Eq. 6.13), hc = 1240 eV·nm, h = 4.136 × 10⁻¹⁵ eV·s; Example 6.5: silver, 4.73 eV → cutoff 262 nm, sodium 504 nm; Example 6.7: 430 nm → 2.88 eV',
+    },
+    {
+      title: 'CODATA Values: Planck constant and elementary charge',
+      publisher: 'NIST Physical Measurement Laboratory',
+      url: 'https://physics.nist.gov/cgi-bin/cuu/Value?h',
+      accessed: '2026-11-26',
+      locator:
+        'h = 6.626 070 15 × 10⁻³⁴ J Hz⁻¹ (exact); e = 1.602 176 634 × 10⁻¹⁹ C (exact); c = 299 792 458 m/s (exact)',
+    },
+  ],
+  review: { status: 'pending' },
+  draftedWith: 'ai-assisted',
+  version: '1.0.0',
+  changelog: [{ version: '1.0.0', date: '2026-11-26', note: 'First published.' }],
+  related: ['wave', 'energy-converter', 'kinetic-energy'],
+  examples: [
+    {
+      id: 'yellow',
+      inputs: { from: 'wavelength', value: 580, lu: 'nm', power: 10 },
+      expect: { joules: 3.42490665026e-19 },
+    },
+    {
+      id: 'uv',
+      inputs: { from: 'wavelength', value: 100, lu: 'nm', power: 0 },
+      expect: { ev: 12.3984198433 },
+    },
+    {
+      id: 'gamma',
+      inputs: { from: 'frequency', value: 1e21, fu: 'Hz', power: 0 },
+      expect: { joules: 6.62607015e-13 },
+    },
+  ],
+  locales: ['en'],
+  contentUpdated: '2026-11-26',
+};

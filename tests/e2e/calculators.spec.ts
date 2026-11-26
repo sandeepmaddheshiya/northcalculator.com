@@ -160,6 +160,9 @@ const CALCULATORS = [
   ['/en/physics/bernoulli-equation-calculator', 'Pressure drop P₁ − P₂ (kPa)'],
   ['/en/chemistry/nernst-equation-calculator', 'log₁₀ K'],
   ['/en/electronics/wire-resistance-calculator', 'Resistance per metre (Ω/m)'],
+  ['/en/physics/photon-energy-calculator', 'Energy per mole of photons (kJ/mol)'],
+  ['/en/statistics/proportion-test-calculator', 'Standard error under H₀ (%)'],
+  ['/en/electronics/rl-time-constant-calculator', 'Five time constants (s)'],
 ] as const;
 
 const snapshot = JSON.parse(
